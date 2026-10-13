@@ -13,6 +13,9 @@ node_modules/
 
 # Backtest output artifacts
 results/
+# Round-2 factor-grid outputs are part of the research PR.
+!research/factor_grid_r2/results/
+!research/factor_grid_r2/results/**
 
 .env
 agent/.env
