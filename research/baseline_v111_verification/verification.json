@@ -1,0 +1,286 @@
+{
+  "baseline_reproduction": {
+    "version": "v1.1.1",
+    "inputs_match_snapshot": true,
+    "metrics": {
+      "total_return": 2.607873613920203,
+      "cagr": 0.18024379719089412,
+      "ann_vol": 0.13220112084063315,
+      "sharpe": 1.325504812340487,
+      "maxdd": -0.11700656773292528,
+      "calmar": 1.5404588022982755,
+      "avg_exposure": 0.5914710808789267,
+      "n_days": 1947,
+      "sortino": 1.9344637635959954,
+      "turnover_per_yr": 6.15880176129501,
+      "cost_per_yr": 0.003079401026911198
+    },
+    "headline": {
+      "cagr": "18.0%",
+      "maxdd": "-11.7%",
+      "sortino": "1.93",
+      "sharpe": "1.33"
+    },
+    "expected_headline": {
+      "cagr": "18.0%",
+      "maxdd": "-11.7%",
+      "sortino": "1.93",
+      "sharpe": "1.33"
+    },
+    "headline_match": true,
+    "metric_absdiff": {
+      "cagr": 1.3788969965844444e-13,
+      "maxdd": 1.3797851750041445e-12,
+      "sortino": 8.685052677037675e-12,
+      "sharpe": 1.921574011021221e-12
+    },
+    "daily_equity_maxabs": 4.998668146072305e-12,
+    "daily_index_match": true,
+    "weekly_rows_expected": 1215,
+    "weekly_rows_unmatched": 0,
+    "weekly_weight_maxabs": 4.994210600628435e-11,
+    "PASS": true,
+    "note": "exact acceptance (snapshot inputs verified)",
+    "snapshot_check": {
+      "missing": [],
+      "mismatch": [],
+      "ok": 116,
+      "exact": true
+    },
+    "periods": {
+      "2019-01-02→2026-09-30": {
+        "total_return": 2.607873613920203,
+        "cagr": 0.18024379719089412,
+        "ann_vol": 0.13220112084063315,
+        "sharpe": 1.325504812340487,
+        "maxdd": -0.11700656773292528,
+        "calmar": 1.5404588022982755,
+        "avg_exposure": 0.5914710808789267,
+        "n_days": 1947,
+        "sortino": 1.9344637635959954,
+        "turnover_per_yr": 6.15880176129501,
+        "cost_per_yr": 0.003079401026911198
+      },
+      "2019–2022": {
+        "total_return": 0.921828666462635,
+        "cagr": 0.17780830022005456,
+        "ann_vol": 0.13484612321025827,
+        "sharpe": 1.2840768906272815,
+        "maxdd": -0.11404718566159067,
+        "calmar": 1.5590766154253086,
+        "avg_exposure": 0.5495526459978896,
+        "n_days": 1008,
+        "sortino": 1.8790827707234345,
+        "turnover_per_yr": 5.995706754021082,
+        "cost_per_yr": 0.0029978535194009363
+      },
+      "2023→2026-09-30": {
+        "total_return": 0.9027267409285766,
+        "cagr": 0.1876856028928202,
+        "ann_vol": 0.12937322316845176,
+        "sharpe": 1.3717407971435178,
+        "maxdd": -0.11700656773292528,
+        "calmar": 1.6040604089953667,
+        "avg_exposure": 0.6364697841378036,
+        "n_days": 939,
+        "sortino": 1.9967673882456731,
+        "turnover_per_yr": 6.350915763967457,
+        "cost_per_yr": 0.003175458032809885
+      }
+    },
+    "yearly": {
+      "2019": 0.1805118351979984,
+      "2020": 0.3960971537767455,
+      "2021": 0.14541183808926794,
+      "2022": 0.02085813904629119,
+      "2023": -0.013768755921748754,
+      "2024": 0.1693547214863409,
+      "2025": 0.4902031833033065,
+      "2026": 0.09236086099700147
+    }
+  },
+  "data_verification": {
+    "inputs": {
+      "missing": [],
+      "mismatch": [],
+      "ok": 116,
+      "exact": true
+    },
+    "derived": {
+      "missing": [],
+      "mismatch": [],
+      "ok": 13,
+      "exact": true
+    }
+  },
+  "snapshot_parts": {
+    "parts": [
+      {
+        "name": "data_snapshot_v1.1.1_20261010T192359+0800.tar.gz.part00",
+        "expected": "ad8c81521f55751da3f6938b5781db297f60c24afe92061b7ff47c61643e04f8",
+        "actual": "ad8c81521f55751da3f6938b5781db297f60c24afe92061b7ff47c61643e04f8",
+        "match": true
+      },
+      {
+        "name": "data_snapshot_v1.1.1_20261010T192359+0800.tar.gz.part01",
+        "expected": "6f09d831f5b328a2a90dd3747b15ce4f5a3f75e08f73cdaf4e72afa8f37c5c18",
+        "actual": "6f09d831f5b328a2a90dd3747b15ce4f5a3f75e08f73cdaf4e72afa8f37c5c18",
+        "match": true
+      },
+      {
+        "name": "data_snapshot_v1.1.1_20261010T192359+0800.tar.gz.part02",
+        "expected": "89cfe0f8b80af933e627a72b1f48a44e58106c5d3c2b30cde1d11c8ac15d366a",
+        "actual": "89cfe0f8b80af933e627a72b1f48a44e58106c5d3c2b30cde1d11c8ac15d366a",
+        "match": true
+      },
+      {
+        "name": "data_snapshot_v1.1.1_20261010T192359+0800.tar.gz.part03",
+        "expected": "7106cdf16d8aa6ed69a8c509677cae0caadbf82f6878b1d6897277fccf1cdea3",
+        "actual": "7106cdf16d8aa6ed69a8c509677cae0caadbf82f6878b1d6897277fccf1cdea3",
+        "match": true
+      },
+      {
+        "name": "data_snapshot_v1.1.1_20261010T192359+0800.tar.gz.part04",
+        "expected": "c1c83004a31933d1de54b1c3bb6c8996e4afc53499bed326ca61f884c6d58d75",
+        "actual": "c1c83004a31933d1de54b1c3bb6c8996e4afc53499bed326ca61f884c6d58d75",
+        "match": true
+      }
+    ],
+    "archive_sha256": "39a415dc2f8ebfadc30634cc1e042483ed3f6c0b457add20c8e92a47abc96f21",
+    "size_bytes": 462489316
+  },
+  "tests": {
+    "passed": 25,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 9,
+    "command": "UPLEG_DATA_DIR=<snapshot>/data python -m pytest -q -rs",
+    "log_sha256": "ced6729643502615d4a875c454731b787e6db2a6423ecc4733db1cb5612eb88f",
+    "log": ".........................                                                [100%]\n=============================== warnings summary ===============================\ntests/test_acceptance_v111.py::test_headline_numbers\ntests/test_acceptance_v111.py::test_headline_numbers\ntests/test_acceptance_v111.py::test_headline_numbers\ntests/test_acceptance_v111.py::test_headline_numbers\ntests/test_acceptance_v111.py::test_headline_numbers\ntests/test_acceptance_v111.py::test_headline_numbers\ntests/test_acceptance_v111.py::test_headline_numbers\n  /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=5) is multi-threaded, use of fork() may lead to deadlocks in the child.\n    self.pid = os.fork()\n\ntests/test_unit.py::test_chart_rules_reject_too_many_lines\ntests/test_unit.py::test_chart_rules_reject_too_many_lines\n  <handoff>/upleg_bt/charts.py:29: UserWarning: No CJK font found (install fonts-noto-cjk); Chinese text will not render.\n    import warnings; warnings.warn(\"No CJK font found (install fonts-noto-cjk); Chinese text will not render.\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n25 passed, 9 warnings in 32.01s\n"
+  },
+  "signal_diagnostics": {
+    "kind": "signal diagnostics only, not a study rerun",
+    "sample": "2019-01-02 to 2026-09-30; warmup from 2008-01-02",
+    "weekly_signal_comparison": [
+      {
+        "symbol": "GLD",
+        "weekly_rows_compared": 405,
+        "pr2_participation_mismatch_weeks": 4,
+        "pr2_fib_mismatch_weeks": 135,
+        "pr1_fib_mismatch_weeks": 0,
+        "first_participation_differences": [
+          {
+            "week_end": "2020-03-27",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2020-12-18",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2022-06-10",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2022-06-17",
+            "official": 0.5,
+            "pr2": 1.0
+          }
+        ]
+      },
+      {
+        "symbol": "SLV",
+        "weekly_rows_compared": 405,
+        "pr2_participation_mismatch_weeks": 3,
+        "pr2_fib_mismatch_weeks": 138,
+        "pr1_fib_mismatch_weeks": 0,
+        "first_participation_differences": [
+          {
+            "week_end": "2021-07-02",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2021-07-09",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2023-07-14",
+            "official": 0.5,
+            "pr2": 1.0
+          }
+        ]
+      },
+      {
+        "symbol": "USO",
+        "weekly_rows_compared": 405,
+        "pr2_participation_mismatch_weeks": 13,
+        "pr2_fib_mismatch_weeks": 123,
+        "pr1_fib_mismatch_weeks": 0,
+        "first_participation_differences": [
+          {
+            "week_end": "2019-09-20",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2019-09-27",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2021-12-10",
+            "official": 0.5,
+            "pr2": 1.0
+          },
+          {
+            "week_end": "2021-12-17",
+            "official": 0.5,
+            "pr2": 1.0
+          }
+        ]
+      }
+    ],
+    "quiet_single_name_weight": {
+      "official": 0.7,
+      "pr2": 0.2333333333333333
+    }
+  },
+  "reviewed_sources": [
+    {
+      "path": "research/gso_ma_compare/gso/indicators.py",
+      "sha": "2c0c82d3175d867db1b3a66303869bb1308e615e",
+      "url": "https://github.com/jakeguo117/Vibe-Trading/blob/0f282317a41f9b4d4b36d3fe4f23196e02e742b4/research/gso_ma_compare/gso/indicators.py"
+    },
+    {
+      "path": "research/gso_ma_compare/gso/simulate.py",
+      "sha": "e981b9270e6e5a6fadb2156720fad768d75c1512",
+      "url": "https://github.com/jakeguo117/Vibe-Trading/blob/0f282317a41f9b4d4b36d3fe4f23196e02e742b4/research/gso_ma_compare/gso/simulate.py"
+    },
+    {
+      "path": "research/gso_ma_compare/gso/config.py",
+      "sha": "74df7ec7a9e7bac09a729586a2d1c991b1cae13e",
+      "url": "https://github.com/jakeguo117/Vibe-Trading/blob/0f282317a41f9b4d4b36d3fe4f23196e02e742b4/research/gso_ma_compare/gso/config.py"
+    },
+    {
+      "path": "research/factor_grid_r2/factor_grid_r2/engine.py",
+      "sha": "a682781707d642693054ab286e3b638d53261e40",
+      "url": "https://github.com/jakeguo117/Vibe-Trading/blob/3a6cf21184b535d6f746d84472ff119ab352fe35/research/factor_grid_r2/factor_grid_r2/engine.py"
+    },
+    {
+      "path": "research/factor_grid_r2/factor_grid_r2/signals.py",
+      "sha": "9f277e19dabab4880b05ad93b107887b9876234c",
+      "url": "https://github.com/jakeguo117/Vibe-Trading/blob/3a6cf21184b535d6f746d84472ff119ab352fe35/research/factor_grid_r2/factor_grid_r2/signals.py"
+    },
+    {
+      "path": "research/factor_grid_r2/factor_grid_r2/data.py",
+      "sha": "f6adf9f5554dfb1ea0ab11f22b363031aef8d736",
+      "url": "https://github.com/jakeguo117/Vibe-Trading/blob/3a6cf21184b535d6f746d84472ff119ab352fe35/research/factor_grid_r2/factor_grid_r2/data.py"
+    }
+  ],
+  "scope": "Exact baseline rerun, tests, selected source review and same-input signal probes. PR1/PR2 studies not rerun."
+}
