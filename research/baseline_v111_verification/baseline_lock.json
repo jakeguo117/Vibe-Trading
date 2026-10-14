@@ -1,0 +1,628 @@
+{
+  "schema": "baseline-lock/1.0",
+  "baseline_version": "v1.1.1",
+  "purpose": "Exact reproduction baseline for research, not an adoption decision for any candidate.",
+  "as_of": "2026-10-14T22:24:32.433354+08:00",
+  "sources": {
+    "strategy_spec": "https://drive.google.com/file/d/1AgezUY_6DNeCT_aEtzN39lrANR-SPBOu/view",
+    "code_handoff": "https://drive.google.com/file/d/1-6-4fJkVXZB5lZNRIsG7n5uM7CxNIeel/view",
+    "snapshot_parts_manifest": "https://drive.google.com/file/d/1Qa2RgvrpfD5hiTCKUrf5FBAILDDZtCKZ/view",
+    "iteration_mechanism": "https://drive.google.com/file/d/1qqEwdlDkC9Lq-bXgzekuqyVKTLkpW6tT/view",
+    "research_pr1": "https://github.com/jakeguo117/Vibe-Trading/pull/1",
+    "research_pr2": "https://github.com/jakeguo117/Vibe-Trading/pull/2"
+  },
+  "archive_sha256": "f76825cde54270ff0258793fd89fdd490a285924a1a6cf65f69b4da67c9f0602",
+  "snapshot_archive_sha256": "39a415dc2f8ebfadc30634cc1e042483ed3f6c0b457add20c8e92a47abc96f21",
+  "strategy_spec_sha256": "c245dfdfe5036020223ccf91606a7107a1a963289080ef8192116f020b9d2445",
+  "iteration_mechanism_sha256": "69880c00c5d7d60a2c59b1fd3930b4d7b4f4445d8e0f7aedaa4ced0c0ade797b",
+  "input_manifest_sha256": "b6413c1aaba6c49b6a0705b685bcd4f0c5b2ea215991c0839e0f90c387fe00e5",
+  "input_manifest": {
+    "symbols/nasdaqlisted.txt": {
+      "bytes": 349479,
+      "sha256": "59e7857c5b9da15c22497ff61eb50a5915494df4116e31d62c5b0597368f4d13"
+    },
+    "symbols/otherlisted.txt": {
+      "bytes": 543175,
+      "sha256": "364bcfd132023f2b2c49ec5dda7dc7b18eade4249a3b4bbd5fef4a70cc614752"
+    },
+    "raw/b000.parquet": {
+      "bytes": 5248107,
+      "sha256": "d7258c1b1d24ccc87af0d73813ffadd5cd2d525e19c45751ec05c62f917c364d"
+    },
+    "raw/b001.parquet": {
+      "bytes": 5449168,
+      "sha256": "a29f86515df861b12c2f197cd5d0b870d5016c6782865cd1f6c04c2874bed43c"
+    },
+    "raw/b002.parquet": {
+      "bytes": 4784912,
+      "sha256": "7230f937e15e924b9287c0810e589b01b6119fc944d05cecc0c46e6e193d5cf8"
+    },
+    "raw/b003.parquet": {
+      "bytes": 4819098,
+      "sha256": "ce8cd4b3ef17d00f7680e014b3a214e9b931f6f33e493dcc2865bc3ad12cfe17"
+    },
+    "raw/b004.parquet": {
+      "bytes": 5652004,
+      "sha256": "2e998004f98fc46ccd5794473e01d51123211c4483f21f48f48d01c519d2b2ab"
+    },
+    "raw/b005.parquet": {
+      "bytes": 4905519,
+      "sha256": "1ecb752565b11e01b575732d766e854575f42654343bce8d80d83b1dda624343"
+    },
+    "raw/b006.parquet": {
+      "bytes": 5051273,
+      "sha256": "5fa55d23c351f64352025c075794c6603e8d52ffd76dad0ca619b773636b1558"
+    },
+    "raw/b007.parquet": {
+      "bytes": 4447147,
+      "sha256": "bdc53fdb66115075010db1401b00d06070570ece05fa526c0e932dddb5de5aef"
+    },
+    "raw/b008.parquet": {
+      "bytes": 5645681,
+      "sha256": "7669d2104d84c2088e2151ff539bd6cedc06f21742d8d2bbf46b93e5b451d14e"
+    },
+    "raw/b009.parquet": {
+      "bytes": 5506905,
+      "sha256": "dceea6ed6439d8573e992a996cd5025ee820dee36f55d029c886a0ecdd6e06f5"
+    },
+    "raw/b010.parquet": {
+      "bytes": 4440893,
+      "sha256": "eaad2656594b0aafc6e586f8d32bf6547f18c612cd77e1b654fd08570d22d0b5"
+    },
+    "raw/b011.parquet": {
+      "bytes": 5232279,
+      "sha256": "cff11a344f1076983665efe2102e5b1fdca98aab743e6100733e9de8754f601e"
+    },
+    "raw/b012.parquet": {
+      "bytes": 4994050,
+      "sha256": "5e9a65e055c8f52a80d474c73cbe288c6bf652f7573cdbef5bc714ca8b5346d5"
+    },
+    "raw/b013.parquet": {
+      "bytes": 4307128,
+      "sha256": "f2e682b8ce4fe2edb622ed1e75df04b9b3dd031f4f4a1ebe385b7270e83b4af6"
+    },
+    "raw/b014.parquet": {
+      "bytes": 3230036,
+      "sha256": "c3f1a98c3135a4af5b50a6584f3325337186f6055b3a38d4b68a54724fb704e9"
+    },
+    "raw/b015.parquet": {
+      "bytes": 5526384,
+      "sha256": "0d2d8a36b7a3b40eea8b3e6cfa570b3d09f430af3cda6cf04aaaf9c5204171da"
+    },
+    "raw/b016.parquet": {
+      "bytes": 4962290,
+      "sha256": "8ae82222d84ce5095c380f913c8ff187acc2d618626338e82f1ce0836feaa6bb"
+    },
+    "raw/b017.parquet": {
+      "bytes": 5332884,
+      "sha256": "e7b0556cc96210b0a30ba77d4a918e7671a883e993c8faa4db59413890473cf2"
+    },
+    "raw/b018.parquet": {
+      "bytes": 5241861,
+      "sha256": "714209862c78ab48c6ad69681282cb6376be238238f7e89d1ff161c5adb3f412"
+    },
+    "raw/b019.parquet": {
+      "bytes": 6268709,
+      "sha256": "c5c9ec6c82066ade7325234f68372d41f10926dd4f127fe7978a9cb50c255868"
+    },
+    "raw/b020.parquet": {
+      "bytes": 6049323,
+      "sha256": "48862bc1cc906f6754ff2b24894c56fba73b095cf155a6021424d857211b55c2"
+    },
+    "raw/b021.parquet": {
+      "bytes": 4973311,
+      "sha256": "c5b5aa14183429839c8fa2741a07e9ad678526ed6f8ffe8416bc5acaf44d6f98"
+    },
+    "raw/b022.parquet": {
+      "bytes": 5444072,
+      "sha256": "16c598ee694eeccaff8e4eb505e02f1045ec8ec1a95ffbc07e8736dc84e50593"
+    },
+    "raw/b023.parquet": {
+      "bytes": 6374177,
+      "sha256": "9c63549db73b176da7cb32f126deb156fefcc97a4476a468497d1be66709f925"
+    },
+    "raw/b024.parquet": {
+      "bytes": 4003939,
+      "sha256": "18a7fec5ac231853fe0e6ec06fc1cc00ea965d53e12b40de6d8f469c7d988bc6"
+    },
+    "raw/b025.parquet": {
+      "bytes": 5108032,
+      "sha256": "a2c62f935317e0ed89faabc9573baa6d4938b91b4b10f0a658f0e5b09cc53dfe"
+    },
+    "raw/b026.parquet": {
+      "bytes": 5226260,
+      "sha256": "33490d4aa32b0250e44cbe0ae122d585adca72bd9c0b9d5f67138e616589013b"
+    },
+    "raw/b027.parquet": {
+      "bytes": 5621602,
+      "sha256": "de39a7a99df5f9f3d5256838af1b57d3a74ed1b280eb9b6472be681b2cc9fe9e"
+    },
+    "raw/b028.parquet": {
+      "bytes": 5381829,
+      "sha256": "6834df0f8f240eb6d273de58d2f5f349f2347e1dffb5193f88178048ab24b023"
+    },
+    "raw/b029.parquet": {
+      "bytes": 5794780,
+      "sha256": "05aeabcaf21b95de3547415beb858461f8c47d82d8abae2edd5ab95215970804"
+    },
+    "raw/b030.parquet": {
+      "bytes": 5575277,
+      "sha256": "cbd37c34831401353a102ceee11ea765fbadf311286b8e9632ba259f37a81eed"
+    },
+    "raw/b031.parquet": {
+      "bytes": 6012758,
+      "sha256": "b9ad587f179b8ee4aeea200a4596c8d59422f530773a18e316ec1cb6066fa266"
+    },
+    "raw/b032.parquet": {
+      "bytes": 6741796,
+      "sha256": "402ec3865b6373256c8fc31f936acf698be762c0fb79b446de199fb11f4eb4ed"
+    },
+    "raw/b033.parquet": {
+      "bytes": 5487811,
+      "sha256": "25666a3f77e33f38d51ab46096ac7b3d8b2573df151e17798ce168021fccb0ba"
+    },
+    "raw/b034.parquet": {
+      "bytes": 4671843,
+      "sha256": "c89302312b90c182a9bb362267395a865c33159ec54a4e7bc1c196a098f4bf84"
+    },
+    "raw/b035.parquet": {
+      "bytes": 4742963,
+      "sha256": "5a4d10694efd340b19126e6043e145488d0b546ef7ab964dbf9e10bd41001b57"
+    },
+    "raw/b036.parquet": {
+      "bytes": 5546878,
+      "sha256": "d1aaf5c57a5cfdd9018032b55d239481d4f8af27ae9dedc863efbfd06b01b29d"
+    },
+    "raw/b037.parquet": {
+      "bytes": 4812636,
+      "sha256": "2e05b79edf20533a8afd0002779eee4c7c5520398eb05b9491436508a99b14a1"
+    },
+    "raw/b038.parquet": {
+      "bytes": 5240672,
+      "sha256": "e33a8e71f2120f1a2edcceff03813882bbc67b20e0d54b92371496a94366757e"
+    },
+    "raw/b039.parquet": {
+      "bytes": 6067570,
+      "sha256": "c67e7f37fc61fdd1dc716639ed7bd97744b9a4b5958a92bba2f2fbd14509c911"
+    },
+    "raw/b040.parquet": {
+      "bytes": 5604464,
+      "sha256": "fc9506b5a95fd2415cab4b147246253497d1796cfaf9c2b4de4cc7c79ed084f5"
+    },
+    "raw/b041.parquet": {
+      "bytes": 4901294,
+      "sha256": "eccef78928ae6884722572c0f2ca186d70991798155615a399327a3323f7712f"
+    },
+    "raw/b042.parquet": {
+      "bytes": 5520940,
+      "sha256": "0d14e36525338a004d0cccfa5efaffc0c2534c9c6a35ffdd451a8cd07cd2aae2"
+    },
+    "raw/b043.parquet": {
+      "bytes": 4831373,
+      "sha256": "2d1c6d6a9c7559d700e9c59992875447da0c5b9f40e649ea4fd5ffc981a7ebf3"
+    },
+    "raw/b044.parquet": {
+      "bytes": 4860521,
+      "sha256": "14e8ee23e78d63243308b692df25fff0e704acf80d96b3a579896fdff2c81611"
+    },
+    "raw/b045.parquet": {
+      "bytes": 5541221,
+      "sha256": "301bebcfe32d9c2a269de7eb6d5352829bf2c98fc2e06be2d525955c70ed57d3"
+    },
+    "raw/b046.parquet": {
+      "bytes": 5697110,
+      "sha256": "8f534732d6124e4b11223e237045b863024cb66e5e561d2dd5db90552f57d04e"
+    },
+    "raw/b047.parquet": {
+      "bytes": 4303706,
+      "sha256": "f6f2452393ef4a23268b2febba4720f8923434327ac7f95ccfd485b205de721c"
+    },
+    "raw/b048.parquet": {
+      "bytes": 5254408,
+      "sha256": "6521bbdd709dc31adf444a4d7ef2ad3785eabc6b2ecbe43d14b98662bd02ef9e"
+    },
+    "raw/b049.parquet": {
+      "bytes": 7232473,
+      "sha256": "99ef94d2fc06f7bbcb3b0695ab0d66ac4158db75da6a41c4d37c3e6e812d26c2"
+    },
+    "raw/b050.parquet": {
+      "bytes": 4935501,
+      "sha256": "28735d90e461fc63443b707e41aa2e3f917e3a52a0215298941f40cde87442dc"
+    },
+    "raw/b051.parquet": {
+      "bytes": 5590047,
+      "sha256": "bf6665d793a7bf81cc6f29771c6517e1208d59a746c6e946cf9074220ae06a06"
+    },
+    "raw/b052.parquet": {
+      "bytes": 7817021,
+      "sha256": "dba21ce482d7650a1cf0d20a89083d0b2364776255578930f3fb86987eb5f61c"
+    },
+    "raw/b053.parquet": {
+      "bytes": 4123632,
+      "sha256": "5dd1f59ec8a9ceb82936304682b1faa2fffa85b8585b684ce6cfeaa73171148c"
+    },
+    "raw/b054.parquet": {
+      "bytes": 4205018,
+      "sha256": "cc0cc9daeffc4519715ac2e0445b8492e13e633f51615bd151899f3551950491"
+    },
+    "raw/b055.parquet": {
+      "bytes": 5123043,
+      "sha256": "146c97547266771d3832882fdb081b63a21ca1f1f57665551fda84c47c51376a"
+    },
+    "raw/b056.parquet": {
+      "bytes": 4983785,
+      "sha256": "9927c933f2f49b158e3f91c155551e2e911c739447d1c4d5e23e5f3381960036"
+    },
+    "raw/b057.parquet": {
+      "bytes": 5225552,
+      "sha256": "a53f13b7b79d80bba6ce3094bc916de84210252f638b9ce0e09294c9fe0779d9"
+    },
+    "raw/b058.parquet": {
+      "bytes": 5456219,
+      "sha256": "4dd816d949057d07e7e40613a2addf46f3d3e79e9d1a97d61d1745852ba6438e"
+    },
+    "raw/b059.parquet": {
+      "bytes": 4687743,
+      "sha256": "93bac8687293275b55a5e9d3835df9100ea95451ffed081460f37b10da6055cb"
+    },
+    "raw/b060.parquet": {
+      "bytes": 4852920,
+      "sha256": "15eea85725280fcc16408156c032320ffc79ca3e385be1f48ccfb27f6241a14f"
+    },
+    "raw/b061.parquet": {
+      "bytes": 5340132,
+      "sha256": "5231804f688c9101f57798063ff417a8af5df2475a9f317b733cb674ba01ec82"
+    },
+    "raw/b062.parquet": {
+      "bytes": 5097651,
+      "sha256": "e1e3ce854c50a8ea38652a1182f34a58f790666a1f8260dbc5e826db926286d5"
+    },
+    "raw/b063.parquet": {
+      "bytes": 5500031,
+      "sha256": "12726cac78429d3aa2193e1ef220924ecc16072c5ae85094a6feb323161b53f6"
+    },
+    "raw/b064.parquet": {
+      "bytes": 5841866,
+      "sha256": "0ab0f475b04d272aad2407fd124465dc66d65a9fe134d934c52871253e34e4ae"
+    },
+    "raw/b065.parquet": {
+      "bytes": 5248282,
+      "sha256": "841e7a1c36ef3b4f00bdeaa661eae7be8e38da49b20b44a8ed485e668e2c8801"
+    },
+    "raw/b066.parquet": {
+      "bytes": 4627541,
+      "sha256": "cdb5cc1ed5cc0b3ea3a552a5c2909b0cfb8c3e706fede0991ea9b38e32d7f871"
+    },
+    "raw/b067.parquet": {
+      "bytes": 5500368,
+      "sha256": "ff3e6e9bb007d092e19b6bbf28dc1a8388acc5533be2778695b94b4be45baffb"
+    },
+    "raw/b068.parquet": {
+      "bytes": 5485618,
+      "sha256": "079ae598bb7d688bfe9b8d21f7feed360faeeb311fbc003c18ccf95c5b4bc688"
+    },
+    "raw/b069.parquet": {
+      "bytes": 5374335,
+      "sha256": "9a47d951198dae2587b56c3cbb0d68664b62d43a441da92c488a7438b13772d9"
+    },
+    "raw/b070.parquet": {
+      "bytes": 4603166,
+      "sha256": "c2c7ab89cfe1627b64cb81d3e44c2fc63955c0bac030f3bff2fc4bb13576bcd0"
+    },
+    "raw/b071.parquet": {
+      "bytes": 5965057,
+      "sha256": "3be49577c274126e9fb578b3d11cf1f4dcee9b763e683473d9b05e047b5e4169"
+    },
+    "raw/b072.parquet": {
+      "bytes": 5585549,
+      "sha256": "50aa0085d8ba53dd8e5179190e43fd0da7802dcb9756a80d565a3bc7eb96da23"
+    },
+    "raw/b073.parquet": {
+      "bytes": 4777429,
+      "sha256": "2e9d6adf0e6f0aecee7c6341e34380fefb116676ee5281613db6915329b7ccfb"
+    },
+    "raw/b074.parquet": {
+      "bytes": 5633398,
+      "sha256": "b07430a6daf505fb883aad5c470092486f09995d5be4192e17b882abd8ac4b7e"
+    },
+    "raw/b075.parquet": {
+      "bytes": 5925840,
+      "sha256": "1aa74176a432f1889dca45a3472106f47d767092df459a576fb5f64edc4bfdb7"
+    },
+    "raw/b076.parquet": {
+      "bytes": 5608867,
+      "sha256": "82e365deadb683da80f38562dff352f343bf5ce82ea0a60fa4a35409d66001a8"
+    },
+    "raw/b077.parquet": {
+      "bytes": 5423153,
+      "sha256": "e6a78fdf557177e07ad3a5bec01aa1f660c760f307ffd3ba5db660952064ce53"
+    },
+    "raw/b078.parquet": {
+      "bytes": 5424866,
+      "sha256": "7c0291fce7ecadc371e9e00989c5f0f337318ca07d1105c77a568969661d3715"
+    },
+    "raw/b079.parquet": {
+      "bytes": 3475002,
+      "sha256": "c864f42932aac77e5e91e394130b0e5e841055c705733b44220f0ee823c6e21a"
+    },
+    "raw/b080.parquet": {
+      "bytes": 3746810,
+      "sha256": "281bd69217f20f96c2a8711acb592f9c51c57a50f4159f808b27e6439f84a055"
+    },
+    "raw/b081.parquet": {
+      "bytes": 5301850,
+      "sha256": "fa9919b0e9570923cfb22a4db0770396d836f2144ccf54b48823e273c91b0a36"
+    },
+    "raw/b082.parquet": {
+      "bytes": 5739744,
+      "sha256": "385feedb99a1fb97566b4a17589b7da7e243bf1eab7bbf23a6c745be686359ae"
+    },
+    "raw/b083.parquet": {
+      "bytes": 5581348,
+      "sha256": "fec1bb5c355fe33d2b5507fa770435485ebcade1758d4ee4f2b0106ffe94ed99"
+    },
+    "raw/b084.parquet": {
+      "bytes": 5948144,
+      "sha256": "fe303b59dba744f9d6ea4dfa2c84198d400c7bf8ea54f940d0122a04695af749"
+    },
+    "raw/b085.parquet": {
+      "bytes": 6135235,
+      "sha256": "22686988a8d6aa3ed50a2e8503e049619c0a8489b044d20d3b45e84db906b212"
+    },
+    "raw/b086.parquet": {
+      "bytes": 4265208,
+      "sha256": "69742da0967da023a0e6220a64dbadaf0facf4d9c35c11537aefc4f655274db1"
+    },
+    "raw/b087.parquet": {
+      "bytes": 5996427,
+      "sha256": "516aed5329e40e097fc6f3347033c281a672c7c2fc6be413433629457e067133"
+    },
+    "raw/b088.parquet": {
+      "bytes": 5679835,
+      "sha256": "dcea73d0060f7b37d1209aa44b3c1f090e200fd42e15db4ac765c2822b37c7da"
+    },
+    "raw/b089.parquet": {
+      "bytes": 5228086,
+      "sha256": "8d62d0feb65107fabd84c4cab747699c73cc82986dee4397628e262f02ffb085"
+    },
+    "raw/b090.parquet": {
+      "bytes": 5939961,
+      "sha256": "f706e5a09174e3938cdd59555d1f4a62d68195b42a803f9afcbfb93eb1d390f4"
+    },
+    "raw/b091.parquet": {
+      "bytes": 5874350,
+      "sha256": "03ff1736b2c2873bbcffc140a8446dab9e0334930b618d3e4381886499a1fdd3"
+    },
+    "raw/b092.parquet": {
+      "bytes": 5579870,
+      "sha256": "881c7095aafd93f51248a84c796ae80b50d534bbe8390537579f21de2f03a4a7"
+    },
+    "raw/b093.parquet": {
+      "bytes": 4235720,
+      "sha256": "ecafaad7f96ab02f37f2babd7cb3e5ab45c4f8694750b5b904d1a0b3cf82e03a"
+    },
+    "raw/b094.parquet": {
+      "bytes": 4936656,
+      "sha256": "26cf3e7c211504991ed34e4bb8ac5345397b37712cea2e8e744fa809ab3e546b"
+    },
+    "raw/b095.parquet": {
+      "bytes": 4084285,
+      "sha256": "a5810476e334f934b5c795a7497e1ee1f0b718c93c659dc0f2331a3a6fca9e76"
+    },
+    "raw/b096.parquet": {
+      "bytes": 5182554,
+      "sha256": "9471273b36efa219e45c2ba8514c0c1448c4cfcf2b4f249790d6dc826457fa25"
+    },
+    "raw/b097.parquet": {
+      "bytes": 4828270,
+      "sha256": "d4cdd6e6c0bfed54ced5bf905b76ddf9563b52d6cb5575f8bf10e7eb7699e67f"
+    },
+    "raw/b098.parquet": {
+      "bytes": 5779510,
+      "sha256": "003eb1aac337dd6ef26d4d68f7fb7cd93a0f9153e848216aa3709592775775f8"
+    },
+    "raw/b099.parquet": {
+      "bytes": 6782431,
+      "sha256": "267e2deb828c48fcc7f78c24e4e56c7f9b22d8eef6e4b75332c0b941818c41a0"
+    },
+    "raw/b100.parquet": {
+      "bytes": 5373451,
+      "sha256": "692ed56ceebbbc8c7eb056d336c773ec47211030bc79bc5f41d2951cb8f7c9d7"
+    },
+    "raw/b101.parquet": {
+      "bytes": 5953784,
+      "sha256": "efe62a79485e5ef8f6327188bbd921e0eaa665512c9e49fda1259de9a75700f2"
+    },
+    "raw/b102.parquet": {
+      "bytes": 6504154,
+      "sha256": "f0dc0f1c6f3678f488f4bc1003cef4a12ff6044a2ba0c418565c03685f669152"
+    },
+    "raw/b103.parquet": {
+      "bytes": 5879751,
+      "sha256": "79af20b0028172307b8ea0ebdb3b2f7353448c57e9a5ca7431d85adf6d4ec441"
+    },
+    "raw/b104.parquet": {
+      "bytes": 6394567,
+      "sha256": "63822b9bc8582e58944ce8063c199cde9704ca83fe1c67d009362dcb206806ed"
+    },
+    "raw/b105.parquet": {
+      "bytes": 5377002,
+      "sha256": "71e5629269c3c4f1999789f6eb99032f30a18f3d30ab4b5b6bce0696340e288c"
+    },
+    "raw/b106.parquet": {
+      "bytes": 4854664,
+      "sha256": "b7bc2ae1c6f53110f1b151f3edc88bda8346af59aa01f29c62eb6f3169c1307a"
+    },
+    "raw/b107.parquet": {
+      "bytes": 3958657,
+      "sha256": "66fe54d878e4e9ae6678708a8ec1b4df21a2be3df53910ffd4672e12d564149d"
+    },
+    "raw/b108.parquet": {
+      "bytes": 3306029,
+      "sha256": "2a2222568bbd75c80d216db16ce2ec86e291abd27cb949d0ac6c8528d50e771b"
+    },
+    "raw/b109.parquet": {
+      "bytes": 1963485,
+      "sha256": "a8a973119c488d397e633bb0c10b5efe12a97ae07a790d8a7d3053f6b7e77fcb"
+    },
+    "raw/core.parquet": {
+      "bytes": 812441,
+      "sha256": "9d2c80f1cae2cbaab9387fef2af673ad38c6d432d7687f7366193842aec8607f"
+    },
+    "commodities/GLD_yahoo_adj.csv": {
+      "bytes": 475639,
+      "sha256": "82908f397e29ced170076c19ae6b810de518fcd7ffb5e18dbf19a93a8f7ef3d2"
+    },
+    "commodities/SLV_yahoo_adj.csv": {
+      "bytes": 471956,
+      "sha256": "8dc3b18e4b39b3c7945e85d3a19e6cc09ba15ed4b86c13e7e270ae0feadc0f1f"
+    },
+    "commodities/USO_yahoo_adj.csv": {
+      "bytes": 458558,
+      "sha256": "70ba7c2d584639da07585ef1536c22a0439f198167ccff288e30778dcd6aa5eb"
+    }
+  },
+  "code_sha256": {
+    "upleg_bt/__init__.py": "375d20fbbbb22dedd39af49f702b902ea3133a57444f083a4662abc8c26111c9",
+    "upleg_bt/__main__.py": "dbc1e63d8b9cd10bcf078c7fb0f76eeec6f2d935d696929028f0922771ab6f89",
+    "upleg_bt/charts.py": "10fb1d9e7005a8a5f688e5e2da0bf35b7fef600a7a4c1091da8fdb17df71358c",
+    "upleg_bt/costs.py": "5e1653a8e2288dc1a0c66049277c170891284aeb9fc385a9532ff59ad68a2573",
+    "upleg_bt/data/__init__.py": "af0d4ce36759134c7780304e50382eea01c480af50341da0095811424d47cd06",
+    "upleg_bt/data/build.py": "e6bc7b9d1a4e0b4422e22c355dcbeae5d6d858bf14ff4e63499c3d5d209da891",
+    "upleg_bt/data/download.py": "2cee6f078c1f11f6ad0f1d09ad6042bd344e58bb2b41e68327e7c586b531720e",
+    "upleg_bt/data/earnings.py": "3ab8f7b7d0c6779166e3a757a710ab3070255277fe44a37e6a372706ac20ea6d",
+    "upleg_bt/data/exclusions.py": "20553a8f5f2f7ecc14b0c643d8965798dcabfaad2128ff78d6f75777f9080366",
+    "upleg_bt/data/symbols.py": "4cefe13a93b40b6b627a8d9cdeaf72a4f65aa4acbfd5b21b606ad8c6dfa82b52",
+    "upleg_bt/data/universe.py": "c2be46aa751f59208a9f2685c6fa6e9cb6f37ac92bf12ab29f157edac03c947e",
+    "upleg_bt/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "upleg_bt/engine/fib_fast.py": "d6e1d51b0f5bf92b9745e5c24573a9be0e7772c49f85110cfedf73c2dbb79373",
+    "upleg_bt/engine/fib_locked.py": "ae48f14ad3e7b813f751ca5dfb9bdbcb103b4774dcc7168a47b501084d9996da",
+    "upleg_bt/engine/fm.py": "4e1713e7698ba2588b252a68035d15aa28148eb9eb06588cea61b16285d0eab5",
+    "upleg_bt/engine/portfolio.py": "f1bb849306e702abd01b9794cbdc6f802238d2fbe224cc4acd7133fc3d67c753",
+    "upleg_bt/engine/upleg.py": "6f7067332981dff6f5835610230aa4bf5a66ff2e7d1b00a39ae6a59aa87b0710",
+    "upleg_bt/engine/v105.py": "714b235a7b051bdd0e5466eafbf8253c335649d91620ff8ba4e6d2527f82a93f",
+    "upleg_bt/metrics.py": "09466d77de37a4afb1a226b2d2389cd2b5f76f8528ce272a16acc522dbc73cdf",
+    "upleg_bt/paths.py": "852168f59a10595905821f41a9af899bba013da316c30da3e8e9a1780804ae36",
+    "upleg_bt/reproduce.py": "547568dc3b8a7ca69b5220328b35616f4f3ff1f152e4322dcd3cf6d8710e341e",
+    "upleg_bt/resources/survivorship_coverage.csv": "75c5de60d0b4aee291ec1a38ab127130a308d9ec000a3ba934214b06da60e57f",
+    "upleg_bt/robustness.py": "94c6dd26d5d46434c9d42df85602f5e98d4bd21b40e6aa4e3144af0b76612cbb",
+    "upleg_bt/snapshot.py": "85de167e41324a737c0a508c318bc3d2abe7f5207f18cd9ae60f8ef31bc476a3"
+  },
+  "acceptance_sha256": {
+    "acceptance/v1.1.1/expected_daily_equity.csv": "80a9c9a0721c9f930a3721068235f088db7f678e7355703ad35d937d7a999ad5",
+    "acceptance/v1.1.1/expected_events.csv": "75dfe9b7b400659def5a2c211804614fe29d7d96393a3b45dda85e7cf3e53b9a",
+    "acceptance/v1.1.1/expected_metrics.json": "bfeacdddc61a37380029eb4e0aa7bd1e3bfb4653048ec65f118cc37e75d4f2e1",
+    "acceptance/v1.1.1/expected_sample_weeks.csv": "da1b7e1226e52c2161d235ec705d5dc452ec26a671e5fb4820c5d34217eba4fc",
+    "acceptance/v1.1.1/expected_weekly_holdings.csv": "05278ce5ac6301956b0d8774353c048cdb1d99f8c14fbe9939b974e34ace565c",
+    "acceptance/v1.1.1/share_class_pairs_reviewed.csv": "f2a2ce641ca9233dbfaa576d5a94b234cd21c97db89657024fb2e008418b4e97"
+  },
+  "settings": {
+    "start": "2019-01-02",
+    "end": "2026-09-30",
+    "ma_weeks": 30,
+    "slope_lag_weeks": 4,
+    "confirmation_weeks": 2,
+    "max_names": 3,
+    "cash_floor": 0.3,
+    "vol_target": 0.16,
+    "corr": 0.35,
+    "priority": [
+      "GLD",
+      "SLV",
+      "USO"
+    ],
+    "priority_policy": "free slots only",
+    "exit": "halve; clear on confirmed down-leg",
+    "rank": "historical completed natural Fib trend segments; ties: dollar volume, alphabet",
+    "share_class_map": {
+      "BRK-A": "BRK-B",
+      "BH-A": "BH"
+    },
+    "rebalance_l1_deadband": 0.02,
+    "cost_per_side_liquid": 0.0005,
+    "cost_per_side_other": 0.001,
+    "weekly_signal_execution": "next week second trading session open",
+    "daily_adjustment": "prior session data, current open"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "matplotlib": "3.11.2",
+    "yfinance": "1.7.0",
+    "pytest": "9.1.1"
+  },
+  "acceptance_expected": {
+    "version": "v1.1.1",
+    "period": "2019-01-02→2026-09-30",
+    "metrics": {
+      "total_return": 2.607873613923467,
+      "cagr": 0.180243797191032,
+      "ann_vol": 0.13220112084083419,
+      "sharpe": 1.3255048123385653,
+      "maxdd": -0.1170065677315455,
+      "calmar": 1.5404588023176196,
+      "avg_exposure": 0.5914710808789265,
+      "n_days": 1947,
+      "sortino": 1.9344637635873103,
+      "turnover_per_yr": 6.158801761294857
+    },
+    "headline": {
+      "cagr": "18.0%",
+      "maxdd": "-11.7%",
+      "sortino": "1.93",
+      "sharpe": "1.33"
+    },
+    "periods": {
+      "2019-01-02→2026-09-30": {
+        "total_return": 2.607873613923467,
+        "cagr": 0.180243797191032,
+        "ann_vol": 0.13220112084083419,
+        "sharpe": 1.3255048123385653,
+        "maxdd": -0.1170065677315455,
+        "calmar": 1.5404588023176196,
+        "avg_exposure": 0.5914710808789265,
+        "n_days": 1947,
+        "sortino": 1.9344637635873103,
+        "turnover_per_yr": 6.158801761294857
+      },
+      "2019–2022": {
+        "total_return": 0.9218286664602209,
+        "cagr": 0.17780830021968397,
+        "ann_vol": 0.13484612320919306,
+        "sharpe": 1.284076890632158,
+        "maxdd": -0.11404718566288208,
+        "calmar": 1.559076615404405,
+        "avg_exposure": 0.5495526459978899,
+        "n_days": 1008,
+        "sortino": 1.879082770716734,
+        "turnover_per_yr": 5.99570675402028
+      },
+      "2023→2026-09-30": {
+        "total_return": 0.9027267409282895,
+        "cagr": 0.18768560289277225,
+        "ann_vol": 0.12937322317006983,
+        "sharpe": 1.3717407971324531,
+        "maxdd": -0.1170065677315455,
+        "calmar": 1.6040604090138726,
+        "avg_exposure": 0.636469784137803,
+        "n_days": 939,
+        "sortino": 1.9967673882336912,
+        "turnover_per_yr": 6.350915763968
+      }
+    },
+    "yearly": {
+      "2019": 0.18051183519999991,
+      "2020": 0.3960971537746427,
+      "2021": 0.14541183808827518,
+      "2022": 0.02085813904466205,
+      "2023": -0.013768755921143905,
+      "2024": 0.16935472149032238,
+      "2025": 0.49020318330144486,
+      "2026": 0.09236086099633711
+    },
+    "source": "/workspace/trading-research/2026-10-review/strategy_v1.1.1_fullmarket_upleg/acceptance/"
+  },
+  "status": "PASS_EXACT_REPRODUCTION"
+}
