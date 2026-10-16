@@ -415,14 +415,8 @@ def tactic_flying_goose(
     return book.batch
 
 
-# ----- Tactic 12: CCI 月线翻倍 -----
-def tactic_cci_monthly(
-    symbol, dates, raw_open, raw_high, raw_low, raw_close, volume, amount, factor, is_st=False
-) -> SignalBatch:
-    """Monthly CCI rises -100→+100, two bottoms above 0, then daily close > MA5."""
-    book = _prepare(symbol, dates, raw_open, raw_high, raw_low, raw_close, volume, amount, factor, is_st)
-    if book is None or book.n < 80:
-        return SignalBatch([])
+def cci_signal_months(book: _Book) -> set:
+    """Months where monthly CCI went -100→+100 then made two bottoms above 0."""
     # build monthly OHLC from daily
     stamps = pd.to_datetime(book.dates)
     frame = pd.DataFrame(
@@ -434,11 +428,11 @@ def tactic_cci_monthly(
         }
     ).dropna()
     if frame.empty:
-        return SignalBatch([])
+        return set()
     frame["ym"] = frame["date"].dt.to_period("M")
     monthly = frame.groupby("ym", sort=True).agg(high=("high", "max"), low=("low", "min"), close=("close", "last"))
     if len(monthly) < 20:
-        return SignalBatch([])
+        return set()
     m_cci = _cci(monthly["high"].to_numpy(), monthly["low"].to_numpy(), monthly["close"].to_numpy(), 14)
     # find months where CCI crossed from below -100 through +100, then two bottoms > 0
     signal_months: set[pd.Period] = set()
@@ -474,8 +468,21 @@ def tactic_cci_monthly(
             bottoms = 0
             last_was_low = False
 
+    return signal_months
+
+
+# ----- Tactic 12: CCI 月线翻倍 -----
+def tactic_cci_monthly(
+    symbol, dates, raw_open, raw_high, raw_low, raw_close, volume, amount, factor, is_st=False
+) -> SignalBatch:
+    """Monthly CCI rises -100→+100, two bottoms above 0, then daily close > MA5."""
+    book = _prepare(symbol, dates, raw_open, raw_high, raw_low, raw_close, volume, amount, factor, is_st)
+    if book is None or book.n < 80:
+        return SignalBatch([])
+    signal_months = cci_signal_months(book)
     if not signal_months:
         return SignalBatch([])
+    stamps = pd.to_datetime(book.dates)
     ma5 = sma(book.q_close, 5)
     # map period -> last daily index in that month
     periods = pd.Series(stamps).dt.to_period("M").to_numpy()
