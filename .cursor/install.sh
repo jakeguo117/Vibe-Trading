@@ -6,6 +6,15 @@ cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 PY="${PYTHON:-python3}"
 "$PY" -c 'import sys; assert sys.version_info >= (3, 11), sys.version' || {
   echo "Python >= 3.11 required"; exit 1; }
+# Cloud images often ship Python without ensurepip. venv creation then fails.
+if ! "$PY" -c 'import ensurepip' >/dev/null 2>&1; then
+  if command -v apt-get >/dev/null 2>&1; then
+    sudo apt-get update -qq
+    sudo apt-get install -y -qq python3-venv
+  else
+    echo "python3-venv (ensurepip) is required"; exit 1
+  fi
+fi
 [ -x .venv/bin/python ] || "$PY" -m venv .venv
 . .venv/bin/activate
 python -m pip install -q --upgrade pip
