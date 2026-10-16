@@ -1,6 +1,7 @@
 # A股战法12（CCI月线）每日纸面订单表。纸面交易，不连券商、不下单。
 # 主触发：外部调用 workflow_dispatch（约北京时间 08:30，交易日）；备用：cron 08:30 北京时间（UTC 00:30，周一至周五）。
 # 状态（纸面账户、发送标记）与日线缓存通过 actions/cache 在运行之间保存，绝不提交到仓库。
+# 首次全历史若超过本任务时限，已写入的 parquet 会保存，下次接着补；也可先跑 ashare-tactic12-build-cache（6 小时）。
 name: ashare-tactic12-daily
 
 on:
@@ -19,6 +20,7 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
 concurrency:
   group: ashare-tactic12-daily
@@ -35,6 +37,9 @@ jobs:
       CACHE_DIR: ${{ github.workspace }}/.t12/cache
       QUIET_SHEET: "1"
       FETCH_WORKERS: "4"
+      FETCH_MIN_INTERVAL: "0.05"
+      # 在任务超时前停手，把已完成的缓存留给下一步保存
+      FETCH_BUDGET_SEC: "2400"
       MIN_COVERAGE: "0.85"
     steps:
       - uses: actions/checkout@v4
@@ -53,6 +58,9 @@ jobs:
           T="${{ inputs.today }}"; [ -n "$T" ] || T="$(date +%F)"
           echo "today=$T" >> "$GITHUB_OUTPUT"
 
+      - name: Prepare cache directories
+        run: mkdir -p .t12/state/sheets .t12/cache/bars
+
       - name: Restore state + bar cache
         uses: actions/cache/restore@v4
         with:
@@ -66,6 +74,7 @@ jobs:
 
       - name: Build order sheet + email
         id: run
+        timeout-minutes: 50
         working-directory: research/ashare_tactic12_daily
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}

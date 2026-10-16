@@ -140,3 +140,82 @@ def test_snapshot_only_before_auction():
     tz = "Asia/Shanghai"
     assert paper.snapshot_usable("2026-10-19", pd.Timestamp("2026-10-19 08:30", tz=tz))
     assert not paper.snapshot_usable("2026-10-19", pd.Timestamp("2026-10-19 10:00", tz=tz))
+
+
+def test_symbol_and_universe_frame_exclude_st_and_b_shares():
+    assert paper.symbol_from_code("600000") == "sh600000"
+    assert paper.symbol_from_code("000001") == "sz000001"
+    assert paper.symbol_from_code("688001") == "sh688001"
+    assert paper.symbol_from_code("830799") == "bj830799"
+    assert paper.symbol_from_code("bj920196") == "bj920196"
+    assert paper.symbol_from_code("900901") is None
+    assert paper.symbol_from_code("200001") is None
+    frame = paper.universe_from_code_name(
+        ["600000", "000001", "688001", "830799", "900901", "200468", "sh601398"],
+        ["浦发银行", "平安银行", "*ST海马", "艾融软件", "仪电B股", "宁通信B", "工商银行"],
+        "eastmoney_spot",
+    )
+    assert set(frame["symbol"]) == {"sh600000", "sz000001", "bj830799", "sh601398"}
+    assert not frame["name"].str.upper().str.contains("ST").any()
+    assert set(frame["source"]) == {"eastmoney_spot"}
+
+
+def _reset_breakers():
+    paper._BREAKER_FAILS.update({k: 0 for k in paper._BREAKER_FAILS})
+    paper._BREAKER_UNTIL.update({k: 0.0 for k in paper._BREAKER_UNTIL})
+
+
+def test_load_universe_falls_back_to_eastmoney_spot(tmp_path, monkeypatch):
+    monkeypatch.setattr(paper, "STATE_DIR", tmp_path)
+    monkeypatch.setattr(paper, "_UNIVERSE_FALLBACK_MIN", 1)
+    import ashare_tactics.download as download
+    monkeypatch.setattr(download, "fetch_universe", lambda: (_ for _ in ()).throw(RuntimeError("sina list down")))
+    spot = paper.universe_from_code_name(["600000", "000001"], ["浦发银行", "ST岩石"], "eastmoney_spot")
+    monkeypatch.setattr(paper, "_universe_from_em_spot", lambda: spot)
+    monkeypatch.setattr(paper, "_universe_from_sina_spot", lambda: (_ for _ in ()).throw(AssertionError("sina spot")))
+    universe = paper.load_universe()
+    assert list(universe["symbol"]) == ["sh600000"]
+    assert (tmp_path / "universe_live.parquet").exists()
+
+
+def test_load_universe_cache_before_network_fallback(tmp_path, monkeypatch):
+    monkeypatch.setattr(paper, "STATE_DIR", tmp_path)
+    cached = paper.universe_from_code_name(["601318"], ["中国平安"], "cache")
+    paper._write_parquet(cached, tmp_path / "universe_live.parquet")
+    import ashare_tactics.download as download
+    monkeypatch.setattr(download, "fetch_universe", lambda: (_ for _ in ()).throw(RuntimeError("sina list down")))
+    monkeypatch.setattr(paper, "_universe_from_em_spot", lambda: (_ for _ in ()).throw(AssertionError("network")))
+    universe = paper.load_universe()
+    assert list(universe["symbol"]) == ["sh601318"]
+
+
+def test_load_universe_raises_when_every_source_fails(tmp_path, monkeypatch):
+    import pytest
+    monkeypatch.setattr(paper, "STATE_DIR", tmp_path)
+    import ashare_tactics.download as download
+    monkeypatch.setattr(download, "fetch_universe", lambda: (_ for _ in ()).throw(RuntimeError("sina list down")))
+    monkeypatch.setattr(paper, "_universe_from_em_spot", lambda: (_ for _ in ()).throw(RuntimeError("em")))
+    monkeypatch.setattr(paper, "_universe_from_sina_spot", lambda: (_ for _ in ()).throw(RuntimeError("sina spot")))
+    monkeypatch.setattr(paper, "_universe_from_exchange_lists", lambda: (_ for _ in ()).throw(RuntimeError("exch")))
+    with pytest.raises(RuntimeError, match="股票池获取失败"):
+        paper.load_universe()
+
+
+def test_fetch_uses_tencent_after_em_and_sina_fail(monkeypatch):
+    _reset_breakers()
+    monkeypatch.setattr(paper, "_fetch_em", lambda *a: (_ for _ in ()).throw(RuntimeError("em")))
+    monkeypatch.setattr(paper, "_fetch_sina", lambda *a: (_ for _ in ()).throw(RuntimeError("sina")))
+    bars = pd.DataFrame({"date": [pd.Timestamp("2026-10-15")], "open": [1.0], "close": [1.0],
+                         "high": [1.0], "low": [1.0], "volume": [10.0], "amount": [100.0], "factor": [1.0]})
+    monkeypatch.setattr(paper, "_fetch_tencent", lambda *a: bars)
+    out = paper._fetch("600000", "20150101", "20261015")
+    assert len(out) == 1 and float(out["volume"].iloc[0]) == 10.0
+    _reset_breakers()
+
+
+def test_refresh_stops_at_budget_without_dropping_finished_files(tmp_path, monkeypatch):
+    monkeypatch.setattr(paper, "CACHE", tmp_path)
+    monkeypatch.setattr(paper, "_past_deadline", lambda deadline: True)
+    monkeypatch.setattr(paper, "refresh_symbol", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should defer")))
+    counts = paper.refresh_all(["sh600000", "sz000001"], "2026-10-15", workers=1, budget_sec=1)
+    assert counts == {"deferred": 2}
