@@ -13,6 +13,9 @@ python -m pip install -q --upgrade pip
 python -m pip install -q -e ".[dev,stats]"
 # research/ (ashare_tactics, ashare_tactic12_daily): data + parquet + JS decoder for Sina
 python -m pip install -q akshare pandas numpy pyarrow requests py_mini_racer pytest
-# smoke: research tests must import and pass without network
-( cd research && python -m pytest -q ashare_tactics/test_logic.py )
+# smoke (offline): key imports; research tests when that folder exists on this branch
+python -c "import akshare, pandas, pyarrow, pytest, agent" 
+if [ -f research/ashare_tactics/test_logic.py ]; then
+  ( cd research && python -m pytest -q ashare_tactics/test_logic.py $( [ -d ashare_tactic12_daily ] && echo ashare_tactic12_daily ) )
+fi
 echo "cursor install ok: $(python --version)"
