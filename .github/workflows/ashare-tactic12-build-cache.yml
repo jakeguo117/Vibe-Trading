@@ -1,0 +1,83 @@
+# 一次性建全历史日线缓存。workflow_dispatch，超时 6 小时。
+# 与每日任务共用 actions/cache 前缀 t12-，已写入的 parquet 在失败时也会保存，可重复运行接着补。
+# 始终演练：不发邮件。订单表、持仓、缓存都不进仓库。
+name: ashare-tactic12-build-cache
+
+on:
+  workflow_dispatch:
+    inputs:
+      today:
+        description: "覆盖日期 YYYY-MM-DD（留空=北京时间今天）"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: ashare-tactic12-daily
+  cancel-in-progress: false
+
+jobs:
+  build-cache:
+    if: github.repository == 'jakeguo117/Vibe-Trading'
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      TZ: Asia/Shanghai
+      STATE_DIR: ${{ github.workspace }}/.t12/state
+      CACHE_DIR: ${{ github.workspace }}/.t12/cache
+      QUIET_SHEET: "1"
+      FETCH_WORKERS: "4"
+      FETCH_MIN_INTERVAL: "0.05"
+      FETCH_BUDGET_SEC: "18000"
+      MIN_COVERAGE: "0.85"
+      DRY_RUN: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: research
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: research/ashare_tactic12_daily/requirements.txt
+      - run: pip install -r research/ashare_tactic12_daily/requirements.txt
+
+      - name: Resolve date
+        id: d
+        run: |
+          T="${{ inputs.today }}"; [ -n "$T" ] || T="$(date +%F)"
+          echo "today=$T" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare cache directories
+        run: mkdir -p .t12/state/sheets .t12/cache/bars
+
+      - name: Restore state + bar cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .t12
+          key: t12-${{ github.run_id }}
+          restore-keys: t12-
+
+      - name: Build history cache (dry run, no email)
+        timeout-minutes: 340
+        working-directory: research/ashare_tactic12_daily
+        run: ./run_daily.sh --dry-run --today "${{ steps.d.outputs.today }}"
+
+      - name: Save state + bar cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .t12
+          key: t12-${{ github.run_id }}
+
+      - name: Upload order sheet
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: order-sheet-${{ steps.d.outputs.today }}
+          path: .t12/state/sheets/order_sheet_${{ steps.d.outputs.today }}.txt
+          if-no-files-found: ignore
+          retention-days: 7

@@ -175,3 +175,7 @@ bench_report.json
 # Grounding ledger persisted by ad-hoc verification scripts into tests/
 agent/tests/artifacts/
 .idea/*
+
+# Tactic 12 paper account, sent markers, order sheets, and bar cache.
+# Public repo: never commit these.
+.t12/
