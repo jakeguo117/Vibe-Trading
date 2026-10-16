@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -17,6 +18,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # mailer
 
 from ashare_tactics.bars import arrays_from_frame  # noqa: E402
 from ashare_tactics.costs import (  # noqa: E402
@@ -26,8 +28,26 @@ from ashare_tactics.indicators import sma  # noqa: E402
 from ashare_tactics.signals import _Book, _liquidity  # noqa: E402
 from ashare_tactics.signals_patterns import cci_signal_months  # noqa: E402
 
-STATE_DIR = Path("/Volumes/Disk/项目/data-cache/tactic12_paper")
-CACHE = Path("/Volumes/Disk/项目/data-cache/ashare_tactics")
+MAC_STATE_DIR = "/Volumes/Disk/项目/data-cache/tactic12_paper"
+MAC_CACHE_DIR = "/Volumes/Disk/项目/data-cache/ashare_tactics"
+
+
+def config_from_env(env=None) -> dict:
+    """路径/开关全部由环境变量决定；未设置时沿用 Mac 默认路径（兼容旧 LaunchAgent）。"""
+    env = os.environ if env is None else env
+    return {
+        "state_dir": Path(env.get("STATE_DIR") or MAC_STATE_DIR),
+        "cache_dir": Path(env.get("CACHE_DIR") or MAC_CACHE_DIR),
+        "dry_run": str(env.get("DRY_RUN", "")).lower() in ("1", "true", "yes"),
+        "min_coverage": float(env.get("MIN_COVERAGE") or 0.85),
+        "min_universe": int(env.get("MIN_UNIVERSE") or 4000),
+        "quiet": str(env.get("QUIET_SHEET", env.get("GITHUB_ACTIONS", ""))).lower() in ("1", "true", "yes"),
+    }
+
+
+_CFG = config_from_env()
+STATE_DIR = _CFG["state_dir"]
+CACHE = _CFG["cache_dir"]
 INITIAL_CASH = 100_000.0
 START_DATE = "2026-10-19"
 MAX_POS = 10
@@ -48,6 +68,31 @@ def prev_trade_date(cal: list[str], day: str) -> str:
 
 # ---------- 数据增量刷新 ----------
 def _fetch(code: str, start: str, end: str):
+    """东方财富 hist；失败（海外IP限流等）时退回新浪日线。"""
+    try:
+        return _fetch_em(code, start, end)
+    except Exception:  # noqa: BLE001
+        return _fetch_sina(code, start, end)
+
+
+def _fetch_sina(code: str, start: str, end: str):
+    import akshare as ak
+    sym = ("bj" if code.startswith(("4", "8", "92")) else "sh" if code.startswith(("6", "9")) else "sz") + code
+    raw = ak.stock_zh_a_daily(symbol=sym, start_date=start, end_date=end, adjust="")
+    if raw is None or raw.empty:
+        return None
+    qfq = ak.stock_zh_a_daily(symbol=sym, start_date=start, end_date=end, adjust="qfq")
+    f = raw[["date", "open", "close", "high", "low", "volume", "amount"]].copy()
+    f["volume"] = f["volume"] / 100.0  # 新浪为股，统一为手（与东财一致）
+    f["date"] = pd.to_datetime(f["date"]).dt.normalize()
+    q = qfq[["date", "close"]].rename(columns={"close": "qc"})
+    q["date"] = pd.to_datetime(q["date"]).dt.normalize()
+    f = f.merge(q, on="date", how="left")
+    f["factor"] = (f["close"] / f["qc"]).replace([np.inf, -np.inf], np.nan).fillna(1.0)
+    return f.drop(columns="qc")
+
+
+def _fetch_em(code: str, start: str, end: str):
     import akshare as ak
     raw = ak.stock_zh_a_hist(symbol=code, period="daily", start_date=start, end_date=end, adjust="")
     qfq = ak.stock_zh_a_hist(symbol=code, period="daily", start_date=start, end_date=end, adjust="qfq")
@@ -92,16 +137,92 @@ def refresh_symbol(symbol: str, through: str) -> str:
     return "ok"
 
 
-def refresh_all(symbols: list[str], through: str, workers: int = 3) -> dict:
+def fetch_snapshot() -> pd.DataFrame:
+    """全市场快照（开盘前即上一交易日收盘）。东财优先，失败退回新浪。列统一为
+    symbol, open, high, low, close, prev_close, volume(手), amount。"""
+    import akshare as ak
+    last: Exception | None = None
+    for k in range(3):
+        try:
+            d = ak.stock_zh_a_spot_em()
+            code = d["代码"].astype(str).str.zfill(6)
+            sym = np.where(code.str.startswith(("4", "8", "92")), "bj", np.where(code.str.startswith(("6", "9")), "sh", "sz")) + code
+            out = pd.DataFrame({"symbol": sym, "open": d["今开"], "high": d["最高"], "low": d["最低"], "close": d["最新价"],
+                                "prev_close": d["昨收"], "volume": d["成交量"], "amount": d["成交额"]})
+            out.attrs["source"] = "eastmoney"
+            return out
+        except Exception as e:  # noqa: BLE001
+            last = e; time.sleep(5 * 2 ** k)
+    for k in range(3):
+        try:
+            d = ak.stock_zh_a_spot()
+            out = pd.DataFrame({"symbol": d["代码"].astype(str), "open": d["今开"], "high": d["最高"], "low": d["最低"],
+                                "close": d["最新价"], "prev_close": d["昨收"], "volume": d["成交量"] / 100.0, "amount": d["成交额"]})
+            out.attrs["source"] = "sina"
+            return out
+        except Exception as e:  # noqa: BLE001
+            last = e; time.sleep(5 * 2 ** k)
+    raise RuntimeError("snapshot failed (eastmoney+sina)") from last
+
+
+def apply_snapshot(symbol: str, snap_row, through: str, prev_day: str) -> str:
+    """缓存最后一根K线=prev_day 且快照昨收与之吻合（无除权）→ 直接追加 through 这一根，沿用复权因子。
+    否则返回 'need_fetch'，由逐只增量接口处理（除权、缺口、新股）。"""
+    path = CACHE / "bars" / f"{symbol}.parquet"
+    if not path.exists() or snap_row is None:
+        return "need_fetch"
+    old = pd.read_parquet(path)
+    old["date"] = pd.to_datetime(old["date"])
+    last = old.iloc[old["date"].values.argmax()]
+    if str(last["date"].date()) >= through:
+        return "fresh"
+    vals = [snap_row[k] for k in ("open", "high", "low", "close", "prev_close", "volume", "amount")]
+    if any(pd.isna(x) for x in vals):
+        return "need_fetch"
+    if float(snap_row["volume"]) <= 0:
+        return "suspended"  # 当日停牌：不追加（与 hist 接口一致）
+    if str(last["date"].date()) != prev_day or not np.isclose(float(snap_row["prev_close"]), float(last["close"]), rtol=1e-3):
+        return "need_fetch"
+    row = {"date": pd.Timestamp(through), "open": float(snap_row["open"]), "close": float(snap_row["close"]),
+           "high": float(snap_row["high"]), "low": float(snap_row["low"]), "volume": float(snap_row["volume"]),
+           "amount": float(snap_row["amount"]), "factor": float(last["factor"])}
+    out = pd.concat([old, pd.DataFrame([row])[old.columns]], ignore_index=True)
+    out.to_parquet(path, index=False)
+    return "snap"
+
+
+def snapshot_usable(today: str, now: pd.Timestamp | None = None) -> bool:
+    """快照仅在 today 09:15（集合竞价）之前代表上一交易日收盘。"""
+    now = now or pd.Timestamp.now(tz="Asia/Shanghai")
+    return now < pd.Timestamp(today + " 09:15", tz="Asia/Shanghai")
+
+
+def refresh_all(symbols: list[str], through: str, workers: int = int(os.environ.get("FETCH_WORKERS") or 4), snapshot: pd.DataFrame | None = None,
+                prev_day: str | None = None) -> dict:
     counts: dict[str, int] = {}
+    todo = list(symbols)
+    if snapshot is not None and prev_day:
+        rows = {r["symbol"]: r for r in snapshot.to_dict("records")}
+        todo = []
+        for s in symbols:
+            try:
+                r = apply_snapshot(s, rows.get(s), through, prev_day)
+            except Exception:  # noqa: BLE001
+                r = "need_fetch"
+            if r == "need_fetch":
+                todo.append(s)
+            else:
+                counts[r] = counts.get(r, 0) + 1
 
     def one(s):
-        for k in range(3):
+        for k in range(4):  # 指数退避重试
             try:
                 return refresh_symbol(s, through)
             except Exception:  # noqa: BLE001
-                time.sleep(1 + k)
+                time.sleep(2 ** k)
         return "fail"
+
+    symbols = todo
 
     with ThreadPoolExecutor(workers) as pool:
         for r in pool.map(one, symbols):
@@ -113,6 +234,7 @@ def load_universe() -> pd.DataFrame:
     from ashare_tactics.download import fetch_universe
     try:
         u = fetch_universe()
+        STATE_DIR.mkdir(parents=True, exist_ok=True)
         u.to_parquet(STATE_DIR / "universe_live.parquet", index=False)
     except Exception:  # noqa: BLE001
         u = pd.read_parquet(STATE_DIR / "universe_live.parquet")
@@ -320,8 +442,47 @@ def render(state: dict, orders: dict, views: dict, through: str, notes: list[str
     return "\n".join(L) + "\n"
 
 
+# ---------- 幂等 / 质量闸门 ----------
+class QualityError(RuntimeError):
+    """数据覆盖不足：宁可不出单也不出错单。"""
+
+
+def sent_marker(state_dir: Path, today: str) -> Path:
+    return state_dir / "sent" / f"{today}.done"
+
+
+def already_sent(state_dir: Path, today: str) -> bool:
+    return sent_marker(state_dir, today).exists()
+
+
+def mark_sent(state_dir: Path, today: str, info: str = "") -> None:
+    p = sent_marker(state_dir, today)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(info or "sent", "utf-8")
+
+
+def quality_check(n_universe: int, views: dict, through: str, positions: dict, min_cov: float, min_uni: int) -> str:
+    fresh = sum(1 for v in views.values() if str(pd.Timestamp(v.book.dates[-1]).date()) == through)
+    cov = fresh / n_universe if n_universe else 0.0
+    msg = f"universe={n_universe} views={len(views)} 截至{through}有K线={fresh} 覆盖率={cov:.1%}"
+    if n_universe < min_uni:
+        raise QualityError(f"股票池过小（<{min_uni}）：{msg}")
+    if cov < min_cov:
+        raise QualityError(f"数据覆盖率低于{min_cov:.0%}：{msg}")
+    missing = [s for s in positions if s not in views]
+    if missing:
+        raise QualityError(f"持仓缺少行情：{missing}；{msg}")
+    return msg
+
+
 # ---------- 主流程 ----------
-def run(today: str, state_dir: Path, refresh: bool, send: bool, dry: bool, test_subject: bool) -> str:
+def run(today: str, state_dir: Path, refresh: bool, send: bool, dry: bool, test_subject: bool,
+        cfg: dict | None = None) -> str:
+    cfg = cfg or _CFG
+    if send and cfg["dry_run"]:
+        print("DRY_RUN=1：不发邮件"); send = False
+    if already_sent(state_dir, today):
+        print(f"{today} 订单表已发送过（{sent_marker(state_dir, today)}），跳过"); return ""
     cal = trade_dates()
     if today not in cal:
         print(f"{today} 非交易日，跳过"); return ""
@@ -329,31 +490,56 @@ def run(today: str, state_dir: Path, refresh: bool, send: bool, dry: bool, test_
     state = load_state(state_dir)
     if today < state["start_date"] and not dry:
         print("未到起始日"); return ""
+    out = state_dir / "sheets" / f"order_sheet_{today}.txt"
+    if out.exists() and (state.get("pending") or {}).get("date") == today:
+        # 同日重跑（上次生成成功但未发出）：不重复回填/记账，只重发已生成的订单表
+        text = out.read_text("utf-8")
+        print(f"复用已生成的订单表 {out.name}")
+        _deliver(text, today, state_dir, send, test_subject, cfg)
+        return text
     uni = load_universe()
     names = dict(zip(uni["symbol"], uni["name"]))
     syms = list(names) + [s for s in state["positions"] if s not in names]
     if refresh:
-        print("refresh", refresh_all(syms, through), flush=True)
+        snap = None
+        if snapshot_usable(today):
+            try:
+                snap = fetch_snapshot(); print("snapshot", snap.attrs.get("source"), len(snap), flush=True)
+            except Exception as e:  # noqa: BLE001
+                print("snapshot 失败，改逐只增量：", repr(e)[:200], flush=True)
+        print("refresh", refresh_all(syms, through, snapshot=snap, prev_day=prev_trade_date(cal, through)), flush=True)
     views = {}
     for s in syms:
         v = load_view(s, names.get(s, state["positions"].get(s, {}).get("name", s)), through)
         if v is not None:
             views[s] = v
+    print("quality", quality_check(len(names), views, through, state["positions"], cfg["min_coverage"], cfg["min_universe"]), flush=True)
     notes = apply_fills(state, views, through)
     orders = build_orders(state, views, names, through, today)
     text = render(state, orders, views, through, notes, dry)
     state["pending"] = {"date": today, "sells": orders["sells"], "buys": orders["buys"]}
     state["history"].append({"date": through, "equity": orders["equity"], "cash": state["cash"]})
     save_state(state_dir, state)
-    out = state_dir / "sheets" / f"order_sheet_{today}.txt"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(text, "utf-8")
-    print(text)
+    _deliver(text, today, state_dir, send, test_subject, cfg)
+    return text
+
+
+def _deliver(text: str, today: str, state_dir: Path, send: bool, test_subject: bool, cfg: dict) -> None:
+    if cfg["quiet"]:  # 公开仓库的 Actions 日志对外可见：不打印持仓/订单明细
+        print(f"订单表已生成（{len(text.splitlines())} 行），日志中不打印明细")
+    else:
+        print(text)
     if send:
         from mailer import send_mail
         subj = ("【测试】" if test_subject else "") + f"【A股战法12纸面】{today} 订单表"
-        print("email:", send_mail(subj, text))
-    return text
+        r = send_mail(subj, text)
+        print("email:", r)
+        if r == "已发送":
+            mark_sent(state_dir, today, r)
+        else:
+            raise RuntimeError(f"邮件未发送：{r}")
 
 
 def main() -> None:
@@ -364,8 +550,21 @@ def main() -> None:
     ap.add_argument("--send", action="store_true")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--test-subject", action="store_true")
+    ap.add_argument("--dry-run", action="store_true", help="演练：生成订单表但绝不发邮件")
     a = ap.parse_args()
-    run(a.today, a.state_dir, not a.no_refresh, a.send, a.dry, a.test_subject)
+    cfg = dict(_CFG)
+    if a.dry_run:
+        cfg["dry_run"] = True; a.dry = True
+    try:
+        run(a.today, a.state_dir, not a.no_refresh, a.send, a.dry, a.test_subject, cfg)
+    except Exception as e:  # noqa: BLE001
+        msg = f"{type(e).__name__}: {e}"
+        print("FAILED", msg, flush=True)
+        if a.send and not cfg["dry_run"]:
+            from mailer import send_mail
+            print("failure email:", send_mail(f"【A股战法12纸面】{a.today} 未出单（失败通知）",
+                                              f"今日订单表未生成，以免发出错误订单。\n原因：{msg}\n请检查 GitHub Actions 日志。"))
+        sys.exit(1)
 
 
 if __name__ == "__main__":

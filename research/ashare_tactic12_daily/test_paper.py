@@ -48,3 +48,95 @@ def test_mailer_without_secret_does_not_send(monkeypatch):
     from ashare_tactic12_daily import mailer
     monkeypatch.setattr(mailer, "_secret", lambda: None)
     assert mailer.send_mail("x", "y").startswith("未发送")
+
+
+def test_env_config_paths_and_defaults(tmp_path):
+    c = paper.config_from_env({"STATE_DIR": str(tmp_path / "s"), "CACHE_DIR": str(tmp_path / "c"), "DRY_RUN": "1",
+                               "MIN_COVERAGE": "0.5", "GITHUB_ACTIONS": "true"})
+    assert c["state_dir"] == tmp_path / "s" and c["cache_dir"] == tmp_path / "c"
+    assert c["dry_run"] and c["min_coverage"] == 0.5 and c["quiet"]
+    d = paper.config_from_env({})
+    assert str(d["state_dir"]) == paper.MAC_STATE_DIR and not d["dry_run"] and not d["quiet"]
+
+
+def test_mail_config_and_secret_from_env(monkeypatch):
+    from ashare_tactic12_daily import mailer
+    c = mailer.mail_config({"GMAIL_USER": "a@x.com", "MAIL_TO": "b@y.com, c@z.com", "STATE_DIR": "/tmp/s"})
+    assert c["sender"] == "a@x.com" and c["to"] == ["b@y.com", "c@z.com"]
+    assert str(c["secret_file"]) == "/tmp/s/.secrets/gmail_app_password"
+    assert mailer.mail_config({})["to"] == ["394592848@qq.com"]
+    assert mailer._secret({"GMAIL_APP_PASSWORD": "pw"}) == "pw"
+    called = []
+    monkeypatch.setattr(mailer.subprocess, "run", lambda *a, **k: called.append(a))
+    assert mailer._secret({"STATE_DIR": "/nonexistent"}, platform="linux") is None and called == []  # 非 mac 不碰钥匙串
+
+
+def _patch_run(monkeypatch, cal):
+    monkeypatch.setattr(paper, "trade_dates", lambda: cal)
+    monkeypatch.setattr(paper, "load_universe", lambda: (_ for _ in ()).throw(AssertionError("should not fetch")))
+
+
+def test_idempotent_skip_when_marker_exists(tmp_path, monkeypatch):
+    _patch_run(monkeypatch, ["2026-10-19", "2026-10-20"])
+    paper.mark_sent(tmp_path, "2026-10-20")
+    cfg = paper.config_from_env({"STATE_DIR": str(tmp_path)})
+    assert paper.run("2026-10-20", tmp_path, False, True, False, False, cfg) == ""
+
+
+def test_non_trading_day_skips(tmp_path, monkeypatch):
+    _patch_run(monkeypatch, ["2026-10-16", "2026-10-19"])
+    cfg = paper.config_from_env({"STATE_DIR": str(tmp_path)})
+    assert paper.run("2026-10-17", tmp_path, False, False, False, False, cfg) == ""
+
+
+def test_rerun_resends_existing_sheet_without_rebooking(tmp_path, monkeypatch):
+    _patch_run(monkeypatch, ["2026-10-19", "2026-10-20"])
+    s = paper.new_state(); s["start_date"] = "2026-10-01"; s["pending"] = {"date": "2026-10-20", "sells": [], "buys": []}
+    paper.save_state(tmp_path, s)
+    (tmp_path / "sheets").mkdir(); (tmp_path / "sheets" / "order_sheet_2026-10-20.txt").write_text("SHEET", "utf-8")
+    import mailer as m  # paper 运行时按脚本目录导入
+    sent = []
+    monkeypatch.setattr(m, "send_mail", lambda subj, body: sent.append(body) or "已发送")
+    cfg = paper.config_from_env({"STATE_DIR": str(tmp_path)})
+    assert paper.run("2026-10-20", tmp_path, False, True, False, False, cfg) == "SHEET"
+    assert sent == ["SHEET"] and paper.already_sent(tmp_path, "2026-10-20")
+    assert paper.load_state(tmp_path)["history"] == []  # 未重复记账
+    # DRY_RUN 下即使带 --send 也不发送、不写标记
+    d = tmp_path / "dry"; paper.save_state(d, s)
+    (d / "sheets").mkdir(); (d / "sheets" / "order_sheet_2026-10-20.txt").write_text("SHEET", "utf-8")
+    sent.clear()
+    paper.run("2026-10-20", d, False, True, False, False, paper.config_from_env({"DRY_RUN": "1"}))
+    assert sent == [] and not paper.already_sent(d, "2026-10-20")
+
+
+def test_quality_gate():
+    import pytest
+    v = _view([10.0] * 90)
+    last = str(pd.Timestamp(v.book.dates[-1]).date())
+    assert "覆盖率" in paper.quality_check(1, {"sh600000": v}, last, {}, 0.85, 1)
+    with pytest.raises(paper.QualityError):
+        paper.quality_check(10, {"sh600000": v}, last, {}, 0.85, 1)
+    with pytest.raises(paper.QualityError):
+        paper.quality_check(1, {"sh600000": v}, last, {"sz000001": {}}, 0.85, 1)
+
+
+def test_snapshot_append_and_exrights(tmp_path, monkeypatch):
+    monkeypatch.setattr(paper, "CACHE", tmp_path)
+    (tmp_path / "bars").mkdir()
+    f = pd.DataFrame({"date": pd.to_datetime(["2026-10-15", "2026-10-16"]), "open": [10.0, 10.0], "close": [10.0, 10.5],
+                      "high": [10.0, 10.6], "low": [10.0, 9.9], "volume": [100.0, 100.0], "amount": [1e5, 1e5], "factor": [1.2, 1.2]})
+    f.to_parquet(tmp_path / "bars" / "sh600000.parquet", index=False)
+    row = {"open": 10.6, "high": 11.0, "low": 10.4, "close": 10.8, "prev_close": 10.5, "volume": 50.0, "amount": 5e4}
+    assert paper.apply_snapshot("sh600000", {**row, "prev_close": 9.0}, "2026-10-19", "2026-10-16") == "need_fetch"  # 除权
+    assert paper.apply_snapshot("sh600000", {**row, "volume": 0}, "2026-10-19", "2026-10-16") == "suspended"
+    assert paper.apply_snapshot("sh600000", row, "2026-10-19", "2026-10-16") == "snap"
+    g = pd.read_parquet(tmp_path / "bars" / "sh600000.parquet")
+    assert len(g) == 3 and g["factor"].iloc[-1] == 1.2 and g["close"].iloc[-1] == 10.8
+    assert paper.apply_snapshot("sh600000", row, "2026-10-19", "2026-10-16") == "fresh"
+    assert paper.apply_snapshot("sh600001", row, "2026-10-19", "2026-10-16") == "need_fetch"
+
+
+def test_snapshot_only_before_auction():
+    tz = "Asia/Shanghai"
+    assert paper.snapshot_usable("2026-10-19", pd.Timestamp("2026-10-19 08:30", tz=tz))
+    assert not paper.snapshot_usable("2026-10-19", pd.Timestamp("2026-10-19 10:00", tz=tz))

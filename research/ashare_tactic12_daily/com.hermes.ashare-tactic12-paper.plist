@@ -3,6 +3,10 @@
 <plist version="1.0"><dict>
   <key>Label</key><string>com.hermes.ashare-tactic12-paper</string>
   <key>ProgramArguments</key><array><string>/Volumes/Disk/项目/Vibe-Trading/research/ashare_tactic12_daily/run_daily.sh</string></array>
+  <key>EnvironmentVariables</key><dict>
+    <key>PYTHON</key><string>/Volumes/Disk/项目/Vibe-Trading/.venv-hermes/bin/python</string>
+    <key>LOG_DIR</key><string>/Volumes/Disk/项目/data-cache/tactic12_paper/logs</string>
+  </dict>
   <key>StartCalendarInterval</key><array>
     <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>0</integer></dict>
     <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>0</integer></dict>
