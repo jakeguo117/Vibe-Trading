@@ -1,0 +1,4 @@
+{
+  "install": "bash .cursor/install.sh",
+  "start": "grep -q 'Vibe-Trading .venv' ~/.bashrc || echo '[ -f \"$PWD/.venv/bin/activate\" ] && . \"$PWD/.venv/bin/activate\"  # Vibe-Trading .venv' >> ~/.bashrc"
+}
