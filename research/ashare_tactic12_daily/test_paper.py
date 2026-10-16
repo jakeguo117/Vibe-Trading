@@ -1,3 +1,5 @@
+import sys
+
 import numpy as np
 import pandas as pd
 
@@ -211,6 +213,45 @@ def test_fetch_uses_tencent_after_em_and_sina_fail(monkeypatch):
     out = paper._fetch("600000", "20150101", "20261015")
     assert len(out) == 1 and float(out["volume"].iloc[0]) == 10.0
     _reset_breakers()
+
+
+def test_smtp_failure_skips_second_notice(tmp_path, monkeypatch, capsys):
+    import pytest
+    import mailer as mailer
+    seen = []
+
+    def boom(subj, body):
+        seen.append(subj)
+        raise TimeoutError("smtp timed out")
+
+    monkeypatch.setattr(mailer, "send_mail", boom)
+    cfg = paper.config_from_env({"QUIET_SHEET": "1"})
+    with pytest.raises(paper.MailError, match="SMTP TimeoutError"):
+        paper._deliver("sheet", "2026-10-16", tmp_path, True, True, cfg)
+    assert seen == ["【测试】【A股战法12纸面】2026-10-16 订单表"]
+    assert not paper.already_sent(tmp_path, "2026-10-16")
+
+    monkeypatch.setattr(paper, "run", lambda *a, **k: (_ for _ in ()).throw(paper.MailError("SMTP TimeoutError")))
+    monkeypatch.setattr(sys, "argv", ["paper.py", "--send", "--no-refresh", "--today", "2026-10-16"])
+    with pytest.raises(SystemExit) as skipped:
+        paper.main()
+    assert skipped.value.code == 1
+    out = capsys.readouterr().out
+    assert "failure email: skipped (mail transport itself failed)" in out
+    assert len(seen) == 1  # 失败通知没有再发
+
+    monkeypatch.setattr(paper, "run", lambda *a, **k: (_ for _ in ()).throw(paper.QualityError("cov")))
+
+    def notice_fails(subj, body):
+        raise ConnectionError("reset")
+
+    monkeypatch.setattr(mailer, "send_mail", notice_fails)
+    with pytest.raises(SystemExit) as guarded:
+        paper.main()
+    assert guarded.value.code == 1
+    out = capsys.readouterr().out
+    assert "failure email failed: ConnectionError" in out
+    assert "Traceback" not in out
 
 
 def test_refresh_stops_at_budget_without_dropping_finished_files(tmp_path, monkeypatch):

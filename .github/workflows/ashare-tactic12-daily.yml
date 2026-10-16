@@ -2,9 +2,15 @@
 # 主触发：外部调用 workflow_dispatch（约北京时间 08:30，交易日）；备用：cron 08:30 北京时间（UTC 00:30，周一至周五）。
 # 状态（纸面账户、发送标记）与日线缓存通过 actions/cache 在运行之间保存，绝不提交到仓库。
 # 首次全历史若超过本任务时限，已写入的 parquet 会保存，下次接着补；也可先跑 ashare-tactic12-build-cache（6 小时）。
+# TEMPORARY — 合并前必须删掉：
+# 下面的 push 只监听 research/tactic12-actions。推这个分支会真发一封主题以【测试】开头的邮件
+# （--test-subject）。合并前删掉 push 触发，并删掉运行步骤里的 --test-subject 分支。
 name: ashare-tactic12-daily
 
 on:
+  push:
+    branches:
+      - research/tactic12-actions
   workflow_dispatch:
     inputs:
       today:
@@ -81,7 +87,13 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
-        run: ./run_daily.sh --today "${{ steps.d.outputs.today }}"
+        # TEMPORARY — 合并前删除：push 才加 --test-subject，真发一封【测试】邮件。
+        run: |
+          args=(--today "${{ steps.d.outputs.today }}")
+          if [ "${{ github.event_name }}" = "push" ]; then
+            args+=(--test-subject)
+          fi
+          ./run_daily.sh "${args[@]}"
 
       # 无论成功失败都保存，首次建缓存若超时，下次接着补
       - name: Save state + bar cache

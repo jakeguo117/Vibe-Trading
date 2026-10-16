@@ -13,7 +13,7 @@
 
 工作流文件：
 
-- `.github/workflows/ashare-tactic12-daily.yml`：每个交易日的订单表。备用 cron 为 UTC 00:30（北京时间 08:30），周一到周五，超时 60 分钟。
+- `.github/workflows/ashare-tactic12-daily.yml`：每个交易日的订单表。备用 cron 为 UTC 00:30（北京时间 08:30），周一到周五，超时 60 分钟。**临时：** 该文件里还有只针对分支 `research/tactic12-actions` 的 `push` 触发。推这个分支会真发一封主题以【测试】开头的邮件（`--test-subject`）。**合并前必须删掉** 这段 `push` 触发，以及运行步骤里的 `--test-subject` 分支。
 - `.github/workflows/ashare-tactic12-build-cache.yml`：一次性建全历史缓存，手动触发，超时 6 小时。与每日任务共用同一份缓存。
 
 两个工作流都限制在 `jakeguo117/Vibe-Trading`。GitHub 托管 runner 的 IP 在美国，东财/新浪会被限流，所以抓取带最小间隔、指数退避，并在东财失败后改用新浪、再失败改用腾讯。每只股票写入一个 parquet；超时或失败也会把已经下好的缓存存进 `actions/cache`，下次接着补。

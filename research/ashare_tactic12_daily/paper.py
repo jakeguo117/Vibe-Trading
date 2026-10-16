@@ -693,6 +693,10 @@ def render(state: dict, orders: dict, views: dict, through: str, notes: list[str
 
 
 # ---------- 幂等 / 质量闸门 ----------
+class MailError(RuntimeError):
+    """发送订单表本身失败（SMTP 不通/认证失败/缺凭据）。"""
+
+
 class QualityError(RuntimeError):
     """数据覆盖不足：宁可不出单也不出错单。"""
 
@@ -784,12 +788,15 @@ def _deliver(text: str, today: str, state_dir: Path, send: bool, test_subject: b
     if send:
         from mailer import send_mail
         subj = ("【测试】" if test_subject else "") + f"【A股战法12纸面】{today} 订单表"
-        r = send_mail(subj, text)
+        try:
+            r = send_mail(subj, text)
+        except Exception as exc:  # noqa: BLE001
+            raise MailError(f"SMTP {type(exc).__name__}") from exc
         print("email:", r)
         if r == "已发送":
             mark_sent(state_dir, today, r)
         else:
-            raise RuntimeError(f"邮件未发送：{r}")
+            raise MailError(f"邮件未发送：{r}")
 
 
 def main() -> None:
@@ -812,8 +819,16 @@ def main() -> None:
         print("FAILED", msg, flush=True)
         if a.send and not cfg["dry_run"]:
             from mailer import send_mail
-            print("failure email:", send_mail(f"【A股战法12纸面】{a.today} 未出单（失败通知）",
-                                              f"今日订单表未生成，以免发出错误订单。\n原因：{msg}\n请检查 GitHub Actions 日志。"))
+            # 邮件本身失败（如 SMTP 不通）时，失败通知同样会失败：只记录类型，不再抛第二个 traceback
+            is_mail_err = isinstance(e, MailError)
+            if is_mail_err:
+                print("failure email: skipped (mail transport itself failed)")
+            else:
+                try:
+                    print("failure email:", send_mail(f"【A股战法12纸面】{a.today} 未出单（失败通知）",
+                                                      f"今日订单表未生成，以免发出错误订单。\n原因：{msg}\n请检查 GitHub Actions 日志。"))
+                except Exception as e2:  # noqa: BLE001
+                    print("failure email failed:", type(e2).__name__)
         sys.exit(1)
 
 
