@@ -1,0 +1,31 @@
+---
+description: Cloud Agent thrift circuit-breaker (省流熔断) — max 2 fix attempts, quiet terminals, scoped reads
+alwaysApply: true
+---
+
+# Cloud Agent thrift circuit-breaker / 省流熔断
+
+本规则约束在本仓库运行的 **Cursor Cloud Agent**。Bot 调度侧另有省流规则；两边叠加生效。
+
+This file binds Cursor Cloud Agents running in this repo. Bot-side thrift rules are separate and also apply.
+
+## 1. 同问题最多修 2 次 / Max 2 fix attempts per failure
+
+- 同一问题 / 同一失败症状，最多修复尝试 **2** 次。
+- 第 2 次仍失败：立刻停止；汇报核心报错与已尝试步骤；**禁止**继续盲改。
+- Same issue / same failing symptom: at most **2** repair attempts.
+- If attempt 2 still fails: stop immediately; report the core error and steps tried; do **not** keep blind-editing.
+
+## 2. 终端禁 verbose / Quiet terminals
+
+- 跑命令优先 `--quiet` / 只保留 error / 需要时只 `tail`。
+- 禁止无必要的 verbose 全量日志刷屏。
+- Prefer `--quiet`, error-only output, or `tail` when needed.
+- Do not dump full verbose logs without a clear need.
+
+## 3. 只读任务指定文件 / Scoped read-only tasks
+
+- 只读 / 调查任务必须指定文件及直接依赖路径。
+- 禁止未指定的无差别全库扫描 / repo-wide search。
+- Read-only / investigation tasks must name target files and their direct dependency paths.
+- No unspecified repo-wide search or whole-tree scans.
