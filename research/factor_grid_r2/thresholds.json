@@ -1,0 +1,81 @@
+{
+  "study": "factor-grid-r2",
+  "locked_before_run": true,
+  "locked_on": "2026-10-13",
+  "seed": 20261013,
+  "primary_start": "2019-01-02",
+  "oos_start": "2024-01-01",
+  "long_start": "1998-01-02",
+  "walk_forward": {
+    "train_years": 3,
+    "test_years": 1,
+    "objective": "maximize_train_sharpe",
+    "train_constraints": {
+      "max_drawdown_floor": -0.30,
+      "worst_calendar_year_floor": -0.30
+    },
+    "grid": {
+      "mom_window": [16, 20, 24],
+      "vol_target": [0.20, 0.25, 0.30],
+      "ma_length": [24, 30, 36]
+    }
+  },
+  "pass": {
+    "must_beat_control_oos_cagr": true,
+    "max_drawdown_floor": -0.30,
+    "worst_calendar_year_floor": -0.30,
+    "min_days_for_calendar_year": 100,
+    "perturbation_ann_ratio_floor": 0.50,
+    "perturbation_base_ann_must_be_positive": true,
+    "walk_forward_stitched_cagr_floor": 0.0,
+    "gates_apply_to_window": "primary_2019_onward"
+  },
+  "perturbation": {
+    "params": ["mom_window", "vol_target", "ma_length"],
+    "shock": 0.20,
+    "note": "20日动量→16/24，目标波动25%→20%/30%，均线30周→24/36。年化跌到基准的一半以下算崩溃。"
+  },
+  "stress_windows": {
+    "2000_02": ["2000-01-01", "2002-12-31"],
+    "2008": ["2008-01-01", "2008-12-31"],
+    "gold_bear_2011_15": ["2011-09-01", "2015-12-31"],
+    "crypto_bear_2018": ["2018-01-01", "2018-12-31"],
+    "y2022": ["2022-01-01", "2022-12-31"]
+  },
+  "costs": {
+    "equity_etf_side": 0.0005,
+    "crypto_side": 0.0010,
+    "corr": 0.35,
+    "missing_vol": 0.20,
+    "rebalance_l1": 0.02
+  },
+  "hist_score": {
+    "cell_min_segments": 30,
+    "formula": "同格子已结束上升段的平均净收益；格子样本不足30则用全体平均；再减双边成本。同格子内用该名字的历史盈利概率打破平局，然后用60日成交额。"
+  },
+  "option_approx": {
+    "model": "black_scholes",
+    "iv_multiplier_on_realized": 1.20,
+    "iv_floor": 0.15,
+    "iv_cap": 1.50,
+    "rate": 0.02,
+    "dividend_yield": 0.0,
+    "realized_window": 63,
+    "leap_delta": 0.70,
+    "leap_expiry_calendar_days": 365,
+    "leap_roll_when_remaining_calendar_days_below": 182,
+    "spread_long_delta": 0.70,
+    "spread_short_delta": 0.40,
+    "spread_expiry_calendar_days": 180,
+    "spread_roll_after_calendar_days": 90,
+    "leap_side_cost_frac_of_premium": 0.04,
+    "spread_side_cost_frac_of_debit": 0.06,
+    "premium_spend_cap": "debit or premium cannot exceed the stock weight times equity",
+    "label": "Black-Scholes approximation with realized vol plus 20% IV premium. Not a historical option print."
+  },
+  "round1_reference_yahoo_2019": {
+    "S": {"ann": 0.200, "maxdd": -0.229, "oos_2024": 0.410},
+    "SC": {"ann": 0.279, "maxdd": -0.227, "oos_2024": 0.546},
+    "control": {"ann": 0.133, "maxdd": -0.167, "oos_2024": 0.208}
+  }
+}
