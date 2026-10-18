@@ -1,0 +1,72 @@
+{
+  "spot": 5576,
+  "sse_delist_added": 104,
+  "szse_delist_added": 14,
+  "sse_delist_bars": 103,
+  "szse_delist_bars": 14,
+  "bars": 5693,
+  "failed": 1,
+  "present_jan_2016": 2671,
+  "runtime_sec": 635,
+  "signals": {
+    "tactic5": 163204,
+    "tactic13": 3878,
+    "tactic19": 599244,
+    "tactic25": 46407,
+    "tactic2": 19296,
+    "tactic3": 201,
+    "tactic4": 45042,
+    "tactic7": 45184,
+    "tactic8": 472,
+    "tactic9": 1065,
+    "tactic12": 127,
+    "tactic16": 16345,
+    "tactic17": 23604,
+    "tactic21": 104707,
+    "tactic22": 1237,
+    "tactic23": 2992,
+    "tactic24": 25133,
+    "tactic26": 2653,
+    "tactic25_no_st_filter": 0,
+    "limit_up_skips": 8960
+  },
+  "end": "2026-10-15",
+  "start": "2016-01-04",
+  "skipped": [
+    {
+      "id": 1,
+      "reason": "需要集合竞价数据（9:15–9:25 试盘/高开筛选）"
+    },
+    {
+      "id": 6,
+      "reason": "需要逐笔/分笔成交明细（庄家暗语）"
+    },
+    {
+      "id": 10,
+      "reason": "需要集合竞价与盘口数据（量比、内外盘）"
+    },
+    {
+      "id": 11,
+      "reason": "主观形态（龙回头支撑位判断无法客观编码）"
+    },
+    {
+      "id": 14,
+      "reason": "主观换手/情绪接力，日线无法可靠复现"
+    },
+    {
+      "id": 15,
+      "reason": "情绪周期框架，无客观买卖参数"
+    },
+    {
+      "id": 18,
+      "reason": "仅介绍 MACD/KDJ 概念，无具体买卖参数（具体规则见战术25）"
+    },
+    {
+      "id": 20,
+      "reason": "可转债标的，非 A 股日线回测范围"
+    }
+  ],
+  "download_elapsed_sec": 563,
+  "backtest_elapsed_sec": 635,
+  "total_elapsed_sec": 1198
+}
