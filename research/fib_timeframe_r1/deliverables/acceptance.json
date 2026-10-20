@@ -1,0 +1,280 @@
+{
+ "gate0": {
+  "baseline_reproduced": {
+   "value": 4.998668146072305e-12,
+   "threshold": 1e-09,
+   "status": "FAIL",
+   "evidence": "runs/gate0.json"
+  },
+  "verify_data_exact": {
+   "value": 116,
+   "status": "PASS"
+  },
+  "pytest": {
+   "value": "273 passed, 1 skipped, 2 warnings in 500.37s (0:08:20)",
+   "status": "PASS"
+  },
+  "a00_identity_vs_official": {
+   "value": 0.0,
+   "threshold": 1e-12,
+   "status": "PASS"
+  }
+ },
+ "configs": {
+  "A00": {
+   "status": "DONE",
+   "cagr": 0.18024379719089412,
+   "maxdd": -0.11700656773292528,
+   "sharpe": 1.3228181499547653,
+   "n_trades": 18,
+   "enough_trades_for_primary_test": false
+  },
+  "A10": {
+   "status": "DONE",
+   "cagr": 0.1728438876442271,
+   "maxdd": -0.12746334990047692,
+   "sharpe": 1.3029848345438875,
+   "n_trades": 18,
+   "enough_trades_for_primary_test": false
+  },
+  "A01": {
+   "status": "DONE",
+   "cagr": 0.17661583079188015,
+   "maxdd": -0.17150562884110665,
+   "sharpe": 1.2538424889406194,
+   "n_trades": 12,
+   "enough_trades_for_primary_test": false
+  },
+  "A11": {
+   "status": "DONE",
+   "cagr": 0.1463725116588852,
+   "maxdd": -0.19751353878851297,
+   "sharpe": 1.0629588457184334,
+   "n_trades": 12,
+   "enough_trades_for_primary_test": false
+  },
+  "B-W-ON": {
+   "status": "DONE",
+   "cagr": 0.11358625245248422,
+   "maxdd": -0.1402700280706507,
+   "sharpe": 2.1589434752951258,
+   "n_trades": 20,
+   "enough_trades_for_primary_test": false
+  },
+  "B-W-OFF": {
+   "status": "DONE",
+   "cagr": 0.09663093998999073,
+   "maxdd": -0.16471660664151266,
+   "sharpe": 1.8966335762564388,
+   "n_trades": 20,
+   "enough_trades_for_primary_test": false
+  },
+  "B-D-ON": {
+   "status": "DONE",
+   "cagr": 0.10260504876167742,
+   "maxdd": -0.16377683169931356,
+   "sharpe": 0.884310370230059,
+   "n_trades": 103,
+   "enough_trades_for_primary_test": true
+  },
+  "B-D-OFF": {
+   "status": "DONE",
+   "cagr": 0.11675968046111262,
+   "maxdd": -0.16728337989765651,
+   "sharpe": 0.9822976470270471,
+   "n_trades": 103,
+   "enough_trades_for_primary_test": true
+  },
+  "B-H-ON": {
+   "status": "BLOCKED_NO_HOURLY_DATA"
+  },
+  "B-H-OFF": {
+   "status": "BLOCKED_NO_HOURLY_DATA"
+  },
+  "C-W-P": {
+   "status": "DONE",
+   "cagr": 0.026706125124901448,
+   "maxdd": -0.05070796968628233,
+   "sharpe": 2.102078172883055,
+   "n_trades": 10,
+   "enough_trades_for_primary_test": false
+  },
+  "C-W-S": {
+   "status": "DONE",
+   "cagr": 0.003532061740279646,
+   "maxdd": -0.05550123908519011,
+   "sharpe": 0.4069073428709173,
+   "n_trades": 8,
+   "enough_trades_for_primary_test": false
+  },
+  "C-D-P": {
+   "status": "DONE",
+   "cagr": 0.03188031049321194,
+   "maxdd": -0.10220146832940125,
+   "sharpe": 0.5685558454467377,
+   "n_trades": 68,
+   "enough_trades_for_primary_test": true
+  },
+  "C-D-S": {
+   "status": "DONE",
+   "cagr": 0.04075648533465115,
+   "maxdd": -0.05938054355622491,
+   "sharpe": 0.7848318463188834,
+   "n_trades": 45,
+   "enough_trades_for_primary_test": false
+  },
+  "C-H-P": {
+   "status": "BLOCKED_NO_HOURLY_DATA"
+  },
+  "C-H-S": {
+   "status": "BLOCKED_NO_HOURLY_DATA"
+  },
+  "C-DH-P": {
+   "status": "BLOCKED_NO_HOURLY_DATA"
+  },
+  "C-DH-S": {
+   "status": "BLOCKED_NO_HOURLY_DATA"
+  }
+ },
+ "comparisons": {
+  "A00-A10": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": 3.156055883,
+   "p_raw": 0.06329367063,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 6,
+   "trades_holdout_right": 6
+  },
+  "A00-A01": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": 7.332414594,
+   "p_raw": 0.1666833317,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 6,
+   "trades_holdout_right": 7
+  },
+  "A00-A11": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": 13.50036928,
+   "p_raw": 0.05099490051,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 6,
+   "trades_holdout_right": 7
+  },
+  "B-W-ON-B-W-OFF": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": 3.327358838,
+   "p_raw": 0.00899910009,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 3,
+   "trades_holdout_right": 3
+  },
+  "B-D-ON-B-D-OFF": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": -1.567844035,
+   "p_raw": 0.8541145885,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 34,
+   "trades_holdout_right": 34
+  },
+  "B-H-ON-B-H-OFF": {
+   "status": "BLOCKED_MISSING_VARIANT",
+   "cagr_diff_pp": null,
+   "p_raw": null,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": null,
+   "trades_holdout_right": null
+  },
+  "B-D-OFF-B-W-OFF": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": -2.530461264,
+   "p_raw": 0.9557044296,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 34,
+   "trades_holdout_right": 3
+  },
+  "B-H-OFF-B-W-OFF": {
+   "status": "BLOCKED_MISSING_VARIANT",
+   "cagr_diff_pp": null,
+   "p_raw": null,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": null,
+   "trades_holdout_right": null
+  },
+  "C-W-S-C-W-P": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": -3.655040527,
+   "p_raw": 0.99570043,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 1,
+   "trades_holdout_right": 2
+  },
+  "C-D-S-C-D-P": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": -0.3532150194,
+   "p_raw": 0.5447455254,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 17,
+   "trades_holdout_right": 27
+  },
+  "C-H-S-C-H-P": {
+   "status": "BLOCKED_MISSING_VARIANT",
+   "cagr_diff_pp": null,
+   "p_raw": null,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": null,
+   "trades_holdout_right": null
+  },
+  "C-DH-S-C-DH-P": {
+   "status": "BLOCKED_MISSING_VARIANT",
+   "cagr_diff_pp": null,
+   "p_raw": null,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": null,
+   "trades_holdout_right": null
+  },
+  "C-D-P-C-W-P": {
+   "status": "INSUFFICIENT_TRADES_EVIDENCE",
+   "cagr_diff_pp": -2.53128361,
+   "p_raw": 0.9795020498,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": 27,
+   "trades_holdout_right": 2
+  },
+  "C-H-P-C-D-P": {
+   "status": "BLOCKED_MISSING_VARIANT",
+   "cagr_diff_pp": null,
+   "p_raw": null,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": null,
+   "trades_holdout_right": null
+  },
+  "C-DH-P-C-D-P": {
+   "status": "BLOCKED_MISSING_VARIANT",
+   "cagr_diff_pp": null,
+   "p_raw": null,
+   "holm_reject": false,
+   "fails": [],
+   "trades_holdout_left": null,
+   "trades_holdout_right": null
+  }
+ },
+ "entry_experience": {},
+ "cost": {},
+ "small_capital": {},
+ "multiline": {}
+}

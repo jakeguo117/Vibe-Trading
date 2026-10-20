@@ -4,7 +4,7 @@
 （sha256 `ca25225fed75769c7454b81b752f40c184a9c4a9f614c9233068f7e79365f0a5`）
 研究编号：JAKE-FIB-TIMEFRAME-20261020-v0.1
 
-实现口径与差异记录见 [SPEC.md](SPEC.md)；结论与全部附表见 [results/REPORT_ZH.md](results/REPORT_ZH.md)。
+实现口径与差异记录见 [SPEC.md](SPEC.md)；结论与全部附表见 [deliverables/REPORT_ZH.md](deliverables/REPORT_ZH.md)。
 
 ## 状态
 

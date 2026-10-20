@@ -1,0 +1,133 @@
+{
+ "generated_at": "2026-10-20T09:08:21.635411+00:00",
+ "plan": {
+  "file": "Jake_Fib_Timeframe_Test_Plan_v0.1_20261020.md",
+  "sha256": "ca25225fed75769c7454b81b752f40c184a9c4a9f614c9233068f7e79365f0a5",
+  "sha256_matches_frozen": true,
+  "bytes": 41373,
+  "lines": 487
+ },
+ "code": {
+  "repo": "jakeguo117/Vibe-Trading",
+  "branch": "research/fib-timeframe-r1",
+  "head_at_emission": "2a7e3b46e6abe9490fb8c1c4a8c022b231976b55",
+  "research_dir": "/Users/jake/projects/trading/Vibe-Trading/research/fib_timeframe_r1",
+  "code_tree_sha256": "37275e7bf964370564e85a7a8bfe208e727bc6debe772b281a5fa2df4cfb8494",
+  "configs_sha256": "acdceb3215ff8f4c197df8387892ac04ba0d5eccd3b5be94db59593fa302b5c3",
+  "configs_mtime": "2026-10-20T08:43:49.009766+00:00",
+  "reference_repo": "jakeguo117/trading-system (read-only)",
+  "reference_commit": "2ac825b56c9121f7bb4616c4e5ab18a2619df657",
+  "reference_head": "026df014b884f9b4af8c29da6eca9a5cc714968a",
+  "reference_blobs": {
+   "backtest/upleg_bt/engine/fib_locked.py": "eb0391c8ebddf06e7b8cc6cdea6ee59789cc942f",
+   "backtest/upleg_bt/engine/upleg.py": "f9f052cd43d46adcde6eaaaabe2dcdfd0cf4bddb",
+   "backtest/upleg_bt/engine/portfolio.py": "488ba770cf92e6ccd9534721424fc5862c685f5a",
+   "backtest/upleg_bt/engine/fm.py": "b6827ea5db3ef708a31e2233a37f905c2f99333c"
+  },
+  "blobs_match_plan": true
+ },
+ "environment": {
+  "python": "3.12.13",
+  "executable": "/Users/jake/projects/trading/trading-system/.venv/bin/python",
+  "numpy": "2.5.3",
+  "pandas": "3.0.6",
+  "pyarrow": "26.0.0",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64"
+ },
+ "data": {
+  "snapshot_dir": "/Users/jake/projects/trading/data/ts_v111",
+  "manifest_file": "/Users/jake/projects/trading/data/ts_v111/MANIFEST_SHA256.txt",
+  "manifest_sha256": "be9c11ada3224e126d1f8a156a3774f839d2c2ab0213f1df6a81621cbc020ebf",
+  "n_manifest_lines": 119,
+  "mat_files": {
+   "n": 1,
+   "tree_sha256": "31aee8b05f4bf1f358885a4bd37e25975505dbb18acb11856d775216cc1ea6d7",
+   "total_bytes": 2309571
+  },
+  "raw_files": {
+   "n": 111,
+   "tree_sha256": "cf5d14a7f868a69af64163d433f3e3f999aea90c224974fc59205cb8cebfd98f",
+   "total_bytes": 578334278
+  },
+  "signals_primary": {
+   "path": "/Users/jake/projects/trading/data/ts_v111/cache/signals_primary.npz",
+   "bytes": 576967628,
+   "sha256": "2633c8dc83c24b6b730e92b378f4b1cddebb4b36911d2ed2c88e81cf1d731850"
+  }
+ },
+ "hourly": {
+  "searched_root": "/Users/jake/projects/trading/data",
+  "name_patterns": [
+   "60m",
+   "1h",
+   "hour",
+   "intraday",
+   "h1",
+   "minute",
+   "1min",
+   "5m"
+  ],
+  "n_hits": 0,
+  "hits": [],
+  "dirs": [],
+  "hourly_available": false,
+  "verdict": "BLOCKED_NO_HOURLY_DATA"
+ },
+ "gate0": {
+  "reproduce_v1_1_1": {
+   "status": "PASS",
+   "exit_code": 0,
+   "run_dir": "/Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1640/runs/r2_202610201645/20261020T164422+0800_reproduce_v1.1.1",
+   "elapsed_s": 3.7,
+   "inputs_match_snapshot": true,
+   "snapshot_check": {
+    "ok": 116,
+    "exact": true,
+    "missing": [],
+    "mismatch": []
+   },
+   "daily_equity_maxabs": 4.998668146072305e-12,
+   "weekly_weight_maxabs": 4.994210600628435e-11,
+   "weekly_rows_unmatched": 0,
+   "headline_match": true,
+   "metrics": {
+    "cagr": 0.18024379719089412,
+    "maxdd": -0.11700656773292528,
+    "sharpe": 1.325504812340487,
+    "sortino": 1.9344637635959954,
+    "ann_vol": 0.13220112084063315,
+    "avg_exposure": 0.5914710808789267,
+    "n_days": 1947
+   },
+   "tolerance_required": 1e-09,
+   "tolerance_used": 4.998668146072305e-12
+  },
+  "verify_data": {
+   "command": "upleg_bt.cli verify-data (read-only)",
+   "exit_code": 0,
+   "inputs_exact": 116,
+   "derived_exact": 13,
+   "missing": [],
+   "mismatch": []
+  },
+  "pytest": {
+   "command": "UPLEG_DATA_DIR=data/ts_v111 .venv/bin/python -m pytest backtest/tests -q -rs",
+   "result_line": "273 passed, 1 skipped, 2 warnings in 500.37s (0:08:20)",
+   "n_passed": 273,
+   "n_failed": 0,
+   "n_error": 0,
+   "n_skipped": 1,
+   "skip_reason": "test_data_gate.py:1170 VmHWM unavailable; ru_maxrss is inherited from the parent and is not asserted (macOS has no /proc VmHWM)",
+   "exit_code": 0,
+   "log": "/Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1640/runs/r2_202610201645/pytest_full.log"
+  },
+  "research_identity": {
+   "test": "aport.run_portfolio(official switches) vs upleg_bt.engine.portfolio.run_portfolio",
+   "a00_vs_official_maxabs": 0.0,
+   "pass": true,
+   "index_match": true
+  },
+  "supplementary_note": "A second, no-data pytest run gave 244 passed / 30 skipped because backtest/data was empty; the run above is the one with the locked snapshot mounted and is the value of record."
+ }
+}
