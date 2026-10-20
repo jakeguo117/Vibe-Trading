@@ -1,13 +1,13 @@
 # JAKE-FIB-TIMEFRAME-20261020-v0.1 交付清单
-# generated 2026-10-20T09:15:47.422888+00:00
+# generated 2026-10-20T09:16:35.095349+00:00
 # git branch: research/fib-timeframe-r1
-# git head at bundle time: 9a48dd69a6b41d9b3db1720e8966e9a0121afe64
+# git head at bundle time: 1f31413d4fb610272db55998eee914da73128484
 #   (the authoritative branch tip is quoted in result.md; a bundle cannot
 #    contain the hash of the commit that ships it)
 #
 # sha256  filename   (MANIFEST_SHA256.txt itself is not self-hashed)
 4e6277c917d7234d8f17189345cdda775c0d387d020d7a2a89dd2110c24e00af  README.md
-3e59d66f1f6d091c76f4cb0ff5969b8d7bec1a02605c8da724113dc0a9be316a  REPORT_ZH.md
+c5a73ecf0268d38e179f126ca0b268caf12c8a53c70fa54b73d9f4ebc3e39981  REPORT_ZH.md
 84f83da71ebfbba4ed578ccb2690e9a8c43164dab2e84fbb7b3748bc3b373f6a  SPEC.md
 d3dcfd42cf4099b230075044960ad190d537eafab2972bcc8a6a78c6536fed09  a_episodes.csv
 e64296379b9d1776ca68aeab9da6d8615a20127ab1f718904a37826525f73f0d  acceptance.json

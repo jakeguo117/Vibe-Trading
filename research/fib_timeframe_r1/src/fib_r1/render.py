@@ -43,7 +43,7 @@ def main(run_root):
 
     A("# Fib 贡献与交易周期缩短 —— 研究报告（中文）\n")
     A(f"研究编号 **{res['research_id']}**　方案 sha256 `{res['plan_sha256']}`　历史验证段标 **{res['holdout_tag']}**\n")
-    A("> 本文件所有业绩数字均由 `scripts/render.py` 从 `result.json` / `comparisons.csv` / `extra.json` "
+    A("> 本文件所有业绩数字均由 `src/fib_r1/render.py` 从 `result.json` / `comparisons.csv` / `extra.json` "
       "生成，未手工填写。数字口径见 §7 与方案 §9。\n")
 
     # ---------------- one page

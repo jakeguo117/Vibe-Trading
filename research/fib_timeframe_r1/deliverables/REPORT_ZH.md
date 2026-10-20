@@ -2,7 +2,7 @@
 
 研究编号 **JAKE-FIB-TIMEFRAME-20261020-v0.1**　方案 sha256 `ca25225fed75769c7454b81b752f40c184a9c4a9f614c9233068f7e79365f0a5`　历史验证段标 **OOS_REUSED**
 
-> 本文件所有业绩数字均由 `scripts/render.py` 从 `result.json` / `comparisons.csv` / `extra.json` 生成，未手工填写。数字口径见 §7 与方案 §9。
+> 本文件所有业绩数字均由 `src/fib_r1/render.py` 从 `result.json` / `comparisons.csv` / `extra.json` 生成，未手工填写。数字口径见 §7 与方案 §9。
 
 ## 0. 一页结论
 
