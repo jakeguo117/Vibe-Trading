@@ -1,0 +1,403 @@
+{
+ "feed": {
+  "vendor": "Databento",
+  "schema": "ohlcv-1h",
+  "csv": "/Users/jake/projects/trading/data/hourly_databento_2019_2026/csv/ALL9_ohlcv-1h_2019-20260930.csv",
+  "csv_sha256": "288a20dba54d69bbd4c54f697a597a69b1526ddebb8515ecb127197ff15039a7",
+  "manifest": "/Users/jake/projects/trading/data/hourly_databento_2019_2026/meta/MANIFEST.json",
+  "manifest_sha256": "7518cdca178627dd9e89c37e1c6936df631569264df18e93072250debef00afc",
+  "rows_raw": 257826,
+  "rows_used": 104694,
+  "rows_dropped_outside_regular_grid": 153132,
+  "venues": {
+   "SPY": "ARCX.PILLAR",
+   "GLD": "ARCX.PILLAR",
+   "SLV": "ARCX.PILLAR",
+   "USO": "ARCX.PILLAR",
+   "TLT": "ARCX.PILLAR",
+   "EFA": "ARCX.PILLAR",
+   "EEM": "ARCX.PILLAR",
+   "QQQ": "XNAS.ITCH",
+   "IWM": "XNAS.ITCH"
+  },
+  "start": "2019-01-02",
+  "end_exclusive": "2026-10-01",
+  "quoted_usd": 0.403400212526,
+  "purchased_for": "JAKE-FIB-TIMEFRAME hourly unblock; no further purchase made"
+ },
+ "grid_rule": {
+  "bar_label": "start of interval, UTC hour aligned (verified two ways: 15:00 bar close within ~1bp of the official daily close; 13:00 bar on 2025-04-09 contains the 13:18 ET tariff-pause move)",
+  "regular_session_et": "09:30-16:00",
+  "kept": "whole vendor hours fully inside the regular session -> 10:00..15:00 ET (6 bars)",
+  "early_close": "13:00 ET -> 10:00..12:00 ET (3 bars)",
+  "short_bars": 0,
+  "limitation_opening_half_hour": "no 09:30-10:00 bar exists on this grid: opening half hour is not tradable and every next-open fill is at 10:00 ET at the earliest (30 min lag, all six configs)",
+  "limitation_short_bar": "no partial bars, so the §3.3 short_bar diagnostic is degenerate; replaced by a per-hour signal distribution and a post-hoc no-last-bar-entry rerun, both labelled diagnostics",
+  "early_close_sessions": 15
+ },
+ "coverage": [
+  {
+   "sym": "SPY",
+   "venue": "ARCX.PILLAR",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "QQQ",
+   "venue": "XNAS.ITCH",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "IWM",
+   "venue": "XNAS.ITCH",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "GLD",
+   "venue": "ARCX.PILLAR",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "SLV",
+   "venue": "ARCX.PILLAR",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "USO",
+   "venue": "ARCX.PILLAR",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "TLT",
+   "venue": "ARCX.PILLAR",
+   "sessions_expected": 1947,
+   "sessions_present": 1940,
+   "sessions_missing": 7,
+   "bars": 11598,
+   "bars_expected": 11637,
+   "coverage": 0.9966486207785512,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 0.9966486207785512,
+   "full_days": 1940,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "EFA",
+   "venue": "ARCX.PILLAR",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  },
+  {
+   "sym": "EEM",
+   "venue": "ARCX.PILLAR",
+   "sessions_expected": 1947,
+   "sessions_present": 1947,
+   "sessions_missing": 0,
+   "bars": 11637,
+   "bars_expected": 11637,
+   "coverage": 1.0,
+   "bars_expected_9x": 104733,
+   "coverage_all9": 1.0,
+   "full_days": 1947,
+   "partial_days": 0,
+   "first": "2019-01-02",
+   "last": "2026-09-30"
+  }
+ ],
+ "coverage_min": 0.9966486207785512,
+ "coverage_threshold_995": true,
+ "sessions_missing_by_symbol": {
+  "SPY": [],
+  "QQQ": [],
+  "IWM": [],
+  "GLD": [],
+  "SLV": [],
+  "USO": [],
+  "TLT": [
+   "2022-11-21",
+   "2022-11-23",
+   "2022-11-25",
+   "2022-12-01",
+   "2022-12-02",
+   "2022-12-05",
+   "2022-12-06"
+  ],
+  "EFA": [],
+  "EEM": []
+ },
+ "cross_source": [
+  {
+   "sym": "EEM",
+   "venue": "ARCX.PILLAR",
+   "n_days": 1947,
+   "med_abs_rel_close": 0.00023343844309753337,
+   "p99_abs_rel_close": 0.0010169006963962166,
+   "max_abs_rel_close": 0.002467905752877808,
+   "med_abs_rel_open": 0.0019026135973777558,
+   "within_10bp": 0.9887005649717514,
+   "high_contained": 0.7853107344632768,
+   "low_contained": 0.7652799178222907
+  },
+  {
+   "sym": "EFA",
+   "venue": "ARCX.PILLAR",
+   "n_days": 1947,
+   "med_abs_rel_close": 0.00014507914016403944,
+   "p99_abs_rel_close": 0.0007330657703700337,
+   "max_abs_rel_close": 0.00242030383543268,
+   "med_abs_rel_open": 0.0013285330235148773,
+   "within_10bp": 0.9964047252182845,
+   "high_contained": 0.8715973292244479,
+   "low_contained": 0.8315356959424756
+  },
+  {
+   "sym": "GLD",
+   "venue": "ARCX.PILLAR",
+   "n_days": 1947,
+   "med_abs_rel_close": 8.195312994985215e-05,
+   "p99_abs_rel_close": 0.0005987882816652473,
+   "max_abs_rel_close": 0.002651980082643668,
+   "med_abs_rel_open": 0.0015411268566991598,
+   "within_10bp": 0.9958911145351823,
+   "high_contained": 0.827426810477658,
+   "low_contained": 0.802773497688752
+  },
+  {
+   "sym": "IWM",
+   "venue": "XNAS.ITCH",
+   "n_days": 1947,
+   "med_abs_rel_close": 0.00012936168600086173,
+   "p99_abs_rel_close": 0.0011882189470781455,
+   "max_abs_rel_close": 0.008502538450713137,
+   "med_abs_rel_open": 0.0034080361954711424,
+   "within_10bp": 0.9840780688238315,
+   "high_contained": 0.7247046738572163,
+   "low_contained": 0.7231638418079096
+  },
+  {
+   "sym": "QQQ",
+   "venue": "XNAS.ITCH",
+   "n_days": 1947,
+   "med_abs_rel_close": 0.00010093565009605676,
+   "p99_abs_rel_close": 0.0010757928065627624,
+   "max_abs_rel_close": 0.008422604205853723,
+   "med_abs_rel_open": 0.002696819218922064,
+   "within_10bp": 0.9871597329224447,
+   "high_contained": 0.7889060092449923,
+   "low_contained": 0.7360041088854649
+  },
+  {
+   "sym": "SLV",
+   "venue": "ARCX.PILLAR",
+   "n_days": 1947,
+   "med_abs_rel_close": 0.0003339152816258517,
+   "p99_abs_rel_close": 0.001391003156589927,
+   "max_abs_rel_close": 0.0028615519326988803,
+   "med_abs_rel_open": 0.0030211447335157793,
+   "within_10bp": 0.9707241910631741,
+   "high_contained": 0.7360041088854649,
+   "low_contained": 0.7211093990755008
+  },
+  {
+   "sym": "SPY",
+   "venue": "ARCX.PILLAR",
+   "n_days": 1947,
+   "med_abs_rel_close": 7.204939514904307e-05,
+   "p99_abs_rel_close": 0.0006133644888807543,
+   "max_abs_rel_close": 0.009478318623944548,
+   "med_abs_rel_open": 0.001613551112292555,
+   "within_10bp": 0.9948638931689779,
+   "high_contained": 0.8510529019003595,
+   "low_contained": 0.7940421160760144
+  },
+  {
+   "sym": "TLT",
+   "venue": "ARCX.PILLAR",
+   "n_days": 1940,
+   "med_abs_rel_close": 0.00011589889104168805,
+   "p99_abs_rel_close": 0.0009080141285186415,
+   "max_abs_rel_close": 0.0030691567531215824,
+   "med_abs_rel_open": 0.0013626115872163447,
+   "within_10bp": 0.993298969072165,
+   "high_contained": 0.856701030927835,
+   "low_contained": 0.8546391752577319
+  },
+  {
+   "sym": "USO",
+   "venue": "ARCX.PILLAR",
+   "n_days": 1947,
+   "med_abs_rel_close": 0.00023529411764700026,
+   "p99_abs_rel_close": 0.002292461968748746,
+   "max_abs_rel_close": 0.012222222222222134,
+   "med_abs_rel_open": 0.0033249986582760682,
+   "within_10bp": 0.9635336414997432,
+   "high_contained": 0.7878787878787878,
+   "low_contained": 0.7806882383153569
+  }
+ ],
+ "cross_source_verdict": "PASS",
+ "cross_source_note": "levels are aligned: after mapping the single-venue tape onto the snapshot's adjusted scale with the split table, the median close difference is a few basis points on every symbol. High/low containment is 72-87%: the venue's own extremes are narrower than the consolidated tape's, so intraday ranges are slightly understated. That is a property of single-venue OHLCV, quoted here rather than repaired by borrowing another vendor's highs.",
+ "sessions_missing_all_symbols": [],
+ "thin_volume_days": [
+  {
+   "sym": "EEM",
+   "date": "2019-12-24",
+   "ratio": 0.24743051299698293
+  },
+  {
+   "sym": "EEM",
+   "date": "2024-12-24",
+   "ratio": 0.24636549510961062
+  },
+  {
+   "sym": "EEM",
+   "date": "2025-12-24",
+   "ratio": 0.18543631433679583
+  },
+  {
+   "sym": "EFA",
+   "date": "2025-12-24",
+   "ratio": 0.19322829430155594
+  },
+  {
+   "sym": "GLD",
+   "date": "2022-11-25",
+   "ratio": 0.2499808438528415
+  },
+  {
+   "sym": "SLV",
+   "date": "2019-08-22",
+   "ratio": 0.24659895459353454
+  },
+  {
+   "sym": "SLV",
+   "date": "2024-12-24",
+   "ratio": 0.23163256181579167
+  },
+  {
+   "sym": "TLT",
+   "date": "2021-11-11",
+   "ratio": 0.24156563067202297
+  },
+  {
+   "sym": "USO",
+   "date": "2019-12-24",
+   "ratio": 0.10221179884052779
+  },
+  {
+   "sym": "USO",
+   "date": "2019-12-26",
+   "ratio": 0.168404879823348
+  }
+ ],
+ "degraded_flag_note": "Databento's per-day degraded flag is not present in the CSV or the manifest, so it cannot be read offline. 2020-04-06 was checked explicitly: 6/6 regular bars for all nine symbols and volume within normal range, so no symptom of it appears in this grid. Days with visible symptoms are listed in thin_volume_days / sessions_missing_all_symbols instead of being dropped.",
+ "common_window": {
+  "start": "2019-02-04",
+  "start_ts": "2019-02-04 10:00:00",
+  "first_bar": 132,
+  "session_ordinal": 22,
+  "bar_index_required": 121,
+  "n_bars": 11637,
+  "n_sessions": 1947,
+  "n_sessions_from_start": 1925,
+  "months_from_start": 91.81997371879106,
+  "all_symbols_warm": false,
+  "binding_config": "C-H-S / C-DH-S (120-value squeeze window)"
+ },
+ "window_used": {
+  "start": "2019-02-04",
+  "end": "2026-09-30",
+  "holdout": [
+   "2024-01-02",
+   "2026-09-30"
+  ],
+  "design": [
+   "2019-02-04",
+   "2023-12-29"
+  ],
+  "holdout_tag": "OOS_REUSED"
+ },
+ "eligibility": {
+  "daily_bars_min": 252,
+  "dv60_min": 5000000.0,
+  "daily_inputs": "prior completed session only (§3.3)",
+  "bar_index_required": 121
+ }
+}

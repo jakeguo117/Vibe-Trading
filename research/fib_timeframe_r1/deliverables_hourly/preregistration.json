@@ -1,0 +1,301 @@
+{
+ "research_id": "JAKE-FIB-TIMEFRAME-20261020-v0.1",
+ "emitted_at": "2026-10-20T11:24:25.576137+00:00",
+ "spec_was_frozen_before_performance_runs": true,
+ "emission_note": "constants frozen in src/fib_r1/configs.py before the first performance run (see code.configs_mtime / configs_sha256); this file is generated from them afterwards so that every value is machine-read rather than retyped",
+ "plan_sha256": "ca25225fed75769c7454b81b752f40c184a9c4a9f614c9233068f7e79365f0a5",
+ "code_commit": "7d486ddec4956388c69c6463f6e7eb95150ad7de",
+ "code_tree_sha256": "636ba6715f6930a56c4eee12bc7ad787fd06e124940a362b36f94929baefc4bb",
+ "configs_sha256": "acdceb3215ff8f4c197df8387892ac04ba0d5eccd3b5be94db59593fa302b5c3",
+ "data": {
+  "snapshot": "ts_v111",
+  "mat_tree_sha256": "94fdc7093ca6d5982295b30be421a9600500e97a3c01cfbed5ad05c866b327b0",
+  "raw_tree_sha256": "cf5d14a7f868a69af64163d433f3e3f999aea90c224974fc59205cb8cebfd98f"
+ },
+ "windows": {
+  "full": [
+   "2019-01-02",
+   "2026-09-30"
+  ],
+  "design": [
+   "2019-01-02",
+   "2023-12-29"
+  ],
+  "holdout": [
+   "2024-01-02",
+   "2026-09-30"
+  ],
+  "slice_2019_2022": [
+   "2019-01-02",
+   "2022-12-30"
+  ],
+  "slice_2023_end": [
+   "2023-01-03",
+   "2026-09-30"
+  ],
+  "ytd_2026": [
+   "2026-01-02",
+   "2026-09-30"
+  ]
+ },
+ "holdout_tag": "OOS_REUSED",
+ "pools": {
+  "A": "D_LOCKED/U_FULL (formal locked snapshot, full US universe)",
+  "BC": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)"
+ },
+ "configs": [
+  {
+   "id": "A00",
+   "line": "A",
+   "pool": "D_LOCKED/U_FULL (formal locked snapshot, full US universe)",
+   "note": "baseline formal v1.1.1, unmodified",
+   "status": "PLANNED"
+  },
+  {
+   "id": "A10",
+   "line": "A",
+   "pool": "D_LOCKED/U_FULL (formal locked snapshot, full US universe)",
+   "note": "g=1 only",
+   "status": "PLANNED"
+  },
+  {
+   "id": "A01",
+   "line": "A",
+   "pool": "D_LOCKED/U_FULL (formal locked snapshot, full US universe)",
+   "note": "DV60 rank only",
+   "status": "PLANNED"
+  },
+  {
+   "id": "A11",
+   "line": "A",
+   "pool": "D_LOCKED/U_FULL (formal locked snapshot, full US universe)",
+   "note": "g=1 + DV60 rank",
+   "status": "PLANNED"
+  },
+  {
+   "id": "B-W-ON",
+   "line": "B",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "weekly clock, g official",
+   "status": "PLANNED"
+  },
+  {
+   "id": "B-W-OFF",
+   "line": "B",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "weekly clock, g=1",
+   "status": "PLANNED"
+  },
+  {
+   "id": "B-D-ON",
+   "line": "B",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "daily clock, g official",
+   "status": "PLANNED"
+  },
+  {
+   "id": "B-D-OFF",
+   "line": "B",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "daily clock, g=1",
+   "status": "PLANNED"
+  },
+  {
+   "id": "B-H-ON",
+   "line": "B",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "60m clock, g official",
+   "status": "UNBLOCKED_R2_HOURLY_FEED"
+  },
+  {
+   "id": "B-H-OFF",
+   "line": "B",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "60m clock, g=1",
+   "status": "UNBLOCKED_R2_HOURLY_FEED"
+  },
+  {
+   "id": "C-W-P",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "weekly/weekly plain breakout, 1 position",
+   "status": "PLANNED"
+  },
+  {
+   "id": "C-W-S",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "weekly/weekly squeeze breakout, 1 position",
+   "status": "PLANNED"
+  },
+  {
+   "id": "C-D-P",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "daily/daily plain breakout, 1 position",
+   "status": "PLANNED"
+  },
+  {
+   "id": "C-D-S",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "daily/daily squeeze breakout, 1 position",
+   "status": "PLANNED"
+  },
+  {
+   "id": "C-H-P",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "60m/60m plain breakout, 1 position",
+   "status": "UNBLOCKED_R2_HOURLY_FEED"
+  },
+  {
+   "id": "C-H-S",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "60m/60m squeeze breakout, 1 position",
+   "status": "UNBLOCKED_R2_HOURLY_FEED"
+  },
+  {
+   "id": "C-DH-P",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "daily structure / 60m entry plain breakout",
+   "status": "UNBLOCKED_R2_HOURLY_FEED"
+  },
+  {
+   "id": "C-DH-S",
+   "line": "C",
+   "pool": "D_COMMON/U_ETF (SPY QQQ IWM GLD SLV USO TLT EFA EEM)",
+   "note": "daily structure / 60m entry squeeze breakout",
+   "status": "UNBLOCKED_R2_HOURLY_FEED"
+  }
+ ],
+ "comparisons": [
+  {
+   "id": "A00-A10",
+   "line": "A",
+   "direction": "left minus right"
+  },
+  {
+   "id": "A00-A01",
+   "line": "A",
+   "direction": "left minus right"
+  },
+  {
+   "id": "A00-A11",
+   "line": "A",
+   "direction": "left minus right"
+  },
+  {
+   "id": "B-W-ON-B-W-OFF",
+   "line": "B",
+   "direction": "left minus right"
+  },
+  {
+   "id": "B-D-ON-B-D-OFF",
+   "line": "B",
+   "direction": "left minus right"
+  },
+  {
+   "id": "B-H-ON-B-H-OFF",
+   "line": "B",
+   "direction": "left minus right"
+  },
+  {
+   "id": "B-D-OFF-B-W-OFF",
+   "line": "B",
+   "direction": "left minus right"
+  },
+  {
+   "id": "B-H-OFF-B-W-OFF",
+   "line": "B",
+   "direction": "left minus right"
+  },
+  {
+   "id": "C-W-S-C-W-P",
+   "line": "C",
+   "direction": "left minus right"
+  },
+  {
+   "id": "C-D-S-C-D-P",
+   "line": "C",
+   "direction": "left minus right"
+  },
+  {
+   "id": "C-H-S-C-H-P",
+   "line": "C",
+   "direction": "left minus right"
+  },
+  {
+   "id": "C-DH-S-C-DH-P",
+   "line": "C",
+   "direction": "left minus right"
+  },
+  {
+   "id": "C-D-P-C-W-P",
+   "line": "C",
+   "direction": "left minus right"
+  },
+  {
+   "id": "C-H-P-C-D-P",
+   "line": "C",
+   "direction": "left minus right"
+  },
+  {
+   "id": "C-DH-P-C-D-P",
+   "line": "C",
+   "direction": "left minus right"
+  }
+ ],
+ "gate": {
+  "cagr_improvement_pp": 0.02,
+  "maxdd_worsen_pp_max": 0.03,
+  "maxdd_floor": -0.3,
+  "min_holdout_trades": 50,
+  "holdout_segments": 3,
+  "holdout_segments_min_positive": 2,
+  "cost_x2_growth_required": true,
+  "trades_per_year_increase_min": 0.25,
+  "adverse_rate_drop_pp_min": 0.05,
+  "bootstrap_block": 20,
+  "bootstrap_n": 10000,
+  "bootstrap_seed": 20261020,
+  "bootstrap_block_sensitivity": [
+   5,
+   60
+  ],
+  "alpha": 0.05
+ },
+ "cost_tiers": {
+  "liquid": {
+   "fee": 0.0001,
+   "slip": 0.0004,
+   "min_dv60": 20000000.0
+  },
+  "mid": {
+   "fee": 0.0001,
+   "slip": 0.0009,
+   "min_dv60": 5000000.0
+  }
+ },
+ "min_dv60": 5000000.0,
+ "min_history_days": 252,
+ "bootstrap": {
+  "block": 20,
+  "n": 10000,
+  "seed": 20261020,
+  "sensitivity_blocks": [
+   5,
+   60
+  ],
+  "two_sided": false,
+  "statistic": "mean of paired log-return difference"
+ },
+ "multiplicity": {
+  "method": "Holm step-down over the 15 primary comparisons",
+  "alpha": 0.05,
+  "unrun_p_value": 1.0
+ },
+ "no_parameter_search": true
+}

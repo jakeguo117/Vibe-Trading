@@ -1,0 +1,17 @@
+{
+ "trigger": "C-H-P beat C-D-P on the holdout with more completed trades (\u00a78.4)",
+ "n_slow": 499,
+ "n_fast": 2296,
+ "p": 0.21733449477351915,
+ "seeds": 100,
+ "base": {
+  "C-H-P": 0.03419371237253399,
+  "C-D-P": 0.031288469411608455
+ },
+ "thinned_cagr_p5": -0.009864455464318583,
+ "thinned_cagr_median": 0.03155974353023128,
+ "thinned_cagr_p95": 0.0711845823804094,
+ "thinned_n_trades_median": 275.0,
+ "share_seeds_beating_daily": 0.51,
+ "note": "100 random paths, all kept, no best-seed selection; p only matches candidate frequency, not completed trades"
+}

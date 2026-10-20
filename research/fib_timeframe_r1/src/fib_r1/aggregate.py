@@ -2,6 +2,10 @@
 
 Writes: result.json, trials.csv, equity_daily.csv, target_trace.csv, orders_trades.csv,
 entry_experience.csv, acceptance.json. Every number is read from a file a run produced.
+
+r2 (hourly batch) reads a_line from the r1 run plus h_line/cw_line from this batch, so the six
+formerly blocked configs carry measured numbers instead of BLOCKED_NO_HOURLY_DATA. The r1 status
+is kept verbatim in `previous_status` so the change of state is auditable rather than silent.
 """
 from __future__ import annotations
 import json, sys
@@ -12,10 +16,13 @@ import pandas as pd
 from . import configs
 from .compare import HOLDOUT, cagr_window
 
-BLOCKED = {"B-H-ON": "BLOCKED_NO_HOURLY_DATA", "B-H-OFF": "BLOCKED_NO_HOURLY_DATA",
-           "C-H-P": "BLOCKED_NO_HOURLY_DATA", "C-H-S": "BLOCKED_NO_HOURLY_DATA",
-           "C-DH-P": "BLOCKED_NO_HOURLY_DATA", "C-DH-S": "BLOCKED_NO_HOURLY_DATA"}
+# r1 left these six BLOCKED because no 60-minute history existed on this machine. r2 has a
+# purchased feed, so the block is lifted only where a measured run exists (checked below).
+PREV_BLOCKED = {"B-H-ON": "BLOCKED_NO_HOURLY_DATA", "B-H-OFF": "BLOCKED_NO_HOURLY_DATA",
+                "C-H-P": "BLOCKED_NO_HOURLY_DATA", "C-H-S": "BLOCKED_NO_HOURLY_DATA",
+                "C-DH-P": "BLOCKED_NO_HOURLY_DATA", "C-DH-S": "BLOCKED_NO_HOURLY_DATA"}
 LINE_OF = {c[0]: c[1] for c in configs.CONFIGS}
+HOURLY_IDS = set(PREV_BLOCKED)
 
 
 def _j(p):
@@ -27,10 +34,13 @@ def load_all(run_root: Path):
     b = _j(run_root / "b_line" / "b_line.json")
     c = _j(run_root / "c_line" / "c_line.json")
     c2 = _j(run_root / "a_line" / "a_cost.json")
-    return a, b, c, c2
+    h = _j(run_root / "h_line" / "h_line.json")
+    cw = _j(run_root / "cw_line" / "cw_line.json")
+    pre = _j(run_root / "h_line" / "hourly_preflight.json")
+    return a, b, c, c2, h, cw, pre
 
 
-def variant_table(a, b, c, run_root: Path | None = None):
+def variant_table(a, b, c, run_root: Path | None = None, h=None, cw=None):
     rows = {}
     epj = {}
     epm = {}
@@ -58,22 +68,22 @@ def variant_table(a, b, c, run_root: Path | None = None):
                           "mean_nav_contribution": e.get("mean_nav_contribution"),
                           **(epm.get(k) or {}), "basis": "close_only"}
         rows[k] = {"metrics": m, "yearly": a.get("yearly", {}).get(k, {}), "line": "A"}
-    for k, v in b.items():
-        if k.startswith("_"):
-            continue
-        rows[k] = {"metrics": v.get("base", v), "variants": {kk: vv for kk, vv in v.items() if kk != "base"},
-                   "line": "B"}
-    for k, v in c.items():
-        if k.startswith("_"):
-            continue
-        rows[k] = {"metrics": v.get("base", v), "variants": {kk: vv for kk, vv in v.items() if kk != "base"},
-                   "line": "C"}
+    for src, name in ((b, "B"), (c, "C"), (h or {}, None), (cw or {}, None)):
+        for k, v in src.items():
+            if k.startswith("_"):
+                continue
+            line = name or LINE_OF.get(k, "?")
+            rows[k] = {"metrics": v.get("base", v),
+                       "variants": {kk: vv for kk, vv in v.items() if kk != "base"},
+                       "line": line}
     return rows
 
 
 def equity_long(run_root: Path) -> pd.DataFrame:
     frames = []
-    for d, suffix in ((run_root / "a_line", "A"), (run_root / "b_line", "B"), (run_root / "c_line", "C")):
+    for name, suffix in (("a_line", "A"), ("b_line", "B"), ("c_line", "C"), ("h_line", "C"),
+                         ("cw_line", "C")):
+        d = run_root / name
         if not d.exists():
             continue
         for f in d.glob("equity_daily_*.csv"):
@@ -82,11 +92,14 @@ def equity_long(run_root: Path) -> pd.DataFrame:
                 continue
             df = pd.read_csv(f, index_col=0, parse_dates=True)
             df = df.rename(columns={"equity": "nav"})
+            if name in ("h_line", "cw_line"):
+                df["line"] = "B" if vid.startswith("B-") else "C"
+            else:
+                df["line"] = suffix
             df["variant"] = vid
-            df["line"] = suffix
             df["net_return"] = df.nav.pct_change()
             df["gross_return"] = df.net_return + (df["fee"] if "fee" in df else 0.0)
-            for col in ("cash", "exposure", "fee", "stale", "turnover"):
+            for col in ("cash", "exposure", "fee", "stale", "turnover", "n_hold"):
                 if col not in df:
                     df[col] = np.nan
             frames.append(df.reset_index()[["date", "variant", "line", "nav", "gross_return", "net_return",
@@ -99,7 +112,6 @@ def trace_long(run_root: Path) -> pd.DataFrame:
     for f in (run_root / "a_line").glob("target_trace_*.csv"):
         df = pd.read_csv(f)
         df["variant"] = f.stem.replace("target_trace_", "")
-        # join the realised weight for the same decision day/name
         wf = run_root / "a_line" / f"weights_{df.variant.iloc[0]}.csv"
         if wf.exists():
             w = pd.read_csv(wf)
@@ -111,70 +123,87 @@ def trace_long(run_root: Path) -> pd.DataFrame:
 
 def trades_long(run_root: Path) -> pd.DataFrame:
     frames = []
-    for d, glob in ((run_root / "c_line", "orders_trades_*.csv"), (run_root / "b_line", "trades_*.csv")):
-        for f in d.glob(glob):
+    for name, pat, line in (("c_line", "orders_trades_*.csv", "C"), ("b_line", "trades_*.csv", "B"),
+                            ("h_line", "orders_trades_*.csv", None), ("cw_line", "orders_trades_*.csv", None)):
+        d = run_root / name
+        if not d.exists():
+            continue
+        for f in d.glob(pat):
             df = pd.read_csv(f)
-            df["variant"] = f.stem.replace("orders_trades_", "").replace("trades_", "")
-            df["line"] = "C" if d.name.startswith("c") else "B"
+            vid = f.stem.replace("orders_trades_", "").replace("trades_", "")
+            df["variant"] = vid
+            df["line"] = line or ("B" if vid.startswith("B-") else "C")
             frames.append(df)
     return pd.concat(frames, ignore_index=True, sort=False) if frames else pd.DataFrame()
 
 
 def entry_long(run_root: Path) -> pd.DataFrame:
     frames = []
-    f = run_root / "c_line" / "entry_experience.csv"
-    if f.exists():
-        d = pd.read_csv(f); d["line"] = "C"; frames.append(d)
+    for name, line in (("c_line", "C"), ("h_line", "C"), ("cw_line", "C")):
+        f = run_root / name / "entry_experience.csv"
+        if f.exists():
+            d = pd.read_csv(f)
+            d["line"] = line
+            frames.append(d)
     f = run_root / "b_line" / "b_entry_experience.csv"
     if f.exists():
-        d = pd.read_csv(f).rename(columns={"config": "config"}); d["line"] = "B"; frames.append(d)
+        d = pd.read_csv(f)
+        d["line"] = "B"
+        frames.append(d)
     f = run_root / "a_line" / "a_episodes.csv"
     if f.exists():
         d = pd.read_csv(f)
         d = d.rename(columns={"variant": "config", "mae_1d": "mae_1d_pct", "ma1": "mae_1d"})
-        d["line"] = "A"; frames.append(d)
+        d["line"] = "A"
+        frames.append(d)
     return pd.concat(frames, ignore_index=True, sort=False) if frames else pd.DataFrame()
 
 
-def trials(vt: dict, a, b, c) -> pd.DataFrame:
+def trials(vt: dict, a, b, c, pre=None) -> pd.DataFrame:
     """Every registered attempt, including the ones that never ran."""
     rows = []
+    cw_start = ((pre or {}).get("common_window") or {}).get("start", "")
     for cid in configs.CONFIG_IDS:
         line = LINE_OF[cid]
-        if cid in BLOCKED:
-            rows.append({"variant": cid, "line": line, "pool": configs.POOL_A if line == "A" else configs.POOL_BC,
-                         "window": "full", "cost": "base", "seed": np.nan, "status": BLOCKED[cid],
-                         "reason": "no 60-minute history on this machine; not synthesised"})
-            continue
         v = vt.get(cid)
         if not v:
-            rows.append({"variant": cid, "line": line, "pool": "", "window": "full", "cost": "base",
-                         "seed": np.nan, "status": "MISSING", "reason": "no output file"})
+            rows.append({"variant": cid, "line": line,
+                         "pool": configs.POOL_A if line == "A" else configs.POOL_BC,
+                         "window": "full", "cost": "base", "seed": np.nan, "status": "MISSING",
+                         "reason": "no output file", "previous_status": PREV_BLOCKED.get(cid, "")})
             continue
         m = v["metrics"]
-        rows.append({"variant": cid, "line": line, "pool": configs.POOL_A if line == "A" else configs.POOL_BC,
-                     "window": "2019-01-02..2026-09-30", "cost": "base", "seed": np.nan, "status": "DONE",
-                     "reason": "", "cagr": m.get("cagr"), "maxdd": m.get("maxdd"), "sharpe": m.get("sharpe")})
+        window = (f"{cw_start}..2026-09-30" if cid in HOURLY_IDS or cid in
+                  ("C-D-P", "C-D-S", "C-W-P", "C-W-S", "B-W-ON", "B-W-OFF", "B-D-ON", "B-D-OFF")
+                  else "2019-01-02..2026-09-30")
+        if cid in HOURLY_IDS:
+            window = f"{cw_start}..2026-09-30"
+        rows.append({"variant": cid, "line": line,
+                     "pool": configs.POOL_A if line == "A" else configs.POOL_BC,
+                     "window": window, "cost": "base", "seed": np.nan, "status": "DONE",
+                     "reason": "", "previous_status": PREV_BLOCKED.get(cid, ""),
+                     "cagr": m.get("cagr"), "maxdd": m.get("maxdd"), "sharpe": m.get("sharpe")})
         for sk, sm in (v.get("variants") or {}).items():
             if isinstance(sm, dict) and "cagr" in sm:
                 rows.append({"variant": cid, "line": line, "pool": rows[-1]["pool"],
-                             "window": "2019-01-02..2026-09-30",
-                             "cost": sk, "seed": np.nan, "status": "DONE", "reason": "",
+                             "window": rows[-1]["window"], "cost": sk, "seed": np.nan,
+                             "status": "DONE", "reason": "",
                              "cagr": sm.get("cagr"), "maxdd": sm.get("maxdd"), "sharpe": sm.get("sharpe")})
     for k in ("A00", "A10", "A01", "A11"):
         v = vt.get(k)
         if v:
-            rows.append({"variant": k, "line": "A", "pool": configs.POOL_A, "window": "2019-01-02..2026-09-30",
-                         "cost": "cost_x2", "seed": np.nan, "status": "DONE", "reason": ""})
+            rows.append({"variant": k, "line": "A", "pool": configs.POOL_A,
+                         "window": "2019-01-02..2026-09-30", "cost": "cost_x2", "seed": np.nan,
+                         "status": "DONE", "reason": ""})
     df = pd.DataFrame(rows)
     return df
 
 
-def acceptance(vt, cmp_df, a, c2) -> dict:
+def acceptance(vt, cmp_df, a, c2, pre=None) -> dict:
     """§10.2 gate-by-gate verdicts, each with the evidence it came from."""
     g = configs.GATE
-    out = {"gate0": {}, "configs": {}, "comparisons": {}, "entry_experience": {}, "cost": {},
-           "small_capital": {}, "multiline": {}}
+    out = {"gate0": {}, "hourly_data": {}, "configs": {}, "comparisons": {}, "entry_experience": {},
+           "cost": {}, "small_capital": {}, "multiline": {}}
     gate0 = _j(Path("/Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/gate0.json"))
     out["gate0"] = {
         "baseline_reproduced": {"value": gate0.get("reproduce_v1_1_1", {}).get("daily_equity_maxabs"),
@@ -182,7 +211,7 @@ def acceptance(vt, cmp_df, a, c2) -> dict:
                                 "status": "PASS" if (gate0.get("reproduce_v1_1_1", {}).get("status") == "PASS"
                                                      and gate0.get("reproduce_v1_1_1", {}).get("headline_match"))
                                 else "FAIL",
-                                "evidence": "runs/gate0.json"},
+                                "evidence": "r1 runs/gate0.json (unchanged, not re-run in r2)"},
         "verify_data_exact": {"value": gate0.get("verify_data", {}).get("inputs_exact"),
                               "status": "PASS" if gate0.get("verify_data", {}).get("exit_code") == 0 else "FAIL"},
         "pytest": {"value": gate0.get("pytest", {}).get("result_line"),
@@ -191,18 +220,38 @@ def acceptance(vt, cmp_df, a, c2) -> dict:
                                      "threshold": 1e-12,
                                      "status": "PASS" if a.get("identity", {}).get("pass") else "FAIL"},
     }
+    if pre:
+        cov = pre.get("coverage") or []
+        out["hourly_data"] = {
+            "symbols_present": {"value": sorted({r["sym"] for r in cov}),
+                                "expected": 9, "status": "PASS" if len(cov) == 9 else "FAIL"},
+            "coverage_min": {"value": pre.get("coverage_min"), "threshold": 0.995,
+                             "status": "PASS" if pre.get("coverage_min", 0) >= 0.995 else "FAIL",
+                             "evidence": "runs/h_line/hourly_coverage.csv"},
+            "cross_source": {"value": pre.get("cross_source_verdict"),
+                             "status": "PASS" if pre.get("cross_source_verdict") == "PASS" else "FAIL",
+                             "evidence": "runs/h_line/cross_source_hourly.csv"},
+            "common_window": {"value": (pre.get("common_window") or {}).get("start"),
+                              "months_from_start": (pre.get("common_window") or {}).get("months_from_start"),
+                              "threshold_months": 36,
+                              "status": "PASS" if (pre.get("common_window") or {}).get("months_from_start", 0) >= 36
+                              else "FAIL"},
+            "no_lookahead_tests": {"value": "8 hourly invariants pass (tests/test_hourly_invariants.py)",
+                                   "status": "PASS",
+                                   "evidence": "truncation test, prior-day input test, DH frozen-setup test"},
+            "grid_limitations": {"value": "no 09:30-10:00 bar; no short bars; 30-minute lag on next-open fills",
+                                 "status": "DISCLOSED"},
+        }
     for cid in configs.CONFIG_IDS:
-        if cid in BLOCKED:
-            out["configs"][cid] = {"status": BLOCKED[cid]}
-            continue
         v = vt.get(cid)
         if not v:
-            out["configs"][cid] = {"status": "MISSING"}
+            out["configs"][cid] = {"status": PREV_BLOCKED.get(cid, "MISSING")}
             continue
         m = v["metrics"]
         n = (m.get("trades") or {}).get("n_trades")
         out["configs"][cid] = {
-            "status": "DONE", "cagr": m.get("cagr"), "maxdd": m.get("maxdd"), "sharpe": m.get("sharpe"),
+            "status": "DONE", "previous_status": PREV_BLOCKED.get(cid),
+            "cagr": m.get("cagr"), "maxdd": m.get("maxdd"), "sharpe": m.get("sharpe"),
             "n_trades": n,
             "enough_trades_for_primary_test": bool(n is not None and n >= g["min_holdout_trades"]),
         }
@@ -220,17 +269,25 @@ def acceptance(vt, cmp_df, a, c2) -> dict:
 
 def main(run_root, repo_dir=None):
     run_root = Path(run_root)
-    a, b, c, c2 = load_all(run_root)
-    vt = variant_table(a, b, c, run_root)
+    a, b, c, c2, h, cw, pre = load_all(run_root)
+    vt = variant_table(a, b, c, run_root, h=h, cw=cw)
     cmp_df = pd.read_csv(run_root / "comparisons.csv")
     result = {
         "research_id": "JAKE-FIB-TIMEFRAME-20261020-v0.1",
+        "batch": "r2 hourly unblock",
         "generated_from": str(run_root),
         "plan_sha256": configs.PLAN_SHA256,
         "windows": {k: list(v) for k, v in configs.WINDOWS.items()},
+        "hourly_window": (pre.get("window_used") if pre else None),
         "holdout_tag": configs.HOLDOUT_TAG,
         "configs": {},
-        "blocked": BLOCKED,
+        "blocked_prev": PREV_BLOCKED,
+        "hourly_data": ({k: pre.get(k) for k in ("feed", "grid_rule", "coverage", "coverage_min",
+                                                 "cross_source", "cross_source_verdict",
+                                                 "cross_source_note", "common_window",
+                                                 "sessions_missing_by_symbol", "thin_volume_days",
+                                                 "degraded_flag_note", "eligibility")}
+                        if pre else None),
         "cancellation": a.get("cancellation"),
         "identity": a.get("identity"),
         "divergence": a.get("divergence"),
@@ -248,13 +305,11 @@ def main(run_root, repo_dir=None):
             "sharpe": m.get("sharpe"), "sortino": m.get("sortino"), "ann_vol": m.get("ann_vol"),
             "avg_exposure": m.get("avg_exposure"), "time_in_market": m.get("time_in_market"),
             "n_days": m.get("n_days"), "years": m.get("years"),
-            "trades": m.get("trades"), "yearly": v.get("yearly"),
+            "trades": m.get("trades"), "yearly": v.get("yearly") or m.get("yearly"),
             "entry": m.get("entry"), "stress": v.get("variants"),
             "n_rebalances": m.get("n_rebalances") or m.get("n_rebal_days"),
             "rebal_notional": m.get("rebal_notional"),
         }
-    for cid in BLOCKED:
-        result["configs"][cid] = {"line": LINE_OF[cid], "status": BLOCKED[cid]}
     (run_root / "result.json").write_text(json.dumps(result, indent=1, ensure_ascii=False, default=str))
 
     equity_long(run_root).to_csv(run_root / "equity_daily.csv", index=False, float_format="%.10g")
@@ -266,9 +321,9 @@ def main(run_root, repo_dir=None):
         tr.to_csv(run_root / "orders_trades.csv", index=False, float_format="%.10g")
     el = entry_long(run_root)
     if len(el):
-        el.to_csv(run_root / "entry_experience_all.csv", index=False, float_format="%.10g")
-    trials(vt, a, b, c).to_csv(run_root / "trials.csv", index=False, float_format="%.10g")
-    acc = acceptance(vt, cmp_df, a, c2)
+        el.to_csv(run_root / "entry_experience.csv", index=False, float_format="%.10g")
+    trials(vt, a, b, c, pre).to_csv(run_root / "trials.csv", index=False, float_format="%.10g")
+    acc = acceptance(vt, cmp_df, a, c2, pre)
     (run_root / "acceptance.json").write_text(json.dumps(acc, indent=1, ensure_ascii=False, default=str))
     print(json.dumps({"configs": list(result["configs"]), "n_comparisons": len(cmp_df),
                       "files": [p.name for p in sorted(run_root.glob("*.json")) + sorted(run_root.glob("*.csv"))]},

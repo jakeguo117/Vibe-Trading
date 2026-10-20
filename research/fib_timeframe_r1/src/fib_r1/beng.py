@@ -118,10 +118,28 @@ def _slip(dv):
 
 
 def run_b(P, g_mode="official", cost_mult=1.0, delay_bars=0, start="2019-01-02", end="2026-09-30",
-          capital=10000.0, gvec=None):
+          capital=10000.0, gvec=None, delay_sessions=0):
     T, N = P["C"].shape
     i0 = int(P["dates"].searchsorted(pd.Timestamp(start)))
     i1 = int(P["dates"].searchsorted(pd.Timestamp(end), side="right")) - 1
+    # SWITCH (hourly batch): plan §12 calendar stress ("one extra trading day"). Inert for B-W/B-D
+    # because those panels have no session map, so their existing numbers are untouched.
+    sess_start = sess_end = None
+    if delay_sessions and P.get("sess") is not None:
+        n_s = int(P["sess"].max()) + 1
+        sess_start = np.array([int(np.flatnonzero(P["sess"] == s)[0]) for s in range(n_s)])
+        sess_end = np.array([int(np.flatnonzero(P["sess"] == s)[-1]) for s in range(n_s)])
+
+    def target_bar(t):
+        u = t + 1 + delay_bars
+        if delay_sessions and sess_start is not None:
+            s = int(P["sess"][t]) + delay_sessions
+            if s >= len(sess_start):
+                return None
+            u = int(sess_start[s]) + int(P["off"][t])
+            if u > sess_end[s]:
+                u = int(sess_end[s])
+        return u if u <= i1 else None
     fee_r = FEE * cost_mult
     gcode = gvec if gvec is not None else np.array([G_OFFICIAL[s] for s in
                                                     ["grind", "chop", "trend", "fish"]])
@@ -238,7 +256,7 @@ def run_b(P, g_mode="official", cost_mult=1.0, delay_bars=0, start="2019-01-02",
                 tgt[j] = tg[k]
         else:
             tgt = np.zeros(N)
-        pending_w = tgt; pending_bar = t + 1 + delay_bars; pending_force = changed
+        pending_w = tgt; pending_bar = target_bar(t); pending_force = changed
         wlog.append((t, *[tgt[j] for j in range(N)]))
     eq = pd.DataFrame(eq_rows, columns=["date", "equity", "cash", "exposure", "n_hold"]).set_index("date")
     EV = pd.DataFrame(events, columns=["t", "j", "what"])

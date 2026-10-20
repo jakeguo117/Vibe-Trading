@@ -55,6 +55,12 @@ class Panel:
     ELIG: np.ndarray        # >=252 valid daily bars and DV60>=5m and all indicators warm
     last_daily_idx: np.ndarray   # bar -> daily row index of its last session
     tf: str = "D"
+    # SWITCH (hourly batch): set only for the 60-minute grid; empty for D/W so the identity
+    # path of the existing four C configs is bit-identical.
+    sess: np.ndarray | None = None       # bar -> session ordinal (0..S-1)
+    off: np.ndarray | None = None        # bar -> index of the bar inside its session
+    is_last: np.ndarray | None = None    # bar -> True if it is the session's last bar
+    prev_daily: np.ndarray | None = None  # bar -> daily row index of the PREVIOUS session
 
 
 def wilder_atr(H, L, C, n=ATR_N):
@@ -194,7 +200,8 @@ def signal_episodes(P: Panel):
 
 def run_breakout(P: Panel, squeeze=False, cost_mult=1.0, start="2019-01-02", end="2026-09-30",
                  capital=10000.0, slippage=True, delay_bars=0, integer=False,
-                 episodes=None, above=None):
+                 episodes=None, above=None, delay_sessions=0, ban_last_bar_entry=False,
+                 thin_p=None, thin_seed=0):
     """Single position, cash allowed. Returns dict with equity, trades, orders."""
     A = wilder_atr(P.H, P.L, P.C)
     B = breakout_line(P.H)
@@ -202,6 +209,26 @@ def run_breakout(P: Panel, squeeze=False, cost_mult=1.0, start="2019-01-02", end
     T, N = P.C.shape
     i0 = int(P.dates.searchsorted(pd.Timestamp(start)))
     i1 = int(P.dates.searchsorted(pd.Timestamp(end), side="right")) - 1
+    # SWITCH (hourly batch): delay_sessions is the plan §12 "one extra trading day" calendar
+    # stress; it needs the session/offset map and is inert (0) for every pre-existing config.
+    sess_start = sess_end = None
+    if delay_sessions and P.sess is not None:
+        n_s = int(P.sess.max()) + 1
+        sess_start = np.array([int(np.flatnonzero(P.sess == s)[0]) for s in range(n_s)])
+        sess_end = np.array([int(np.flatnonzero(P.sess == s)[-1]) for s in range(n_s)])
+
+    def target_bar(t):
+        """Execution bar for a decision at bar t; None when the plan has no valid time left."""
+        u = t + 1 + delay_bars
+        if delay_sessions and sess_start is not None:
+            s = int(P.sess[t]) + delay_sessions
+            if s >= len(sess_start):
+                return None
+            u = int(sess_start[s]) + int(P.off[t])
+            if u > sess_end[s]:
+                u = int(sess_end[s])
+        return u if u <= i1 else None
+
     fee_r = FEE * cost_mult
     cash = float(capital)
     pos = None
@@ -301,16 +328,24 @@ def run_breakout(P: Panel, squeeze=False, cost_mult=1.0, start="2019-01-02", end
                 time_hit = held >= MAX_BARS
                 if stop_hit or time_hit:
                     why = "stop+time" if (stop_hit and time_hit) else ("trail_stop" if stop_hit else "time_40")
-                    pending = dict(kind="exit", j=j, why=why, held=held, exec_bar=t + 1 + delay_bars,
-                                   sig_bar=t)
+                    u = target_bar(t)
+                    if u is None:
+                        pending = None
+                    else:
+                        pending = dict(kind="exit", j=j, why=why, held=held, exec_bar=u,
+                                       sig_bar=t)
         elif pending is None:
+            if ban_last_bar_entry and P.is_last is not None and bool(P.is_last[t]):
+                continue
             ok = P.ELIG[t] & np.isfinite(P.C[t]) & np.isfinite(B[t])
             ok &= P.C[t] > B[t]
             if squeeze:
                 ok &= SQ[t]
             js = np.flatnonzero(ok)
             # an order must be fillable at its own execution bar
-            js = np.array([j for j in js if np.isfinite(P.O[min(t + 1 + delay_bars, T - 1), j])], dtype=int)
+            u = target_bar(t)
+            js = np.array([j for j in js if u is not None and np.isfinite(P.O[min(u, T - 1), j])],
+                          dtype=int)
             if len(js):
                 js = js[np.lexsort((js, -P.DV[t, js]))]   # DV60 desc, then symbol (columns are sym-sorted)
                 j = int(js[0])
@@ -325,10 +360,15 @@ def run_breakout(P: Panel, squeeze=False, cost_mult=1.0, start="2019-01-02", end
                 if why:
                     orders.append(dict(bar=t, date=P.dates[t], sym=P.syms[j], kind="entry", status="rejected",
                                        qty=np.nan, price=np.nan, fee=0.0, slip_bps=0.0, reason=",".join(why)))
+                elif thin_p is not None and np.random.default_rng([thin_seed, j, t]).random() > thin_p:
+                    # §8.4 opportunity thinning: the refusal does NOT fall through to the second name
+                    orders.append(dict(bar=t, date=P.dates[t], sym=P.syms[j], kind="entry", status="thinned",
+                                       qty=np.nan, price=np.nan, fee=0.0, slip_bps=0.0,
+                                       reason=f"thin_p={thin_p}"))
                 else:
                     pending = dict(kind="entry", j=j, ATR=atr_s, sigma=sig, B=float(B[t, j]),
                                    DV60=float(P.DV[t, j]), sig_bar=t, sig_date=P.dates[t],
-                                   exec_bar=t + 1 + delay_bars,
+                                   exec_bar=u,
                                    episode=int(episodes[t, j]) if episodes is not None else -1,
                                    why="breakout" + ("+squeeze" if squeeze else ""))
     eq = pd.DataFrame(eq_rows, columns=["date", "equity", "cash", "exposure", "n_hold", "stale"]).set_index("date")

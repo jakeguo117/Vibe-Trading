@@ -18,15 +18,21 @@ HOLDOUT = configs.WINDOWS["holdout"]
 
 STRESS_SUFFIX = ("_costx2", "_delay1")
 
+# SWITCH (hourly batch): h_line holds the six formerly-blocked configs, cw_line the W/D controls
+# re-run on the hourly common window. Later directories win, so the B/C family in the r2
+# comparison table is uniformly measured from one common start date (§3.1).
+DIRS = ("a_line", "b_line", "c_line", "h_line", "cw_line")
+
 
 def load_equity(run_root: Path, stress: str | None = None) -> dict:
     """variant -> daily equity Series.
 
     stress=None reads the base runs; stress="costx2" / "delay1" reads that stress variant
-    (A-line files carry the suffix, B/C-line files are written by their drivers the same way).
+    (A-line files carry the suffix, B/C/H-line files are written by their drivers the same way).
     """
     eq = {}
-    for d in (run_root / "a_line", run_root / "b_line", run_root / "c_line"):
+    for name in DIRS:
+        d = run_root / name
         if not d.exists():
             continue
         for f in d.glob("equity_daily_*.csv"):
@@ -46,7 +52,10 @@ def holdout_round_trips(run_root: Path) -> dict:
     """§8.1 completed trades inside the holdout window, per variant."""
     out = {}
     h0, h1 = pd.Timestamp(HOLDOUT[0]), pd.Timestamp(HOLDOUT[1])
-    for d in (run_root / "b_line", run_root / "c_line"):
+    for name in DIRS:
+        d = run_root / name
+        if not d.exists():
+            continue
         for f in d.glob("trades_*.csv"):
             vid = f.stem.replace("trades_", "")
             t = pd.read_csv(f)
@@ -70,11 +79,12 @@ def holdout_round_trips(run_root: Path) -> dict:
 
 def load_metrics(run_root: Path) -> dict:
     out = {}
-    for d, fn in ((run_root / "a_line", "a_line.json"), (run_root / "b_line", "b_line.json"),
-                  (run_root / "c_line", "c_line.json")):
-        if not (d / fn).exists():
+    for name, fn in ((run_root / "a_line", "a_line.json"), (run_root / "b_line", "b_line.json"),
+                     (run_root / "c_line", "c_line.json"), (run_root / "h_line", "h_line.json"),
+                     (run_root / "cw_line", "cw_line.json")):
+        if not (name / fn).exists():
             continue
-        j = json.loads((d / fn).read_text())
+        j = json.loads((name / fn).read_text())
         for k, v in j.items():
             if k.startswith("_"):
                 continue

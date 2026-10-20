@@ -1,0 +1,7 @@
+comparison,dropped_symbol,cagr_left,cagr_right,cagr_diff_pp,status,note
+B-H-ON-B-H-OFF,GLD,-0.020718636571316895,0.005534440101695237,-2.6253076673012132,DONE,"post-hoc stress (plan §10.2 gate 7), not a new validation"
+B-H-OFF-B-W-OFF,SLV,0.06666748429990821,0.13276414501022282,-6.609666071031461,DONE,"post-hoc stress (plan §10.2 gate 7), not a new validation"
+C-H-S-C-H-P,GLD,-0.022593473504958328,0.037930616182626054,-6.052408968758439,DONE,"post-hoc stress (plan §10.2 gate 7), not a new validation"
+C-DH-S-C-DH-P,GLD,0.009985081479986002,-0.0027838902918093655,1.2768971771795368,DONE,"post-hoc stress (plan §10.2 gate 7), not a new validation"
+C-H-P-C-D-P,GLD,0.037930616182626054,0.009928407482354018,2.8002208700272035,DONE,"post-hoc stress (plan §10.2 gate 7), not a new validation"
+C-DH-P-C-D-P,GLD,-0.0027838902918093655,0.009928407482354018,-1.2712297774163384,DONE,"post-hoc stress (plan §10.2 gate 7), not a new validation"

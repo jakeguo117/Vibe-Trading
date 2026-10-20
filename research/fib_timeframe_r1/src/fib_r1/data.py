@@ -39,9 +39,15 @@ def load_etf_daily(raw_dir: str | Path) -> dict[str, pd.DataFrame]:
         fut = np.r_[np.cumprod(spl[::-1])[::-1][1:], 1.0]
         raw = g.Close.values * fut
         dv = pd.Series(g.Close.values * g.Volume.values).rolling(60, min_periods=60).median().values
+        sel = np.asarray(spl, dtype=float)
+        # SWITCH (hourly batch): keep the raw split table and the per-day adjustment ratio so the
+        # intraday feed can be mapped onto exactly this scale (hourly.split_factor). No existing
+        # column changes, so A/B/C results are untouched.
         out[s] = pd.DataFrame({"open": o, "high": h, "low": l, "close": c, "raw_close": raw,
                                "volume": g.Volume.values, "dv60": dv,
-                               "dividend": g.Dividends.fillna(0).values}, index=g.index)
+                               "dividend": g.Dividends.fillna(0).values,
+                               "splits": sel, "adj_ratio": (g["Adj Close"] / g.Close).values,
+                               "raw_close_col": g.Close.values}, index=g.index)
     missing = [s for s in SYMS if s not in out]
     if missing:
         raise RuntimeError(f"missing ETF bars in snapshot: {missing}")

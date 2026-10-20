@@ -80,21 +80,44 @@ def data_block():
 
 
 def hourly_block():
-    """§2.4: is there any real intraday history on this machine? Search by name, then by content."""
+    """§2.3/§2.4: what intraday history exists, from which vendor, and is it usable.
+
+    r1 answered "nothing on this machine" and blocked the six H/DH configs. r2 has a purchased
+    Databento ohlcv-1h feed, so the block is replaced by measured facts: files, hashes, rows,
+    session coverage and the grid limitation, all taken from the r2 hourly preflight when present.
+    """
+    feed_dir = Path("/Users/jake/projects/trading/data/hourly_databento_2019_2026")
+    csv = feed_dir / "csv" / "ALL9_ohlcv-1h_2019-20260930.csv"
+    man = feed_dir / "meta" / "MANIFEST.json"
     hits = []
-    for base in [Path("/Users/jake/projects/trading/data")]:
-        for p in base.rglob("*"):
-            if not p.is_file():
-                continue
-            n = p.name.lower()
-            if any(k in n for k in ("60m", "1h", "hour", "intraday", "h1", "minute", "1min", "5m")):
-                hits.append(str(p))
-    dirs = sorted({str(p.parent) for p in map(Path, hits)})
-    return {"searched_root": "/Users/jake/projects/trading/data",
-            "name_patterns": ["60m", "1h", "hour", "intraday", "h1", "minute", "1min", "5m"],
-            "n_hits": len(hits), "hits": hits[:20], "dirs": dirs,
-            "hourly_available": False,
-            "verdict": "BLOCKED_NO_HOURLY_DATA" if not hits else "REVIEW_HITS"}
+    for p in Path("/Users/jake/projects/trading/data").rglob("*"):
+        if p.is_file() and any(k in p.name.lower() for k in
+                               ("60m", "1h", "hour", "intraday", "h1", "minute", "1min", "5m")):
+            hits.append(str(p))
+    if not csv.exists():
+        return {"searched_root": "/Users/jake/projects/trading/data", "n_hits": len(hits),
+                "hits": hits[:20], "hourly_available": False, "verdict": "BLOCKED_NO_HOURLY_DATA"}
+    cands = sorted(Path("/Users/jake/projects/hermes-tasks/runs/backtest-fib-hourly-20261020-1900/"
+                        "runs").glob("*/hourly_preflight.json"), key=lambda p: p.stat().st_mtime)
+    pre_j = json.loads(cands[-1].read_text()) if cands else {}
+    return {
+        "searched_root": "/Users/jake/projects/trading/data", "n_hits": len(hits), "hits": hits[:20],
+        "hourly_available": True,
+        "verdict": "HOURLY_AVAILABLE",
+        "feed": {"vendor": "Databento", "schema": "ohlcv-1h", "csv": str(csv), "sha256": sha(csv),
+                 "manifest": str(man), "manifest_sha256": sha(man) if man.exists() else None,
+                 "rows": pre_j.get("feed", {}).get("rows_used"),
+                 "start": "2019-01-02", "end_exclusive": "2026-10-01",
+                 "quoted_usd": 0.403400212526, "purchase": "bought for this study; no further purchase"},
+        "grid": pre_j.get("grid_rule"),
+        "coverage_min": pre_j.get("coverage_min"),
+        "cross_source_verdict": pre_j.get("cross_source_verdict"),
+        "common_window": pre_j.get("common_window"),
+        "unblocked_configs": ["B-H-ON", "B-H-OFF", "C-H-P", "C-H-S", "C-DH-P", "C-DH-S"],
+        "note": "r1's BLOCKED_NO_HOURLY_DATA is superseded by this feed. It is single-venue OHLCV "
+                "on a UTC-hour grid, so a 09:30-10:00 bar does not exist; that limitation is carried "
+                "in grid_rule and in the report instead of being interpolated away.",
+    }
 
 
 def main():
@@ -156,8 +179,9 @@ def main():
         "holdout_tag": configs.HOLDOUT_TAG,
         "pools": {"A": configs.POOL_A, "BC": configs.POOL_BC},
         "configs": [{"id": c[0], "line": c[1], "pool": c[2], "note": c[3],
-                     "status": "BLOCKED_NO_HOURLY_DATA" if c[0] in
-                     ("B-H-ON", "B-H-OFF", "C-H-P", "C-H-S", "C-DH-P", "C-DH-S") else "PLANNED"}
+                     "status": ("UNBLOCKED_R2_HOURLY_FEED" if c[0] in
+                                ("B-H-ON", "B-H-OFF", "C-H-P", "C-H-S", "C-DH-P", "C-DH-S")
+                                else "PLANNED")}
                     for c in configs.CONFIGS],
         "comparisons": [{"id": c[0], "line": c[1], "direction": "left minus right"} for c in configs.COMPARISONS],
         "gate": configs.GATE,

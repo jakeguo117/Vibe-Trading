@@ -8,8 +8,10 @@
 
 ## 状态
 
-18 个核心配置：12 个 DONE，6 个 `BLOCKED_NO_HOURLY_DATA`（本机无 60 分钟历史，未插值、未购买）。
-15 个主比较：9 个有结果、6 个因小时数据缺失 `BLOCKED`；**没有任何一个通过 §10.2 的 7 条门槛**。
+**r2（2026-10-20，小时批）**：18 个核心配置全部 **DONE**（6 个此前 `BLOCKED_NO_HOURLY_DATA` 已用
+购买的 Databento `ohlcv-1h` 解锁）；15 个主比较全部有结果，**仍无一通过方案 §10.2 的 7 条门槛**。
+小时批的结论见 [deliverables_hourly/REPORT_ZH.md](deliverables_hourly/REPORT_ZH.md)
+（r1 报告见 [deliverables/REPORT_ZH.md](deliverables/REPORT_ZH.md)，A 线与 W/D 结论以它为准）。
 
 ## 依赖
 
