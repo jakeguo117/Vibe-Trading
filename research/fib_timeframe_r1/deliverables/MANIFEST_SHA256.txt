@@ -1,0 +1,46 @@
+# JAKE-FIB-TIMEFRAME-20261020-v0.1 交付清单
+# generated 2026-10-20T09:15:47.422888+00:00
+# git branch: research/fib-timeframe-r1
+# git head at bundle time: 9a48dd69a6b41d9b3db1720e8966e9a0121afe64
+#   (the authoritative branch tip is quoted in result.md; a bundle cannot
+#    contain the hash of the commit that ships it)
+#
+# sha256  filename   (MANIFEST_SHA256.txt itself is not self-hashed)
+4e6277c917d7234d8f17189345cdda775c0d387d020d7a2a89dd2110c24e00af  README.md
+3e59d66f1f6d091c76f4cb0ff5969b8d7bec1a02605c8da724113dc0a9be316a  REPORT_ZH.md
+84f83da71ebfbba4ed578ccb2690e9a8c43164dab2e84fbb7b3748bc3b373f6a  SPEC.md
+d3dcfd42cf4099b230075044960ad190d537eafab2972bcc8a6a78c6536fed09  a_episodes.csv
+e64296379b9d1776ca68aeab9da6d8615a20127ab1f718904a37826525f73f0d  acceptance.json
+ba4b990fc4a30667d0b99dc89d8cc084f69cd50ca9fd61ceb0ee2b43421a45e0  buy_and_hold.csv
+5dfac3b40bf61c6d9d51e44abe30e937fe8d5db0247f51bfa6abafd1ae5fa659  cancellation_by_decision.csv
+044e40bd4fa0f15543893bc364fa3a6b0e9a988b52deae660ea54c3724db9dc8  comparisons.csv
+f839ba8c6962629fd585ca7f29833c688f8aa96c2ed6bf37f9ae98186d23d665  entry_experience.csv
+003909878016823f8bf8bf5504d398b8f5b0987718956239013eb3eb24bf085f  equity_daily.csv
+a8444053c75501a77fa2affc7823c83a36460b79251ccb42fce6447f986906c7  orders_trades.csv
+04740cdd0b73aa89963977156357b5d44b3fb458040d436e15fed783ef746b63  preflight.json
+afbaf8e200c4462a5b8fc73c102ec69e21f3dc743e365d3d56b57d11a764ad3d  preregistration.json
+2d41a5c7e89fd4e272e3496027e91962c11b7ffdf3fee631854b003a4207db94  result.json
+56c9f1d25120396cbccf28b438d10073388c280da0b721c7f9313c592ba41fa2  target_trace.csv
+1c674d00fde86a3ccaf2963b27f5608510118c01651c95072e181f0c5e79c1e1  trials.csv
+#
+# 以下为本地运行目录中的大文件（未上传，位置 + sha256 可追溯）
+# run root: /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs
+003909878016823f8bf8bf5504d398b8f5b0987718956239013eb3eb24bf085f       1481446  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/equity_daily.csv
+56c9f1d25120396cbccf28b438d10073388c280da0b721c7f9313c592ba41fa2       3225101  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/target_trace.csv
+a8444053c75501a77fa2affc7823c83a36460b79251ccb42fce6447f986906c7         71516  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/orders_trades.csv
+cb5a2016e68d31dd946b0ba0a4caa7d2087b446fe3f4e2608b4e433582d6cccf        163467  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/a_line/equity_daily_A00.csv
+8cf3246212e8b8f7f24d55a4ab95c3faaf2ea215faa932fd146318de76fa2944        161410  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/a_line/equity_daily_A10.csv
+55e0571f3f9f1139ebd04509e37db2a2371e2843131b975890ee6ea997219faa        163172  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/a_line/equity_daily_A01.csv
+20b1cd15d6665e70a6c761016f0e9e153a816c3d21a65c577aa628d75adba89b        162303  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/a_line/equity_daily_A11.csv
+0fc675db999305573c9536a7632ebd2597aff925c4fdf817b8a4173013d72950        429864  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/a_line/weights_A00.csv
+5dfac3b40bf61c6d9d51e44abe30e937fe8d5db0247f51bfa6abafd1ae5fa659         75631  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/a_line/cancellation_by_decision.csv
+d3dcfd42cf4099b230075044960ad190d537eafab2972bcc8a6a78c6536fed09         10650  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/a_line/a_episodes.csv
+22a3c14e8db06add74b9272c92c0324e3c1176460f3be40cc2d3db384c75117d         89645  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/c_line/equity_c_all.csv
+36d9cc108a689cfb3b7b7c4188034f47d61a68ad39c78c1f65624c7a8c7acf08         89789  /Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/b_line/equity_b_all.csv
+#
+# 训练/回测数据快照（1.8G，不入库不上传）：
+# snapshot dir: /Users/jake/projects/trading/data/ts_v111
+# mat tree sha256: 94fdc7093ca6d5982295b30be421a9600500e97a3c01cfbed5ad05c866b327b0  (10 files, 723698861 bytes)
+# raw tree sha256: cf5d14a7f868a69af64163d433f3e3f999aea90c224974fc59205cb8cebfd98f  (111 files, 578334278 bytes)
+# signals_primary.npz: 576967628 bytes  sha256 2633c8dc83c24b6b730e92b378f4b1cddebb4b36911d2ed2c88e81cf1d731850
+# manifest file sha256: be9c11ada3224e126d1f8a156a3774f839d2c2ab0213f1df6a81621cbc020ebf
