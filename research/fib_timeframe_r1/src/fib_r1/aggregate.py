@@ -178,7 +178,10 @@ def acceptance(vt, cmp_df, a, c2) -> dict:
     gate0 = _j(Path("/Users/jake/projects/hermes-tasks/runs/backtest-fib-breakout-20261020-1655/runs/gate0.json"))
     out["gate0"] = {
         "baseline_reproduced": {"value": gate0.get("reproduce_v1_1_1", {}).get("daily_equity_maxabs"),
-                                "threshold": 1e-9, "status": "PASS" if gate0.get("reproduce_v1_1_1", {}).get("PASS") else "FAIL",
+                                "threshold": 1e-9,
+                                "status": "PASS" if (gate0.get("reproduce_v1_1_1", {}).get("status") == "PASS"
+                                                     and gate0.get("reproduce_v1_1_1", {}).get("headline_match"))
+                                else "FAIL",
                                 "evidence": "runs/gate0.json"},
         "verify_data_exact": {"value": gate0.get("verify_data", {}).get("inputs_exact"),
                               "status": "PASS" if gate0.get("verify_data", {}).get("exit_code") == 0 else "FAIL"},

@@ -3,7 +3,7 @@
   "baseline_reproduced": {
    "value": 4.998668146072305e-12,
    "threshold": 1e-09,
-   "status": "FAIL",
+   "status": "PASS",
    "evidence": "runs/gate0.json"
   },
   "verify_data_exact": {
