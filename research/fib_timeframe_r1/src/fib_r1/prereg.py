@@ -59,7 +59,7 @@ def env_block():
 
 def data_block():
     man = DATA / "MANIFEST_SHA256.txt"
-    mat = sorted((DATA / "mat").glob("*.npz")) + sorted((DATA / "mat").glob("*.parquet"))
+    mat = sorted(p for p in (DATA / "mat").iterdir() if p.is_file())
     raw = sorted((DATA / "raw").glob("b*.parquet"))
     core = DATA / "raw" / "core.parquet"
     sig = DATA / "cache" / "signals_primary.npz"

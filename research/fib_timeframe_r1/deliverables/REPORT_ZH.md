@@ -204,5 +204,5 @@ cd research/fib_timeframe_r1 && PYTHONPATH=src:<trading-system>/backtest \
   python -m fib_r1.aggregate runs
 ```
 
-数据快照 `ts_v111`：mat 树 sha256 `31aee8b05f4bf1f358885a4bd37e25975505dbb18acb11856d775216cc1ea6d7`、raw 树 sha256 `cf5d14a7f868a69af64163d433f3e3f999aea90c224974fc59205cb8cebfd98f`；`signals_primary.npz` 576967628 字节 sha256 `2633c8dc83c24b6b730e92b378f4b1cd…`。
+数据快照 `ts_v111`：mat 树 sha256 `94fdc7093ca6d5982295b30be421a9600500e97a3c01cfbed5ad05c866b327b0`、raw 树 sha256 `cf5d14a7f868a69af64163d433f3e3f999aea90c224974fc59205cb8cebfd98f`；`signals_primary.npz` 576967628 字节 sha256 `2633c8dc83c24b6b730e92b378f4b1cd…`。
 

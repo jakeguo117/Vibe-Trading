@@ -1,15 +1,15 @@
 {
  "research_id": "JAKE-FIB-TIMEFRAME-20261020-v0.1",
- "emitted_at": "2026-10-20T09:08:22.643111+00:00",
+ "emitted_at": "2026-10-20T09:13:13.675191+00:00",
  "spec_was_frozen_before_performance_runs": true,
  "emission_note": "constants frozen in src/fib_r1/configs.py before the first performance run (see code.configs_mtime / configs_sha256); this file is generated from them afterwards so that every value is machine-read rather than retyped",
  "plan_sha256": "ca25225fed75769c7454b81b752f40c184a9c4a9f614c9233068f7e79365f0a5",
- "code_commit": "2a7e3b46e6abe9490fb8c1c4a8c022b231976b55",
- "code_tree_sha256": "37275e7bf964370564e85a7a8bfe208e727bc6debe772b281a5fa2df4cfb8494",
+ "code_commit": "52ceebd884544fa32132d288a95ea9cf913749a6",
+ "code_tree_sha256": "333796c23db9f148efe1b82e9321824cff26cf148d51e3d34c96b1ceecb4dbe8",
  "configs_sha256": "acdceb3215ff8f4c197df8387892ac04ba0d5eccd3b5be94db59593fa302b5c3",
  "data": {
   "snapshot": "ts_v111",
-  "mat_tree_sha256": "31aee8b05f4bf1f358885a4bd37e25975505dbb18acb11856d775216cc1ea6d7",
+  "mat_tree_sha256": "94fdc7093ca6d5982295b30be421a9600500e97a3c01cfbed5ad05c866b327b0",
   "raw_tree_sha256": "cf5d14a7f868a69af64163d433f3e3f999aea90c224974fc59205cb8cebfd98f"
  },
  "windows": {
