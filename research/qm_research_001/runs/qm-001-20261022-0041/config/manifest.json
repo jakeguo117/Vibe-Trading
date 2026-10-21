@@ -1,0 +1,1485 @@
+{
+ "evaluations": [
+  {
+   "eval_id": "QM-BO-001|BO-MAIN|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-MAIN",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-MAIN|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-MAIN",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-MAIN|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-MAIN",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-MAIN|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-MAIN",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-MAIN|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-MAIN",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C1|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C1",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C1|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C1",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C1|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C1",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C1|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C1",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C1|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C1",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C2|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C2",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C2|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C2",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C2|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C2",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C2|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C2",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C2|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C2",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C3|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C3",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C3|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C3",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C3|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C3",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C3|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C3",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-C3|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-C3",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P01|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P01",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P01|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P01",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P01|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P01",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P01|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P01",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P01|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P01",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P02|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P02",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P02|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P02",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P02|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P02",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P02|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P02",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P02|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P02",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P03|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P03",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P03|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P03",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P03|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P03",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P03|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P03",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P03|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P03",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P04|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P04",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P04|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P04",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P04|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P04",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P04|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P04",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P04|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P04",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P05|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P05",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P05|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P05",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P05|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P05",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P05|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P05",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P05|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P05",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P06|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P06",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P06|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P06",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P06|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P06",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P06|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P06",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P06|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P06",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P07|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P07",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P07|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P07",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P07|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P07",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P07|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P07",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P07|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P07",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P08|DEV|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P08",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P08|CONT|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P08",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P08|S1|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P08",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P08|S2|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P08",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|BO-P08|S3|slip10",
+   "strategy": "QM-BO-001",
+   "config": "BO-P08",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-MAIN|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-MAIN",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-MAIN|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-MAIN",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-MAIN|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-MAIN",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-MAIN|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-MAIN",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-MAIN|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-MAIN",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C1|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C1",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C1|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C1",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C1|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C1",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C1|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C1",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C1|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C1",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C3|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C3",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C3|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C3",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C3|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C3",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C3|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C3",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-C3|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-C3",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P01|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P01",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P01|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P01",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P01|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P01",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P01|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P01",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P01|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P01",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P02|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P02",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P02|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P02",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P02|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P02",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P02|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P02",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P02|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P02",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P03|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P03",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P03|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P03",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P03|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P03",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P03|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P03",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P03|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P03",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P04|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P04",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P04|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P04",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P04|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P04",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P04|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P04",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P04|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P04",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P05|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P05",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P05|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P05",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P05|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P05",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P05|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P05",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P05|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P05",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P06|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P06",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P06|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P06",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P06|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P06",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P06|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P06",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P06|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P06",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P07|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P07",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P07|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P07",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P07|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P07",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P07|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P07",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P07|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P07",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P08|DEV|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P08",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P08|CONT|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P08",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P08|S1|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P08",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P08|S2|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P08",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-EP-001|EP-P08|S3|slip10",
+   "strategy": "QM-EP-001",
+   "config": "EP-P08",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-MAIN|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-MAIN",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-MAIN|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-MAIN",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-MAIN|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-MAIN",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-MAIN|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-MAIN",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-MAIN|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-MAIN",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C1|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C1",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C1|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C1",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C1|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C1",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C1|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C1",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C1|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C1",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C2|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C2",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C2|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C2",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C2|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C2",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C2|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C2",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C2|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C2",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C3|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C3",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C3|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C3",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C3|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C3",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C3|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C3",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-C3|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-C3",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P01|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P01",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P01|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P01",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P01|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P01",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P01|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P01",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P01|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P01",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P02|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P02",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P02|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P02",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P02|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P02",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P02|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P02",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P02|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P02",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P03|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P03",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P03|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P03",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P03|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P03",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P03|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P03",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P03|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P03",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P04|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P04",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P04|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P04",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P04|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P04",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P04|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P04",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P04|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P04",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P05|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P05",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P05|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P05",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P05|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P05",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P05|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P05",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P05|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P05",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P06|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P06",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P06|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P06",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P06|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P06",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P06|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P06",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P06|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P06",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P07|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P07",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P07|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P07",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P07|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P07",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P07|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P07",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P07|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P07",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P08|DEV|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P08",
+   "segment": "DEV",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P08|CONT|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P08",
+   "segment": "CONT",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P08|S1|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P08",
+   "segment": "S1",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P08|S2|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P08",
+   "segment": "S2",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-PS-001|PS-P08|S3|slip10",
+   "strategy": "QM-PS-001",
+   "config": "PS-P08",
+   "segment": "S3",
+   "scenario": "base_10bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|CONT|slip25",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|S1|slip25",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|S2|slip25",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|S3|slip25",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|CONT|slip50",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|S1|slip50",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|S2|slip50",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-BO-001|MAIN|S3|slip50",
+   "strategy": "QM-BO-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|CONT|slip25",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|S1|slip25",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|S2|slip25",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|S3|slip25",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|CONT|slip50",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|S1|slip50",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|S2|slip50",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-EP-001|MAIN|S3|slip50",
+   "strategy": "QM-EP-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|CONT|slip25",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S1|slip25",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S2|slip25",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S3|slip25",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "stress_25bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|CONT|slip50",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S1|slip50",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S2|slip50",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S3|slip50",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "stress_50bps"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|CONT|borrow10",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "borrow_10pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S1|borrow10",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "borrow_10pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S2|borrow10",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "borrow_10pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S3|borrow10",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "borrow_10pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|CONT|borrow30",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "borrow_30pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S1|borrow30",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "borrow_30pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S2|borrow30",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "borrow_30pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S3|borrow30",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "borrow_30pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|CONT|borrow100",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "CONT",
+   "scenario": "borrow_100pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S1|borrow100",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S1",
+   "scenario": "borrow_100pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S2|borrow100",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S2",
+   "scenario": "borrow_100pct"
+  },
+  {
+   "eval_id": "QM-PS-001|MAIN|S3|borrow100",
+   "strategy": "QM-PS-001",
+   "config": "MAIN",
+   "segment": "S3",
+   "scenario": "borrow_100pct"
+  }
+ ],
+ "count": 211,
+ "code_hash": "4e9bfc5cdbadd079",
+ "data_hash": "cfa4573bd5a20f79",
+ "frozen_at": "2026-10-22T01:01:54+0800"
+}

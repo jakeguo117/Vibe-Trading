@@ -1,0 +1,16 @@
+{
+ "daily_source": "/Users/jake/projects/trading/data/ts_live/raw/*.parquet (local, read-only)",
+ "daily_rows_2009_2026": 49099259,
+ "symbols_total": 10967,
+ "symbols_in_kit": 3826,
+ "date_range": [
+  "2009-01-02",
+  "2026-10-20"
+ ],
+ "symbols_alive_at_end": 3813,
+ "symbols_not_alive_at_end": 13,
+ "split_events_total": 4094,
+ "dividend_events_total": 298088,
+ "gap_ge_10_events_all": 6425,
+ "avg_base_eligible_per_day": 431.5208845208845
+}

@@ -1,0 +1,29 @@
+[
+ {
+  "sym": "AAPL",
+  "overlap_days": 1254,
+  "max_abs_close_diff": 0.0,
+  "mean_abs_close_diff": 0.0,
+  "max_rel_vol_diff": 5.91522628934779e-08,
+  "first": "2021-10-21",
+  "last": "2026-10-20"
+ },
+ {
+  "sym": "MSFT",
+  "overlap_days": 1254,
+  "max_abs_close_diff": 0.0,
+  "mean_abs_close_diff": 0.0,
+  "max_rel_vol_diff": 5.6468385835379746e-08,
+  "first": "2021-10-21",
+  "last": "2026-10-20"
+ },
+ {
+  "sym": "AEIS",
+  "overlap_days": 1254,
+  "max_abs_close_diff": 0.0,
+  "mean_abs_close_diff": 0.0,
+  "max_rel_vol_diff": 0.0,
+  "first": "2021-10-21",
+  "last": "2026-10-20"
+ }
+]

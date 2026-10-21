@@ -1,0 +1,2 @@
+entry_day,exit_day,j,entry,exit,q0,q_exit,planned_risk,gross,fees,borrow,divs,pnl,R,hold_days,exit_reason,mfe,mae,flags,partial,sym,entry_date,exit_date
+3374,3382,624,37.307518,37.276226,64,32,76.52368,-1.0013428,3.0,0.0,0.0,21.672974,0.28321916,9,sma_close,0.039378762,-7.0631504e-05,,True,CC,2022-05-27,2022-06-09

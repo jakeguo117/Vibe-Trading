@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+runs/*/data/*.npz
+runs/*/data/edgar_8k202.csv
+runs/*/data/panel.npz

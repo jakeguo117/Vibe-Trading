@@ -1,0 +1,11 @@
+{
+ "source": "/Users/jake/projects/trading/data/ts_live/raw/*.parquet",
+ "universe_csv": "/Users/jake/projects/trading/data/ts_live/symbols/universe.csv",
+ "start": "2009-01-01",
+ "end": "2026-10-20",
+ "n_dates": 4477,
+ "n_syms": 10967,
+ "rows": 23864208,
+ "built_at": "2026-10-22T00:43:02+0800",
+ "rows_with_nan_close": 25252959
+}

@@ -1,0 +1,35 @@
+{
+ "QM-BO-001": {
+  "A": "INCONCLUSIVE",
+  "B": "INCOMPLETE",
+  "C": "EXECUTION_INCOMPLETE",
+  "n_trades_CONT": 20,
+  "cagr": -0.0041357874786791,
+  "mdd": -0.067724767102505,
+  "sharpe": -0.3668742933054062,
+  "avg_R": -0.617891127243638,
+  "pf": 0.3284161984920501
+ },
+ "QM-EP-001": {
+  "A": "INCONCLUSIVE",
+  "B": "INCOMPLETE",
+  "C": "EXECUTION_INCOMPLETE",
+  "n_trades_CONT": 57,
+  "cagr": 0.0168502516956101,
+  "mdd": -0.0704187908592317,
+  "sharpe": 0.474150079140803,
+  "avg_R": 0.6773807699220222,
+  "pf": 1.7445513010025024
+ },
+ "QM-PS-001": {
+  "A": "INCONCLUSIVE",
+  "B": "INCOMPLETE",
+  "C": "EXECUTION_INCOMPLETE",
+  "n_trades_CONT": 105,
+  "cagr": -0.0307932994807841,
+  "mdd": -0.2890306396484374,
+  "sharpe": -0.362776064621338,
+  "avg_R": -4.177894319948696,
+  "pf": 0.699500560760498
+ }
+}

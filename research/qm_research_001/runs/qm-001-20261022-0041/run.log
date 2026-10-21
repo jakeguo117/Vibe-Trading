@@ -1,0 +1,44 @@
+[kit] base-eligible symbols kept: 3826 / 10967
+[bench] done 7.7s
+[BO] BO-MAIN paths done 3.4s signals=92
+[BO] BO-C1 paths done 1.5s signals=4760
+[BO] BO-C2 paths done 4.2s signals=7271
+[BO] BO-C3 paths done 3.2s signals=92
+[BO] BO-P01 paths done 3.2s signals=108
+[BO] BO-P02 paths done 3.2s signals=72
+[BO] BO-P03 paths done 3.2s signals=49
+[BO] BO-P04 paths done 3.3s signals=165
+[BO] BO-P05 paths done 3.2s signals=92
+[BO] BO-P06 paths done 3.2s signals=92
+[BO] BO-P07 paths done 3.2s signals=92
+[BO] BO-P08 paths done 3.2s signals=92
+[PS] PS-MAIN paths done 0.5s signals=806
+[PS] PS-C1 paths done 0.7s signals=2019
+[PS] PS-C2 paths done 1.0s signals=3611
+[PS] PS-C3 paths done 0.5s signals=806
+[PS] PS-P01 paths done 0.5s signals=1061
+[PS] PS-P02 paths done 0.4s signals=587
+[PS] PS-P03 paths done 0.5s signals=940
+[PS] PS-P04 paths done 0.4s signals=634
+[PS] PS-P05 paths done 0.5s signals=806
+[PS] PS-P06 paths done 0.5s signals=806
+[PS] PS-P07 paths done 0.5s signals=806
+[PS] PS-P08 paths done 0.5s signals=806
+/Users/jake/projects/trading/Vibe-Trading/research/qm_research_001/scripts/run_all.py:128: RuntimeWarning: divide by zero encountered in divide
+  gap = k.o / prev_c - 1
+/Users/jake/projects/trading/Vibe-Trading/research/qm_research_001/scripts/run_all.py:128: RuntimeWarning: invalid value encountered in divide
+  gap = k.o / prev_c - 1
+/Users/jake/projects/trading/Vibe-Trading/research/qm_research_001/scripts/run_all.py:140: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  cand = pd.Timestamp(day) + pd.Timedelta(days=off)
+[EP] EP-MAIN paths done 2.2s signals=625
+[EP] EP-C1 paths done 0.3s signals=625
+[EP] EP-C3 paths done 0.3s signals=625
+[EP] EP-P01 paths done 0.4s signals=864
+[EP] EP-P02 paths done 0.3s signals=459
+[EP] EP-P03 paths done 0.3s signals=625
+[EP] EP-P04 paths done 0.3s signals=624
+[EP] EP-P05 paths done 0.3s signals=625
+[EP] EP-P06 paths done 0.3s signals=625
+[EP] EP-P07 paths done 0.3s signals=625
+[EP] EP-P08 paths done 0.3s signals=625
+[done] {'paths': 350, 'wall_s': 430.9} 63.5

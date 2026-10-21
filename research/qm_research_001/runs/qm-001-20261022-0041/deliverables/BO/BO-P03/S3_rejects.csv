@@ -1,0 +1,15 @@
+d,j,reason,date,sym
+3591,1392,stop_too_wide,2023-04-11,GBTC
+3591,-1,none_executable,2023-04-11,
+3756,1392,stop_too_wide,2023-12-05,GBTC
+3756,-1,none_executable,2023-12-05,
+3787,205,stop_too_wide,2024-01-22,ANF
+3787,-1,none_executable,2024-01-22,
+3796,205,stop_too_wide,2024-02-02,ANF
+3796,-1,none_executable,2024-02-02,
+4125,3192,stop_too_wide,2025-05-28,STRL
+4125,-1,none_executable,2025-05-28,
+4258,1525,stop_too_wide,2025-12-05,HAE
+4258,-1,none_executable,2025-12-05,
+4464,1071,stop_too_wide,2026-10-02,EFOR
+4464,-1,none_executable,2026-10-02,

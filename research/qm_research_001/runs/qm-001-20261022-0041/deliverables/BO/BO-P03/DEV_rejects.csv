@@ -1,0 +1,17 @@
+d,j,reason,date,sym
+403,441,stop_too_wide,2010-08-10,BHC
+403,-1,none_executable,2010-08-10,
+506,3459,stop_too_wide,2011-01-05,URI
+506,-1,none_executable,2011-01-05,
+564,1842,stop_too_wide,2011-03-30,JAZZ
+564,-1,none_executable,2011-03-30,
+923,2474,stop_too_wide,2012-08-30,ONIT
+923,-1,none_executable,2012-08-30,
+1070,398,stop_too_wide,2013-04-05,BBY
+1070,-1,none_executable,2013-04-05,
+1173,3783,stop_too_wide,2013-08-30,YELP
+1173,-1,none_executable,2013-08-30,
+1285,1711,stop_too_wide,2014-02-11,ILMN
+1285,-1,none_executable,2014-02-11,
+1358,179,stop_too_wide,2014-05-28,AMKR
+1358,-1,none_executable,2014-05-28,
