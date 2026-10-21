@@ -1,6 +1,6 @@
 # 策略研究｜START HERE
 更新：2026-10-21（Asia/Hong_Kong）｜入口版本：v1.7
-状态：MOM-XASSET-001 已按统一口径完整重跑（v1.2）并归档；研究结论与交付完整性见新 run。旧正式结果与旧归因包保留审计，旧归因数字不再作为最终解释。
+状态：MOM-XASSET-001 已按统一口径完整重跑（v1.2）并归档；QM-RESEARCH-001 已完成数据审计与 EOD 诊断（主方案因缺分钟/借券数据为 DATA_INCOMPLETE）。旧正式结果与旧归因包保留审计，旧归因数字不再作为最终解释。
 
 ## 1. 固定入口与资料分工
 - 策略研究总入口：https://drive.google.com/drive/folders/1WvLQ5vOLcaFC3LIFN6SHdx1GCpXSTRVZ
@@ -25,7 +25,8 @@ Drive 存研究定义、报告、结果和证据；Notion 存任务负责人、�
 | 研究 | 当前证据与状态 | 下一步 |
 |---|---|---|
 | MOM-GLD-001 | R1/R2/R3 已完成；保留为历史证据 | 不继续原版单纯提仓位修补，新研究见下一行 |
-| MOM-XASSET-001 | 首轮NO_PASS；Jake已授权统一口径完整重跑，状态：已设计待测试 | Hermes按v1.2规范执行原180组开发、三资产验证及归因，保存新run |
+| MOM-XASSET-001 | 首轮NO_PASS；统一口径重跑已完成（`mom-xasset-001-rerun-20261021-2313`） | 不自动重启；如需新方向先由 Jake 决定 |
+| QM-RESEARCH-001 | 数据审计完成；三策略仅能跑 EOD 诊断（无历史分钟线/借券）→ A=INCONCLUSIVE、B=INCOMPLETE、C=EXECUTION_INCOMPLETE；EP 逐笔 +0.68R（PF 1.74，57 笔） | 补 2016–2026 分钟数据后再验 EP；见下方 §4A |
 | Fib / 周期 / D-H | 根据既有项目记录，Jake 已决定暂停 D/H，不做下一轮 | 保留证据；不自动重启 |
 | GTO 情景瘦表 | 既有接手盘点记录为暂停；本次未独立复验数值 | 如重启先查原报告与 Jake 决策 |
 | 单标的 / 金银油均线 / 早期因子等 | 历史材料已存在，尚未在本轮逐项复核 | 从历史结果与研究仓库定位，禁止把历史探索当生产批准 |
@@ -97,6 +98,19 @@ Drive 存研究定义、报告、结果和证据；Notion 存任务负责人、�
 - 历史已经多轮观察，本轮只能称算法隔离的历史迁移验证；未来模拟才提供新行情证据。
 - 本轮 run_id：`mom-xasset-001-20261021-1719`；引擎评估 1024 次（开发 720 / 验证 304），墙钟约 1 分钟级；未修改生产系统、未下单、未新增采购。状态由 Hermes 写入并在归档后读回。
 
+## 4A. QM-RESEARCH-001（Qullamaggie 三类策略）当前结果
+
+- 方案：https://drive.google.com/file/d/1Bxm6F-cM8g5zmzKvMhXHAM8IqMbcPUJn/view（v1.0，已冻结未改规则）
+- 研究目录（方案、审计、报告）：https://drive.google.com/drive/folders/187atRsVfZn_WAr0kxskPvuyMioeYSKrU
+- 本轮 run：`qm-research-001-20261022`｜代码分支：https://github.com/jakeguo117/Vibe-Trading/tree/research/qm-research-001
+- 结果正本：https://drive.google.com/drive/folders/1kRID4peUueFv10wFC2wrkrICL5hw40eI → `2026-10-22_qm-research-001/qm-research-001-20261022/`
+- 一句话：日线数据可用且已核对；**历史分钟线、历史借券、含退市的股票池不可获得**，主方案无法按原版执行。
+  只能交付明确命名的 EOD 诊断：BO -0.62R（20 笔）、EP +0.68R（PF 1.74，57 笔）、PS -4.18R（105 笔）；
+  账户年化 -0.41% / +1.69% / -3.08%，QQQ 同期 +20.15%。三层判定全部未通过/不可判定。
+- 可靠性：13/13 合成自检；211 条评估全部落盘；断点续跑已实测（二次启动跳过 350 条已完成路径）。
+- 已知缺口：无 OR5/分钟成交、无停牌、无借券/SSR、EP-C2 未运行、股票池生存偏差 0.12% 退市覆盖。
+- 唯一下一步：补 2016–2026 美股 1 分钟数据（含成交额），先只复现 EP 的 583 个跳空事件；需 Jake 决定是否采购。
+
 ## 5. 多 agent 接续约定
 - 触发：Jake 指定任务，或负责人明确交接。建立资料入口不等于自动启动任务。
 - 输入：本文件 + 策略定义 + 最新已验收 run + 当前任务。
@@ -118,6 +132,7 @@ https://drive.google.com/drive/folders/1WvLQ5vOLcaFC3LIFN6SHdx1GCpXSTRVZ
 完成任务后保存可复现证据，读回验证，更新同一份入口及 Notion 状态。新研究必须在执行前固定假设和停止条件。
 
 ## 7. 更新记录
+- 2026-10-22（v1.8）：QM-RESEARCH-001 完成数据审计 + 三策略 EOD 诊断；主方案因分钟/借券/退市数据缺口标记 DATA_INCOMPLETE；结果归档并读回。
 - 2026-10-21：按 Jake 要求建立全策略研究共享入口；核对 MOM R2/R3 报告与 Notion 项目；新增证据限制和通用接续约定。
 
 
