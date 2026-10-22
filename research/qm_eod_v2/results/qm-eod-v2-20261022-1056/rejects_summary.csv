@@ -1,0 +1,8 @@
+reason,count
+qqq_filter,804
+stop_too_wide,300
+max_positions,188
+already_holding,93
+abandon_stop_wide,69
+gap_too_far,61
+size_lt_one_share,2

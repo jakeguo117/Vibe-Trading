@@ -1,0 +1,55 @@
+[load] kit from /Users/jake/projects/trading/Vibe-Trading/research/qm_eod_v2/results/qm-eod-v2-20261022-1056/data/panel.npz
+[kit] base-eligible symbols kept: 3826 / 10967
+[segs] {'FULL': ('2015-01-02', '2025-12-31'), 'Y2015_19': ('2015-01-02', '2019-12-31'), 'Y2020_21': ('2020-01-02', '2021-12-31'), 'Y2022': ('2022-01-03', '2022-12-30'), 'Y2023_25': ('2023-01-03', '2025-12-31'), 'CONT': ('2016-01-04', '2026-10-20')}
+[signals] BO...
+[signals] BO n=1616 in 25.5s
+[signals] EP...
+[signals] EP n=1162 tagged=491 in 3.0s
+[filter] QQQ rising days=2713/4477
+[done] COMBINED|filter_on|slip10|e100000|FULL cagr=0.0083 n=594 exec=0.31 0.8s
+[done] COMBINED|filter_on|slip10|e100000|Y2015_19 cagr=0.0080 n=198 exec=0.38 0.28s
+[done] COMBINED|filter_on|slip10|e100000|Y2020_21 cagr=0.0236 n=121 exec=0.35 0.14s
+[done] COMBINED|filter_on|slip10|e100000|Y2022 cagr=-0.0384 n=62 exec=0.18 0.1s
+[done] COMBINED|filter_on|slip10|e100000|Y2023_25 cagr=0.0117 n=213 exec=0.31 0.28s
+[done] COMBINED|filter_on|slip10|e100000|CONT cagr=0.0102 n=627 exec=0.30 0.86s
+[done] COMBINED|filter_off|slip10|e100000|FULL cagr=0.0185 n=943 exec=0.49 0.82s
+[done] COMBINED|filter_off|slip10|e100000|Y2015_19 cagr=0.0176 n=325 exec=0.62 0.29s
+[done] COMBINED|filter_off|slip10|e100000|Y2020_21 cagr=0.0342 n=160 exec=0.45 0.15s
+[done] COMBINED|filter_off|slip10|e100000|Y2022 cagr=0.0016 n=154 exec=0.43 0.11s
+[done] COMBINED|filter_off|slip10|e100000|Y2023_25 cagr=0.0191 n=304 exec=0.44 0.28s
+[done] COMBINED|filter_off|slip10|e100000|CONT cagr=0.0202 n=1028 exec=0.48 0.87s
+[done] COMBINED|filter_on|slip25|e100000|FULL cagr=-0.0043 n=587 exec=0.31 0.8s
+[done] COMBINED|filter_on|slip25|e100000|Y2015_19 cagr=-0.0009 n=196 exec=0.38 0.28s
+[done] COMBINED|filter_on|slip25|e100000|Y2020_21 cagr=0.0105 n=119 exec=0.35 0.14s
+[done] COMBINED|filter_on|slip25|e100000|Y2022 cagr=-0.0506 n=64 exec=0.19 0.1s
+[done] COMBINED|filter_on|slip25|e100000|Y2023_25 cagr=-0.0046 n=208 exec=0.30 0.28s
+[done] COMBINED|filter_on|slip25|e100000|CONT cagr=-0.0045 n=622 exec=0.30 0.89s
+[done] COMBINED|filter_off|slip25|e100000|FULL cagr=-0.0019 n=932 exec=0.49 0.82s
+[done] COMBINED|filter_off|slip25|e100000|CONT cagr=-0.0029 n=1019 exec=0.48 0.86s
+[done] COMBINED|filter_on|slip50|e100000|FULL cagr=-0.0265 n=569 exec=0.31 0.81s
+[done] COMBINED|filter_on|slip50|e100000|Y2015_19 cagr=-0.0238 n=189 exec=0.37 0.28s
+[done] COMBINED|filter_on|slip50|e100000|Y2020_21 cagr=-0.0264 n=118 exec=0.35 0.14s
+[done] COMBINED|filter_on|slip50|e100000|Y2022 cagr=-0.0669 n=64 exec=0.19 0.1s
+[done] COMBINED|filter_on|slip50|e100000|Y2023_25 cagr=-0.0172 n=198 exec=0.30 0.27s
+[done] COMBINED|filter_on|slip50|e100000|CONT cagr=-0.0274 n=603 exec=0.30 0.86s
+[done] COMBINED|filter_off|slip50|e100000|FULL cagr=-0.0390 n=914 exec=0.49 0.82s
+[done] COMBINED|filter_off|slip50|e100000|CONT cagr=-0.0424 n=998 exec=0.48 0.87s
+[done] COMBINED|filter_on_1k|slip10|e1000|FULL cagr=-0.3979 n=429 exec=0.23 0.8s
+[done] COMBINED|filter_on_1k|slip10|e1000|Y2015_19 cagr=-0.1142 n=198 exec=0.38 0.28s
+[done] COMBINED|filter_on_1k|slip10|e1000|Y2020_21 cagr=-0.1419 n=121 exec=0.35 0.15s
+[done] COMBINED|filter_on_1k|slip10|e1000|Y2022 cagr=-0.1668 n=62 exec=0.18 0.11s
+[done] COMBINED|filter_on_1k|slip10|e1000|Y2023_25 cagr=-0.2130 n=213 exec=0.31 0.28s
+[done] COMBINED|filter_on_1k|slip10|e1000|CONT cagr=-0.4637 n=447 exec=0.21 0.88s
+[done] BO_ONLY|filter_on|slip10|e100000|FULL cagr=0.0048 n=423 exec=0.41 0.54s
+[done] BO_ONLY|filter_on|slip10|e100000|Y2015_19 cagr=-0.0007 n=148 exec=0.45 0.2s
+[done] BO_ONLY|filter_on|slip10|e100000|Y2020_21 cagr=0.0671 n=90 exec=0.47 0.1s
+[done] BO_ONLY|filter_on|slip10|e100000|Y2022 cagr=-0.0307 n=61 exec=0.28 0.08s
+[done] BO_ONLY|filter_on|slip10|e100000|Y2023_25 cagr=-0.0149 n=124 exec=0.43 0.15s
+[done] BO_ONLY|filter_on|slip10|e100000|CONT cagr=0.0030 n=453 exec=0.40 0.55s
+[done] EP_ONLY|filter_on|slip10|e100000|FULL cagr=0.0082 n=217 exec=0.24 0.42s
+[done] EP_ONLY|filter_on|slip10|e100000|Y2015_19 cagr=0.0064 n=54 exec=0.27 0.11s
+[done] EP_ONLY|filter_on|slip10|e100000|Y2020_21 cagr=-0.0313 n=42 exec=0.25 0.07s
+[done] EP_ONLY|filter_on|slip10|e100000|Y2022 cagr=0.0067 n=20 exec=0.15 0.06s
+[done] EP_ONLY|filter_on|slip10|e100000|Y2023_25 cagr=0.0393 n=101 exec=0.24 0.18s
+[done] EP_ONLY|filter_on|slip10|e100000|CONT cagr=0.0118 n=232 exec=0.23 0.46s
+[ALL DONE] 65.6s run_id=qm-eod-v2-20261022-1056

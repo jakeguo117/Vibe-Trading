@@ -1,0 +1,69 @@
+{
+  "run_id": "qm-eod-v2-20261022-1056",
+  "spec": "QM_EOD_v2_Spec_20261022.md",
+  "code_hash": "fa3c6f02fdbf10c9c8b0e585fee5b7978c9b4bb1173cb5afd4477523648009ba",
+  "data_hash_panel": "cfa4573bd5a20f79c1b3fbf3c3cb68b524cfda334dccfa0e86f7c53e8c198b4c",
+  "data_hash_edgar": "feeea578fba0bd32c557e80171676e6652f647a4bda59ab8482b1167d3af636b",
+  "account": {
+    "initial_equity_main": 100000,
+    "initial_equity_stress": 1000,
+    "risk_per_trade": 0.005,
+    "max_notional_weight": 0.25,
+    "max_positions": 5,
+    "commission_per_share": 0.005,
+    "commission_min": 1.0,
+    "slippage_bps": [
+      10,
+      25,
+      50
+    ],
+    "allow_reentry_same_day": true,
+    "partial_frac": "1/3",
+    "sma_exit": 10
+  },
+  "ep_vol_mult": 3.0,
+  "bo_adr_min": 4.0,
+  "qqq_filter": "10SMA>20SMA and 20SMA rising (5d)",
+  "segments": {
+    "FULL": [
+      "2015-01-02",
+      "2025-12-31"
+    ],
+    "Y2015_19": [
+      "2015-01-02",
+      "2019-12-31"
+    ],
+    "Y2020_21": [
+      "2020-01-02",
+      "2021-12-31"
+    ],
+    "Y2022": [
+      "2022-01-03",
+      "2022-12-30"
+    ],
+    "Y2023_25": [
+      "2023-01-03",
+      "2025-12-31"
+    ],
+    "CONT": [
+      "2016-01-04",
+      "2026-10-20"
+    ]
+  },
+  "data_cutoff": "2026-10-20",
+  "universe_flag": "UNIVERSE_SURVIVORSHIP_BIAS",
+  "nature": "EOD-DIAG",
+  "no_short": true,
+  "ep_c2": "NOT_RUN_DATA_GAP",
+  "primary_label": "COMBINED|filter_on|slip10|e100000|FULL",
+  "wall_total_s": 65.6,
+  "n_bo_signals_full": 1616,
+  "n_ep_signals_full": 1162,
+  "deviations": [
+    "BO consolidation scanned discrete lengths {10,15,20,25,30,35,40} rather than continuous 10-40 search per bar (speed).",
+    "EP main uses price-action gaps; 8-K tags optional (per spec).",
+    "Exit-day re-entry ENABLED (v2 delta vs qm_research_001).",
+    "Partial sell uses 1/3 (spec) vs prior 1/2.",
+    "Combined BO+EP shared 5-slot book is primary; BO_ONLY/EP_ONLY are diagnostics."
+  ]
+}

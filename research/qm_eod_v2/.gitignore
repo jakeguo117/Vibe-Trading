@@ -1,0 +1,5 @@
+# heavy data lives in qm_research_001; only symlinks here
+data/
+results/*/data/
+**/__pycache__/
+*.pyc
