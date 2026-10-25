@@ -1,0 +1,44 @@
+{
+ "version": "v1.1.1",
+ "data_sha_ok": true,
+ "daily_equity_maxabs": 4.998668146072305e-12,
+ "daily_exposure_maxabs": 4.996558722325517e-13,
+ "weekly_rows_expected": 1215,
+ "weekly_rows_unmatched": 0,
+ "weekly_weight_maxabs": 4.994210600628435e-11,
+ "events_match": true,
+ "brk_held_as": [
+  "BRK-B"
+ ],
+ "mapping_off_vs_v110_gold_maxabs": 4.998668146072305e-12,
+ "reference_run_fm_vs_v110_gold_maxabs": 4.998668146072305e-12,
+ "vs_jake_rules_A+R3_maxabs": null,
+ "summary": {
+  "cagr": 0.18024379719089412,
+  "maxdd": -0.11700656773292528,
+  "sortino": 1.9344637635959954,
+  "sharpe": 1.325504812340487
+ },
+ "summary_v110_mapping_off": {
+  "cagr": 0.18022133466653223,
+  "maxdd": -0.1170065677329255,
+  "sortino": 1.9349846231012695,
+  "sharpe": 1.3259567939916652
+ },
+ "delta_vs_v110": {
+  "cagr": 2.2462524361888114e-05,
+  "maxdd": 2.220446049250313e-16,
+  "sortino": -0.0005208595052741405,
+  "sharpe": -0.0004519816511783237,
+  "cagr_pp": 0.0022462524361888114
+ },
+ "summary_rounded": {
+  "年化": "18.0%",
+  "最大回撤": "-11.7%",
+  "索提诺": "1.93",
+  "夏普": "1.33"
+ },
+ "summary_match": true,
+ "PASS": true,
+ "run_at": "2026-10-25T17:33:54.039245+08:00"
+}
