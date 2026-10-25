@@ -1,0 +1,26 @@
+{
+ "same_index": true,
+ "equity_maxabs": 0.0,
+ "exposure_maxabs": 0.0,
+ "official": {
+  "total_return": 2.607873613920203,
+  "cagr": 0.18024379719089412,
+  "ann_vol": 0.13220112084063315,
+  "sharpe": 1.325504812340487,
+  "maxdd": -0.11700656773292528,
+  "calmar": 1.5404588022982755,
+  "avg_exposure": 0.5914710808789267,
+  "n_days": 1947,
+  "sortino": 1.9344637635959954,
+  "turnover_per_yr": 6.15880176129501,
+  "cost_per_yr": 0.003079401026911198,
+  "trade_days": 496,
+  "headline": {
+   "cagr": "18.0%",
+   "maxdd": "-11.7%",
+   "sortino": "1.93",
+   "sharpe": "1.33"
+  }
+ },
+ "PASS": true
+}
