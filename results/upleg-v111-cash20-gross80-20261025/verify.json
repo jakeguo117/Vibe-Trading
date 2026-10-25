@@ -1,0 +1,71 @@
+{
+ "snapshot_sha256": "39a415dc2f8ebfadc30634cc1e042483ed3f6c0b457add20c8e92a47abc96f21",
+ "handoff_sha256": "f76825cde54270ff0258793fd89fdd490a285924a1a6cf65f69b4da67c9f0602",
+ "calendar_first": "2006-01-03",
+ "calendar_last": "2026-10-09",
+ "long_start": "2006-01-04",
+ "engine": "upleg_bt.engine.portfolio.run_portfolio",
+ "scanner_copy": "results/upleg-v111-position-scan-20261025/scan_run.py",
+ "same_index": true,
+ "equity_maxabs": 0.0,
+ "exposure_maxabs": 0.0,
+ "fee_maxabs": 0.0,
+ "official": {
+  "total_return": 2.607873613920203,
+  "cagr": 0.18024379719089412,
+  "ann_vol": 0.13220112084063315,
+  "sharpe": 1.325504812340487,
+  "maxdd": -0.11700656773292528,
+  "calmar": 1.5404588022982755,
+  "avg_exposure": 0.5914710808789267,
+  "n_days": 1947,
+  "sortino": 1.9344637635959954,
+  "turnover_per_yr": 6.15880176129501,
+  "cost_per_yr": 0.003079401026911198,
+  "trade_days": 496,
+  "headline": {
+   "cagr": "18.0%",
+   "maxdd": "-11.7%",
+   "sortino": "1.93",
+   "sharpe": "1.33"
+  }
+ },
+ "expected_headline": {
+  "cagr": "18.0%",
+  "maxdd": "-11.7%",
+  "sortino": "1.93",
+  "sharpe": "1.33"
+ },
+ "PASS": true,
+ "official_reproduce": {
+  "PASS": true,
+  "headline_match": true,
+  "daily_equity_maxabs": 4.998668146072305e-12,
+  "inputs_match_snapshot": true,
+  "run_dir": "/tmp/ca-v111/handoff/repo_handoff_backtest_20261010T185418+0800/runs/20261025T201138+0800_reproduce_v1.1.1"
+ },
+ "derived_files_match_acceptance_sha256": true,
+ "chart": "equity_v111_vs_cash20_gross80.png",
+ "candidate": {
+  "cash_floor": 0.2,
+  "gross_cap": 0.8,
+  "vol_target": 0.16
+ },
+ "explicit_gross_cap_maxabs": 0.0,
+ "long_drawdown": {
+  "baseline": {
+   "maxdd": -0.35228820100494285,
+   "peak": "2006-01-04",
+   "trough": "2009-07-10",
+   "equity_at_trough": 0.6477117989950572,
+   "equity_at_peak": 1.0
+  },
+  "candidate": {
+   "maxdd": -0.360932531829228,
+   "peak": "2006-01-04",
+   "trough": "2009-07-10",
+   "equity_at_trough": 0.639067468170772,
+   "equity_at_peak": 1.0
+  }
+ }
+}
