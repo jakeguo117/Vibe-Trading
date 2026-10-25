@@ -1,0 +1,8 @@
+{
+ "n": 40,
+ "n_hard_pass_excluding_baseline": 0,
+ "baseline_long_maxdd": -0.3522882010049428,
+ "baseline_long_dd_ok": false,
+ "baseline_oos_ok": true,
+ "names_hard_pass": []
+}
