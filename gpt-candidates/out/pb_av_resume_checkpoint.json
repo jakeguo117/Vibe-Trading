@@ -1,0 +1,14 @@
+{
+ "manifest_path": "/workspace/gpt-candidates/out/pb_av_vs_pb_manifest.json",
+ "downloaded_list": "/workspace/gpt-candidates/out/pb_av_downloaded_ticker_days.csv",
+ "remaining_list": "/workspace/gpt-candidates/out/pb_av_remaining_ticker_days.csv",
+ "n_pull_list": 48635,
+ "n_downloaded_ticker_days": 48635,
+ "n_downloaded_with_rth_bars": 47660,
+ "n_remaining_ticker_days": 0,
+ "n_dates_on_disk": 859,
+ "credit_spent_usd": 9.382805496453988,
+ "credit_quoted_avwap_usd": 9.355686217546,
+ "stop_reason": null,
+ "next_pull": "pb_av_remaining_ticker_days.csv is the only minute list still unpaid. Do not re-request dates already on disk."
+}
