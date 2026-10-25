@@ -1,0 +1,10 @@
+{
+ "n_signals": 12227,
+ "n_with_yahoo_close": 12225,
+ "n_close_match": 12225,
+ "close_match_rate": 0.9998364275783103,
+ "close_rel_p95": 1.4841314824606893e-16,
+ "n_f_match_1bp": 12227,
+ "f_match_rate_1bp": 1.0,
+ "f_rel_p95": 0.0
+}

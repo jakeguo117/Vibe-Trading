@@ -1,0 +1,109 @@
+{
+  "generated_at_hk": "2026-10-25 10:17:37 Asia/Hong_Kong",
+  "window_start": "2023-03-28",
+  "window_end": "2026-10-23",
+  "n_signals": 12227,
+  "n_signals_sig_pb_raw": 12227,
+  "n_signals_also_in_risk_range": 2764,
+  "n_signals_h_before_equs_blocked": 95,
+  "n_signals_fetchable_h_ok": 12132,
+  "n_symbols": 1598,
+  "unique_ticker_days": 48635,
+  "unique_ticker_days_incl_blocked_h": 49003,
+  "gross_ticker_days_all_signals": 83401,
+  "gross_ticker_days_fetchable": 82753,
+  "mean_window_days": 6.8211,
+  "excluded_h_before_equs": 95,
+  "preflight_reference": {
+    "n_signals": 12227,
+    "unique_ticker_days": 48812,
+    "blocked_h": 95,
+    "n_symbols": 1598,
+    "gross": 83401
+  },
+  "match_preflight": {
+    "signals_exact": true,
+    "signals_delta": 0,
+    "blocked_h_exact": true,
+    "n_symbols_exact": true,
+    "gross_ticker_days_exact": true,
+    "gross": 83401,
+    "unique_ticker_days_primary": 48635,
+    "unique_ticker_days_preflight_partial_windows": 48812,
+    "ticker_days_delta_vs_preflight_primary_method": -177,
+    "magnitude_ok": true
+  },
+  "outputs": {
+    "signals": "/workspace/gpt-candidates/out/pb_signals_2023plus.csv",
+    "ticker_days": "/workspace/gpt-candidates/out/pb_minute_ticker_days_2023plus.csv",
+    "blocked": "/workspace/gpt-candidates/out/pb_signals_h_before_equs_blocked.csv",
+    "ticker_days_incl_blocked": "/workspace/gpt-candidates/out/pb_minute_ticker_days_2023plus_incl_blocked_h.csv",
+    "summary": "/workspace/gpt-candidates/out/pb_prescreen_summary.json",
+    "ticker_days_preflight_partial": "/workspace/gpt-candidates/out/pb_minute_ticker_days_2023plus_preflight_partial.csv",
+    "runner_script": "/workspace/gpt-candidates/out/_pb_prescreen_run.py"
+  },
+  "code_meta": {
+    "engine": {
+      "path": "/workspace/gpt-candidates/code/engine.py",
+      "sha256": "148526a16e3b4ddadb7d536fa884b484fa9369c297acc174cf1302cc0a31cce0",
+      "mtime_epoch": 1792805590.1526163,
+      "mtime_hk": "2026-10-24 09:33:10 Asia/Hong_Kong",
+      "size": 19373
+    },
+    "frozen_config": {
+      "path": "/workspace/gpt-candidates/config/frozen_config.yaml",
+      "sha256": "ea286f7e438b5a6060ee54c68a350b4fe86fe317f6550ffdddd82e59d45c9986",
+      "mtime_epoch": 1792806116.4206164,
+      "mtime_hk": "2026-10-24 09:41:56 Asia/Hong_Kong",
+      "size": 3503
+    },
+    "frozen_config_sha256_file": "ea286f7e438b5a6060ee54c68a350b4fe86fe317f6550ffdddd82e59d45c9986  config/frozen_config.yaml\n148526a16e3b4ddadb7d536fa884b484fa9369c297acc174cf1302cc0a31cce0  engine.py\na1c518295c2c1101af87698fb1d57211c203f9d9bbb49d40c094eabba49013e4  run_all.py\n2262786444a4f322382df26464c734efb106dfe247725f4df06ffa8b50ca3b3c  01_download_ext.py\n3afc37609c6858d8bd2f8c865b89ef44ffa33600db91a75eba40a2fecc4671e7  02_build.py\n474a25585e3b4b7c3409248ba7e107971816694794bc345d950e1ae23ff1d82d  03_crosscheck.py\n73accca588a1d2be362c694cd68bdc60a5ded3764046aed9f6d6dfbe6d77a401  04_verify_trades.py\n98b285dce44f88308b5665732123cd599e0227092f34df9a9d9ea8a3db9f2d90  05_aggregate.py\nf57493ac90176a9c94d459e2c2cca0da6659135c2994fb2b5006c7b6bfd15682  test_cases.py"
+  },
+  "cost_estimate": {
+    "method": "preflight_unit_price_extrapolation",
+    "unit_usd_per_ticker_day_full_session": 0.00025228,
+    "unique_ticker_days": 48635,
+    "est_usd_full_session": 12.2696,
+    "est_usd_rth_approx": 11.3494,
+    "note": "Not a live full get_cost sum; optional sample batches below. No Databento download.",
+    "live_sample_batches": [
+      {
+        "date": "2026-09-29",
+        "n_sym": 75,
+        "cost_usd": 0.014024019241
+      },
+      {
+        "date": "2026-09-30",
+        "n_sym": 70,
+        "cost_usd": 0.012994498014
+      },
+      {
+        "date": "2026-10-01",
+        "n_sym": 72,
+        "cost_usd": 0.013731122017
+      },
+      {
+        "date": "2026-10-02",
+        "n_sym": 58,
+        "cost_usd": 0.011662065983
+      },
+      {
+        "date": "2026-10-05",
+        "n_sym": 51,
+        "cost_usd": 0.009547322989
+      }
+    ],
+    "live_sample_cum_usd": 0.061959028244,
+    "live_implied_unit_usd": 0.00019005836884662577,
+    "live_extrapolated_full_usd": 9.2435
+  },
+  "elapsed_sec": 61.9,
+  "notes": [
+    "Export = raw engine.sig_pb True cells in window (matches preflight 12227). Risk [1%,5%] NOT required for this list; column in_risk_range flags orderability.",
+    "Includes all daily-qualified signals that may later fail AVWAP.",
+    "Minute pull list excludes signals whose h < 2023-03-28; those rows also in blocked CSV.",
+    "No Databento download; optional metadata.get_cost samples only."
+  ],
+  "unique_ticker_days_preflight_method": 48812,
+  "unique_ticker_days_method_note": "Primary pull list excludes entire signals with h<2023-03-28 → 48635 unique ticker-days. Preflight 48812 = unique (sym,day) with day>=2023-03-28 drawn from ALL signals including blocked-h (partial windows after EQUS start). Both documented; Cloud Agent should use primary pull list pb_minute_ticker_days_2023plus.csv (48635). Blocked signals listed separately."
+}

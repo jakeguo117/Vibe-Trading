@@ -1,0 +1,5 @@
+data/
+logs/
+__pycache__/
+*.parquet
+tests/test_results.json

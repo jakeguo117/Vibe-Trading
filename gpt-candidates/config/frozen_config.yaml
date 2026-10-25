@@ -1,0 +1,78 @@
+# COMP 三族研究代理 冻结配置 v1.1（实现口径）
+# 依据：spec_v1.1.md（Drive 1c0fCHoI6nghzat4UdjCBbba6ql5XevV7）；Notion「交易比赛策略雷达｜首轮筛选｜2026-10-24」
+# 披露：参数在首次全量运行前已按规格写入 code/engine.py 与 code/run_all.py；本文件是在运行后整理落盘的同一组参数，
+#       运行后未改动任何参数（无调参、无重跑挑选）。hash 见 config/frozen_config.sha256。
+version: COMP-v1.1-impl-20261024
+labels: "COMP-研究版；不是冠军原版；不是 Martin 原版/完整 SEPA"
+data:
+  source: "Yahoo Finance via yfinance 1.7.0, auto_adjust=False (OHLC/量为拆股调整、未做分红复权)"
+  universe_source: "Nasdaq Trader 当前上市清单 2026-10-09（无已退市股 → 存活者偏差 → EXPLORATORY）"
+  warmup_start: 2008-01-02
+  data_start: 2006-01-03
+  data_end: 2026-10-23
+  calendar: "QQQ 有 bar 的交易日（含半日市）"
+periods:
+  FULL: [2009-01-01, 2026-10-23]
+  DEV: [2009-01-01, 2018-12-31]
+  VAL: [2019-01-01, 2022-12-31]
+  TEST: [2023-01-01, 2026-10-23]
+  segment_independent_start: true
+universe:
+  types: "普通股（名称规则过滤 D12；优先股后缀 D12b）；ETF/ADR/优先股/OTC/权证排除"
+  min_valid_history_days: 252
+  min_raw_close: 5.0
+  min_adv20_usd: 20000000
+  momentum: {lookback: 63, top_frac: 0.10, n_rule: "ceil(0.1N)", ties: "收益降序, 永久ID(ticker)升序"}
+  env: {symbol: QQQ, rule: "C > SMA200"}
+  trend: "C>EMA50, EMA9>EMA21>EMA50, EMA21(t)>EMA21(t-5)"
+indicators: {ema: "alpha=2/(n+1), 首 n 个有效观测 SMA 初始化", atr: "Wilder 14, 首14个TR简单均值"}
+PB:
+  h_window: [t-10, t-2]
+  h_is_20d_high: true
+  pullback_low_band_vs_ema21: [0.95, 1.01]
+  bull_bar: "C>EMA21, C>O, C>C(t-1)"
+  trigger: "H(t)+0.01(原始价)"
+  stop: "min(L[h+1:t]) - 0.1*ATR14"
+  risk_range: [0.01, 0.05]
+VC:
+  segments: {A: [t-14, t-10], B: [t-9, t-5], C: [t-4, t]}
+  rC_max: 0.06
+  vol_ratio_max: 0.7
+  near_20d_high: 0.95
+  trigger: "max(H[t-4:t])+0.01"
+  stop: "min(L[t-4:t]) - 0.1*ATR14"
+  risk_range: [0.01, 0.05]
+HTF:
+  h_window: [t-15, t-5]
+  pole_min: 0.90
+  pole_lookback: 40
+  flag_len: [5, 15]
+  flag_max_high: 1.02
+  flag_min_low: 0.80
+  close_min: 0.90
+  vol_ratio_max: 0.7
+  trigger: "max(H[h+1:t])+0.01"
+  stop: "min(L[h+1:t]) - 0.1*ATR14"
+  risk_range: [0.01, 0.10]
+BO20: {trigger: "max(H[t-19:t])+0.01", stop: "min(L[t-4:t]) - 0.1*ATR14", risk_range: [0.01, 0.05]}
+portfolio:
+  capital: 16000
+  max_positions: 1
+  risk_per_trade: 0.005
+  notional_cap: 1.0
+  leverage: false
+  adv_cap: 0.01
+  ranking: "63日收益降序, 20日美元量降序, ticker升序；只为第一名挂单"
+exits: {ema9_close_exit: "C<EMA9 → t+1 开盘全平", time_exit_days: 20, entry_day_counts_as: 1, no_reentry_same_day: true}
+execution:
+  gap_cancel: 1.02
+  same_bar_stop: conservative
+  open_gap_stop_priority: true
+  fees: {commission: "max(1, 0.005*shares) 每边", buffer_bp: 1}
+  slippage_bp: [10, 30, 50]
+  cash_interest: 0
+  dividend_pay_lag_trading_days: 15   # D15，无 pay_date
+  delisting: "无官方清算数据 → 标 DATA_BLOCKED（本数据无退市股）"
+experiments: [E01_PB_base, E02_VC_base, E03_HTF_base, E04_PB_noenv, E05_PB_nomom, E06_PB_nopullback, E07_BO20, E08_PB_AV(DATA_BLOCKED), E09_PB_delay1]
+sensitivity: [S01_PB_risk025, S02_PB_risk100, S03_PB_ema18, S04_PB_ema24]
+stats: {sortino: "日收益, 目标0, sqrt(mean(min(r,0)^2)), ×sqrt252", rf: 0, bootstrap: {block_months: 12, n: 2000, seed: 20261024}}
