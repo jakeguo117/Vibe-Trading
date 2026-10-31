@@ -1,0 +1,16 @@
+# Fixed20 F 腿的只读依赖。算法留在 trading-system，不复制进本仓库。
+# 提交：70038a53e7992b49f10e5906b18573a2beddb965
+#
+# 安装（不要解析依赖，避免改本仓库已有的 numpy / pandas）：
+#   pip install --no-deps "git+https://github.com/jakeguo117/trading-system@70038a53e7992b49f10e5906b18573a2beddb965"
+#
+# 需要能读私有仓库 jakeguo117/trading-system 的 token，或把该提交加为只读 submodule。
+# 若仓库根目录不是安装包，改为含 upleg_bt 的子目录，提交号不变。
+# 本环境 2026-10-31 拉取结果：失败。GitHub 返回 Repository not found。
+#
+# 装上之后，F 腿调用：
+#   upleg_bt.engine.fib_locked.fib_stages_weekly
+#   upleg_bt.engine.fm.FM.score
+#   upleg_bt.engine.fm.FM.cells
+#   upleg_bt.costs.trade_fee / side_cost_matrix
+git+https://github.com/jakeguo117/trading-system@70038a53e7992b49f10e5906b18573a2beddb965
